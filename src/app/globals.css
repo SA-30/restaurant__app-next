@@ -15,6 +15,7 @@ h3 {
     @apply text-gray-400 text-sm;
 }
 
+
 /* Scroolbar hide */
 
 .hide-scroolbar::-webkit-scrollbar {

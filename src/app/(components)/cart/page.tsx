@@ -2,9 +2,9 @@ import CartComponent from '@/components/cart/CartComponent'
 
 const Cart = () => {
   return (
-    <>
-    <CartComponent />
-    </>
+    <div>
+      <CartComponent />
+    </div>
   )
 }
 

@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+
 import {FaArrowLeft, FaShoppingBag} from 'react-icons/fa';
 import {FaPerson} from 'react-icons/fa6';
 
@@ -16,7 +19,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = (props) => {
             <h1 className=''>{props.methodTitle}</h1>
         </div>
         <div className='flex gap-5 items-center'>
-            <Link href='#'> <FaShoppingBag size={20}/> </Link>
+            <Link href='/cart'> <FaShoppingBag size={20}/> </Link>
             <Link href='#'> <FaPerson size={22}/> </Link>
         </div>
       </div>
