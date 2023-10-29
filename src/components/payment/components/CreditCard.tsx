@@ -17,7 +17,7 @@ const CreditCard = () => {
             <div className='border-gray-700 border-t-2 my-5'></div>
 
             <div className='flex px-5 mt-5'>
-                <button className='flex items-center gap-5'>
+                <button className='bg-transparent flex items-center gap-5'>
                     <FaPlus size={15} className='text-white'/>
                     <h3>Add New Card</h3>
                 </button>

@@ -15,6 +15,15 @@ h3 {
     @apply text-gray-400 text-sm;
 }
 
+h5{
+    @apply text-white text-xl;
+}
+
+/* Button */
+button{
+    @apply py-5 bg-gray-400;
+}
+
 
 /* Scroolbar hide */
 
