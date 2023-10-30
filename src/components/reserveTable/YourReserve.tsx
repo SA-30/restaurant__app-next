@@ -6,10 +6,6 @@ import Image from "next/image";
 import table2c from '../../../public/assets/images/table2c.png'
 
 interface Props {
-    date : string,
-    time: string,
-    nos: number,
-    tableNo: number,
 }
  
 const YourReserve: FunctionComponent<Props> = () => {
