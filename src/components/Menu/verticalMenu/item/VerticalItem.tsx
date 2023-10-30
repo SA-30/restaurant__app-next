@@ -1,4 +1,5 @@
 import {FaWeight, FaPlus} from 'react-icons/fa';
+import Link from 'next/link';
 
 interface MethodHeaderProps{
     title: string,
@@ -9,7 +10,8 @@ interface MethodHeaderProps{
 const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
     
     return (
-        <div className='bg-gray-800 md:w-[600px] flex flex-row  rounded-2xl'>
+        <Link href="/items">
+            <div className='bg-gray-800 md:w-[600px] flex flex-row  rounded-2xl'>
             <div className='h-32 w-32 bg-red-400 flex items-center justify-center rounded-l-2xl'>s</div>
             <div className='flex flex-col p-4 gap-2 w-full justify-center rounded-r-2xl'>
                 <h2 className='font-bold'>{props.title}</h2>
@@ -22,7 +24,8 @@ const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
                     <div className='cursor-pointer bg-gray-600 p-2 rounded-full'><FaPlus size={10}/></div>
                 </div>
             </div>
-        </div>
+            </div>
+        </Link>
     )
 }
 
