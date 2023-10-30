@@ -1,7 +1,9 @@
 import {FaWeight, FaPlus} from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface MethodHeaderProps{
+    imgUrl: string,
     title: string,
     weight: string,
     price: string,
@@ -12,7 +14,8 @@ const HorizontalItem: React.FC<MethodHeaderProps> = (props) => {
     return (
         <Link href='/items'>
             <div className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
-            <div className='h-40 bg-red-400 flex items-center justify-center rounded-t-2xl'></div>
+            <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover' style={{ backgroundImage: `url(${props.imgUrl})`}}>
+            </div>
             <div className='flex flex-col p-4 gap-2'>
                 <h2 className='font-bold'>{props.title}</h2>
                 <div className='flex gap-2 items-center justify-start'>

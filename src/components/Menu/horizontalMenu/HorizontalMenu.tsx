@@ -1,27 +1,28 @@
+
 import HorizontalItem from "./item/HorizontalItem"
 
 const HorizontalMenu = () => {
     const items = [
         {
-            imgUrl: '',
+            imgUrl: '/assets/images/momov.jpg',
             title: 'Veg Momo',
             weight: '1 plate',
             price: 'Rs 100',
         },
         {
-            imgUrl: '',
+            imgUrl: '/assets/images/momoc.jpg',
             title: 'Buff Momo',
             weight: '1 plate',
             price: 'Rs 120',
         },
         {
-            imgUrl: '',
+            imgUrl: '/assets/images/chauminc.jpg',
             title: 'Buff Chaumin',
             weight: '1 plate',
             price: 'Rs 160',
         },
         {
-            imgUrl: '',
+            imgUrl: '/assets/images/chauminv.jpg',
             title: 'Veg Chaumin',
             weight: '1 plate',
             price: 'Rs 120',
@@ -51,7 +52,7 @@ const HorizontalMenu = () => {
             <div className=" flex flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar">
                 {/* Items are fetched from database */}
                 {items.map((item, index) => (
-                    <HorizontalItem key={index} title={item.title} weight={item.weight} price={item.price}/>
+                    <HorizontalItem key={index} imgUrl={item.imgUrl} title={item.title} weight={item.weight} price={item.price}/>
                 ))}
             </div>
         </div>
