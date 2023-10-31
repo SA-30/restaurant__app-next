@@ -34,3 +34,7 @@ button{
 .active {
     @apply pb-2 border-b-2 border-b-red-500;
 }
+
+.admin-items::-webkit-scrollbar{
+    display: none;
+}

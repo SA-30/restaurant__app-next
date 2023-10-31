@@ -17,6 +17,12 @@ const config: Config = {
         primaryColor: '#151518',
         secondaryColor: '#1B1B20',
         ternaryColor: '#3E3E42',
+        adminbgColor: '#252836',
+        admindarkColor: '#1F1D2B',
+        adminblueColor: '#828EFF',
+        adminredColor: '#F07070',
+        admingreenColor: '#50D1AA',
+
       },
     },
   },
