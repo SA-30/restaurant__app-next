@@ -24,28 +24,67 @@ const ReserveTable: FunctionComponent<Props> = () => {
                 <h5 className="text-center">Choose your table</h5>
                 <div className="flex  justify-center gap-10 mt-10">
                     <div className="flex flex-col gap-5">
-                        <Image src={table1} width={70} height={40} alt="table1" />
-                        <Image src={table1} width={70} height={40} alt="table1"   />
-                        <Image src={table1} width={70} height={40} alt="table1"  />
-                        <Image src={table1} width={70} height={40} alt="table1"  />
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">1</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-3xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">2</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">3</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">4</h1>
+                        </div>
                         <div className=" relative">
                             <div className="absolute w-[160px] md:w-[120px]">
                                 <Image  src={table3} width={160} height={0} alt="table3" />
+                                <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">5</h1>
                             </div>
+                            
                         </div>
                     </div>
                     <div className="flex flex-col gap-5">
-                        <Image src={table1} width={70} height={40} alt="table1" />
-                        <Image src={table1} width={70} height={40} alt="table1" />
-                        <Image src={table1} width={70} height={40} alt="table1" />
-                        <Image src={table1} width={70} height={40} alt="table1" />
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">6</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">7</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">8</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table1} width={70} height={40} alt="table1" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">9</h1>
+                        </div>
                     </div>
                     <div className="flex flex-col gap-8">
-                        <Image src={table2} width={70} height={40} alt="table2" />
-                        <Image src={table2c} width={70} height={40} alt="table2" />
-                        <Image src={table2} width={70} height={40} alt="table2" />
-                        <Image src={table4} width={70} height={40} alt="table4" />
-                        <Image src={table4} width={70} height={40} alt="table4" />
+                        <div className="relative">
+                            <Image src={table2} width={70} height={40} alt="table2" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">10</h1>
+                        </div><div className="relative">
+                            <Image src={table2} width={70} height={40} alt="table2" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">11</h1>
+                        </div><div className="relative">
+                            <Image src={table2c} width={70} height={40} alt="table2" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">12</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table4} width={70} height={40} alt="table2" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">13</h1>
+                        </div>
+                        <div className="relative">
+                            <Image src={table4} width={70} height={40} alt="table2" />
+                            <h1 className="absolute text-white text-xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">14</h1>
+                        </div>
                     </div>
                 </div>
                 </div>

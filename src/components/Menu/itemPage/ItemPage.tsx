@@ -14,9 +14,10 @@ const ItemPage: FunctionComponent<Props> = () => {
             <div ><MethodHeader methodTitle='Order food'/></div>
             
             {/* Lower Section */}
-            <div>
-                <div className='min-h-[50vh] bg-red-200'></div>
-                <div className="flex flex-col items-center justify-center -mt-10 pt-10 rounded-t-3xl bg-primaryColor">
+            <div className=" flex flex-col items-center ">
+                <div className='flex w-full h-full flex-col items-center justify-center  md:w-[200px] min-h-[50vh] md:min-h-[20vh] md:mt-20 bg-center bg-cover md:bg-contain' style={{ backgroundImage: `url(/assets/images/momoc.jpg)`}}></div>
+
+                <div className="flex w-full flex-col items-center justify-center -mt-10 pt-10 rounded-t-3xl bg-primaryColor">
                     <h2 className="text-2xl mb-5">Veg Momo</h2>
                     <div className="flex items-center gap-5  mb-5">
                         <div className="flex gap-2">
@@ -47,7 +48,7 @@ const ItemPage: FunctionComponent<Props> = () => {
                     </div>
 
                     {/* Order now button */}
-                    <div className='py-5 bg-secondaryColor mt-8 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10 w-full'> 
+                    <div className='py-5 bg-secondaryColor mt-8 flex justify-center items-center  md:mx-60 md:rounded-3xl  w-full'> 
                         <Link href="/cart">
                             <button className='transition-all text-white  bg-gray-700 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
                                 ADD TO CART

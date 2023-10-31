@@ -15,9 +15,9 @@ const LoginForm = () => {
     e.preventDefault();
 
     if(!email || !password){
-            setError("Please fill all fields!!!");
-            return;
-        }
+        setError("Please fill all fields!!!");
+        return;
+    }
 
     try {
         const res = await signIn('credentials', {

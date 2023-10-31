@@ -15,7 +15,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = (props) => {
     <div className='text-white fixed h-16 w-full px-5 p-5 md:px-20 bg-primaryColor border-b-[1px] border-gray-600 z-[1]'>
       <div className='flex justify-between '>
         <div className='flex items-center gap-10'>
-            <Link href='#'> <FaArrowLeft size={22}/> </Link>
+            {/* <Link href='#'> <FaArrowLeft size={22}/> </Link> */}
             <h1 className=''>{props.methodTitle}</h1>
         </div>
         <div className='flex gap-5 items-center'>
