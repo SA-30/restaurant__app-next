@@ -1,8 +1,7 @@
-import GrandTotal from '@/components/cart/GrandTotal/GrandTotal'
-import React from 'react'
-import { FaPlus, FaWeight } from 'react-icons/fa';
+import {  FaWeight } from 'react-icons/fa';
+import {  FaPerson } from 'react-icons/fa6';
 
-function AdminDetails() {
+function AdminOrderDetails() {
     const bookedItems = [
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -23,13 +22,18 @@ function AdminDetails() {
     const GrandTotal = totalPrice + tax + 99;
 
     return (
-        <div className='h-screen flex flex-col justify-between mr-5'>
+        <div className='md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
             <div className='bg-admindarkColor flex flex-col px-5 mt-5 py-5'>
                 <div>
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
-                            <h2 className='text-xl font-semibold mb-2  '>Table 2</h2>
-                        <p className='text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 text-adminredColor'>Booked</p>
+                            <div className='flex items-center gap-3'>
+                                <div className={`bg-[#41ad4110] text-[16px] rounded-[50%] p-2 flex items-center`} >
+                                🍗
+                            </div>
+                                <h2 className='text-lg font-normal   '>Monkey D Luffy</h2>
+                            </div>
+                        <p className='cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center bg-[#2e4e2e] text-admingreenColor'>Completed</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
@@ -67,7 +71,7 @@ function AdminDetails() {
                 <div>
                 <div className='flex justify-between items-center mx-5' >
                         <h2 className='text-[12px] font-semibold'>Total Payment</h2>
-                    <p className='text-[12px]  px-2 border-[1px] flex justify-center items-center border-gray-600'>Esewa</p>
+                    <p className='cursor-pointer text-[12px]  px-2 py-1 border-[1px] flex justify-center items-center border-gray-600'>COD</p>
                 </div>
 
                 <div className='border-b-[1px] border-gray-500 mt-4 mx-5'></div>
@@ -97,9 +101,7 @@ function AdminDetails() {
                 </div>   
             </div>
         </div>
-
-        
     )
 }
 
-export default AdminDetails
+export default AdminOrderDetails

@@ -21,7 +21,7 @@ h5{
 
 /* Button */
 button{
-    @apply py-5 bg-gray-400;
+    @apply py-5 bg-gray-400 outline-none;
 }
 
 
@@ -35,6 +35,9 @@ button{
     @apply pb-2 border-b-2 border-b-red-500;
 }
 
-.admin-items::-webkit-scrollbar{
-    display: none;
+
+/* Order List */
+
+.order-list > div > p, .order-list>div>div>p{
+    @apply text-[12px] font-normal text-gray-300;
 }
