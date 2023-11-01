@@ -1,7 +1,6 @@
 import {  FaWeight } from 'react-icons/fa';
-import {  FaPerson } from 'react-icons/fa6';
 
-function AdminOrderDetails() {
+function AdminOrderDetails({selectedOrder}: any) {
     const bookedItems = [
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -28,12 +27,12 @@ function AdminOrderDetails() {
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
                             <div className='flex items-center gap-3'>
-                                <div className={`bg-[#41ad4110] text-[16px] rounded-[50%] p-2 flex items-center`} >
-                                🍗
+                                <div className={`bg-[#41ad4110] text-[16px] rounded-[50%] p-2 flex items-center`}>
+                                {selectedOrder? selectedOrder.face : '🍗'}
                             </div>
-                                <h2 className='text-lg font-normal   '>Monkey D Luffy</h2>
+                                <h2 className='text-lg font-normal'>{selectedOrder? selectedOrder.name : 'Monkey D Luffy'}</h2>
                             </div>
-                        <p className='cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center bg-[#2e4e2e] text-admingreenColor'>Completed</p>
+                        <p className={`cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrder && selectedOrder.status == 'completed'? 'bg-[#2e4e2e]' : 'bg-[#4e2e2e]'}`}>{selectedOrder? selectedOrder.status : 'Completed'}</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
@@ -45,7 +44,10 @@ function AdminOrderDetails() {
                 <div>
                     <div className='flex flex-col gap-10 mb-5'>
                         {bookedItems.map((item, index) => (
-                            <div key={index}>
+                            <div 
+                            key={index}
+                            
+                            >
                                 <div className='  flex flex-row  rounded-2xl items-center gap-5'>
                                 <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgUrl})`}}></div>
 

@@ -1,6 +1,11 @@
 import OrderList from "./orderList/OrderList"
 
-function AdminOrderList() {
+function AdminOrderList({onOrderSelection}: any) {
+
+  const handleOrderSelection = (table:any) => {
+        onOrderSelection(table);
+    };
+
   return (
     <div className='h-screen flex flex-col py-5 px-5 md:px-0'>
         <div className="mb-5">
@@ -11,7 +16,7 @@ function AdminOrderList() {
 
         {/* Tables */}
         <div className="overflow-hidden">
-            <OrderList />
+            <OrderList onOrderSelection={handleOrderSelection}/>
         </div>
     </div>
   )

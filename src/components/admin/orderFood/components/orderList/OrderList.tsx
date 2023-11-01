@@ -1,6 +1,6 @@
 import { FaPerson, FaFilter } from "react-icons/fa6"
 
-function OrderList() {
+function OrderList({onOrderSelection}: any) {
    const orderList = [
         {
             face:'🍗',
@@ -108,7 +108,10 @@ function OrderList() {
             {/* Order Lists */}
             <div className="hide-scroolbar h-[50vh] overflow-scroll">
                 {orderList.map(( item, index) => (
-                    <div key={index} className="">
+                    <div 
+                    key={index} 
+                    onClick={() => onOrderSelection(item)}
+                    className="">
                         <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center py-3   ${item.status == 'completed' ? 'hover:bg-[#806dd4d5]' : 'hover:bg-[#d46d94d5]' } ${index == 0? 'bg-[#806dd4d5]' : ''}`}>
                         <div className="flex gap-3 items-center">
                             <div className={`${item.status == 'completed' ? 'bg-[#41ad4110]': 'bg-[#963d3d27]'} text-[16px] rounded-[50%] p-1 flex items-center`} >

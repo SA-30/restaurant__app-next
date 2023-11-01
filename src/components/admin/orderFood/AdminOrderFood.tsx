@@ -1,4 +1,6 @@
-import { FunctionComponent } from "react";
+'use client'
+
+import { FunctionComponent, useState } from "react";
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import AdminOrderDetails from "./components/AdminOrderDetails";
 import AdminOrderList from "./components/AdminOrderList";
@@ -7,6 +9,12 @@ interface AdminPageProps {
 }
  
 const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
+    const [selectedOrder, setSelectedOrder] = useState(null);
+
+    const handleOrderSelection = (table: any) => {
+        setSelectedOrder(table);
+    };
+
     return (  
         <>
         <div className='bg-adminbgColor'>
@@ -18,10 +26,10 @@ const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
 
             {/* Admin Items */}
             <div className='hide-scroolbar flex-[7_7_0%]  overflow-scroll'>
-                <AdminOrderList />
+                <AdminOrderList onOrderSelection={handleOrderSelection} />
             </div>
             <div className='flex-[4_4_0%] '>
-                <AdminOrderDetails />
+                <AdminOrderDetails selectedOrder={selectedOrder}/>
             </div>
         </div>
         </div>

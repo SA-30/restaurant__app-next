@@ -1,6 +1,6 @@
 import {  FaWeight } from 'react-icons/fa';
 
-function AdminDetails() {
+function AdminDetails({ selectedTable }: any) {
     const bookedItems = [
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -26,8 +26,8 @@ function AdminDetails() {
                 <div>
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
-                            <h2 className='text-xl font-semibold mb-2  '>Table 2</h2>
-                        <p className='cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 text-adminredColor'>Booked</p>
+                            <h2 className='text-xl font-semibold mb-2  '>{selectedTable ?  selectedTable.name : 'Table'}</h2>
+                        <p className={`cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 ${selectedTable && selectedTable.status == 'available'? 'text-adminredColor': 'text-admingreenColor'}`}>{selectedTable ?  selectedTable.status : 'available'}</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>

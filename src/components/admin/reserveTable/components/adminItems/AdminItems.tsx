@@ -1,6 +1,11 @@
-import AdminTable from "./AdminTable"
+import AdminTable from "./AdminTable";
 
-function AdminItems() {
+function AdminItems({onTableSelection}: any) {
+
+  const handleTableSelection = (table:any) => {
+        onTableSelection(table);
+    };
+
   return (
     <div className='flex flex-col py-5 px-5 md:px-0'>
         <div className="mb-5">
@@ -11,7 +16,7 @@ function AdminItems() {
 
         {/* Tables */}
         <div className="">
-            <AdminTable />
+            <AdminTable  onTableSelection={handleTableSelection}  />
         </div>
     </div>
   )
