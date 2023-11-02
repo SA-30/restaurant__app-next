@@ -2,13 +2,15 @@
 
 import React from 'react'
 import MethodChoose from '@/components/methodChoose/MethodChoose'
-import {signOut} from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
+  const router = useRouter();
+
   return (
     <div>
       <div className='min-h-[5vh] absolute top-10 left-[50%] translate-x-[-50%]'> 
-        <button onClick={ () => signOut() } className='transition-all hover:shadow-md text-gray-400 text-sm  bg-gray-800 px-10 py-3 rounded'>Logout</button>
+        <button onClick={ () => router.replace('/login')} className='transition-all hover:shadow-md text-gray-400 text-sm  bg-gray-800 px-10 py-3 rounded'>Logout</button>
       </div>
       <MethodChoose />
     </div>

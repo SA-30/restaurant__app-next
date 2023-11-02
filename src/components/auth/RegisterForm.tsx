@@ -22,43 +22,44 @@ const RegisterForm = () => {
             return;
         }
 
-        try {
-            const resUser = await fetch('api/userExists', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email })
-            })
+        // try {
+        //     const resUser = await fetch('api/userExists', {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({ email })
+        //     })
 
-            const { user } = await resUser.json();
+        //     const { user } = await resUser.json();
 
-            if( user ) {
-                setError("User already Exists!!!");
-            }
+        //     if( user ) {
+        //         setError("User already Exists!!!");
+        //     }
 
-            const res = await fetch('api/register', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name, email, password
-                })
-            })
+        //     const res = await fetch('api/register', {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             name, email, password
+        //         })
+        //     })
 
-            if(res.ok){
-                const form = e.target;
-                form.reset();
-                router.push('/login')
-            } else {
-                console.log("User registration failed");
+        //     if(res.ok){
+        //         const form = e.target;
+        //         form.reset();
+        //         router.push('/login')
+        //     } else {
+        //         console.log("User registration failed");
                 
-            }
-        } catch (error) {
-            console.log("Error during registration", error);
-            
-        }
+        //     }
+        // } catch (error) {
+        //     console.log("Error during registration", error);
+        // }
+
+        router.push('/login')
     }
 
     return (
