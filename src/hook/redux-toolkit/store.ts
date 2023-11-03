@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tableReducer from './features/table-slice'
+import tableReducer from './features/admin/table-slice';
+import customerTableReducer from './features/customer/table-slice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
     reducer: {
         tableReducer,
+        customerTableReducer,
     },
 })
 

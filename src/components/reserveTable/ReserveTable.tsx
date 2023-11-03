@@ -3,106 +3,102 @@
 import { FunctionComponent, useState } from "react";
 import MethodHeader from "../component/Header/MethodHeader";
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
-import {FaSkull,FaArrowUp, FaArrowDown, FaTable} from 'react-icons/fa'
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from "@/hook/redux-toolkit/store";
+import { customerTouchTable } from "@/hook/redux-toolkit/features/customer/table-slice";
 
+
+import {FaSkull,FaArrowUp, FaArrowDown, FaTable, FaChair} from 'react-icons/fa'
 
 interface Props {
 }
  
 const ReserveTable: FunctionComponent<Props> = () => {
     const [selectedTable, setSelectedTable] = useState<number | null>(null);
+    const [tableStatus, setTableStatus] = useState<string | null>(null);
+
+    const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
 
     const tables = [
         {
-            name: "Table 1",
+            name: 1,
             status: "available",
-            dish : [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 2",
+            name: 2,
             status: "booked",
-            dish: [
-                {first: 'Buff Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 3",
+            name: 3,
             status: "available",
-            dish: [
-                {first: 'Mix Momo', second: 'Mix veg momo'}
-            ],
+            seat: 6,
         },
         {
-            name: "Table 4",
+            name: 4,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 5",
+            name: 5,
             status: "booked",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 6",
+            name: 6,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 6,
         },
         {
-            name: "Table 7",
+            name: 7,
             status: "booked",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 8",
+            name: 8,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 9",
+            name: 9,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 10,
         },
         {
-            name: "Table 10",
+            name: 10,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 11",
+            name: 11,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
         {
-            name: "Table 12",
+            name: 12,
             status: "available",
-            dish: [
-                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
-            ],
+            seat: 4,
         },
     ]
 
-    const handleTableClick = (index: number) => {
+    const handleTableClick = (table: any, index: number) => {
         setSelectedTable(index);
+        setTableStatus(table.status);
+
+        if(table.status == 'available'){
+
+            dispatch(customerTouchTable({status: table.status, tableName: table.name, seat: table.seat}))    
+        }
     };
+
+    
+    const handleNext = () => {
+        if(tableStatus == 'available') router.push('reserveTable/conformReserve')
+    }
 
     return ( 
         <div className="bg-primaryColor min-h-screen">
@@ -114,12 +110,15 @@ const ReserveTable: FunctionComponent<Props> = () => {
                 <div className="h-[15vh]"></div>
 
                 {/* Tables */}
-                <div className='mx-5 md:mx-20 grid grid-cols-2 md:grid-cols-4 gap-5 text-white'>
+                <div className='mx-5 md:mx-20 grid grid-cols-2 md:grid-cols-4 gap-5 text-white' >
                 {tables.map((table, index) => (
-            <div 
-            key={index} 
-            className='transition-all hover:scale-[1.02] cursor-pointer '>
-                <div className={`p-3 pr-20 bg-admindarkColor ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
+                    <div 
+                        key={index}
+                        onClick={() => handleTableClick(table, index)}
+                        className='transition-all hover:scale-[1.02] cursor-pointer '>
+                    <div className={`p-3 pr-20 bg-admindarkColor ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-adminredColor" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}
+                    
+                    >
                     <div className='flex items-center gap-2 mb-4'>
                     <div className='p-1 bg-gray-600 rounded'>{table.status == 'available' ? <FaTable size={10}/> : <FaSkull size={10}/>}</div>
                     <p className={`text-[10px] ${table.status == 'available' ? "text-admingreenColor" : "text-adminredColor"}`}>{table.status}</p>
@@ -128,27 +127,23 @@ const ReserveTable: FunctionComponent<Props> = () => {
                         {table.status == 'available' ?<FaArrowUp size={6}/> : <FaArrowDown size={6}/>}
                     </div>
                     </div>
-                    <h1 className='md:text-xl font-semibold mb-2'>{table.name}</h1>
-                    <div className='text-[8px]'> 
-                        {table.dish.map((dishItem, index) => (
-                            <div key={index}>
-                                {dishItem.first}
-                                {dishItem.second}
-                            </div>
-                        ))}
+                    <h1 className='md:text-xl font-semibold mb-2'>Table {table.name}</h1>
+                    <div className='flex gap-2  items-center text-[14px]'> 
+                        <FaChair className="text-gray-400"/>
+                        {table.seat}
                     </div>
-                </div>
-            </div>
+                    </div>
+                    </div>
                 ))}
                 </div>
 
                 {/* Next button */}
                 <div className='py-5 my-5 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
-                <Link href="reserveTable/conformReserve">
-                    <button className='text-[10px] font-bold transition-all text-white  bg-adminblueColor py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
+                {/* <Link href="reserveTable/conformReserve"> */}
+                    <button onClick={handleNext} className='text-[10px] font-bold transition-all text-white  bg-adminblueColor py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
                         NEXT
                     </button> 
-                </Link> 
+                {/* </Link>  */}
                 </div>
             </div>
         </div>

@@ -1,7 +1,11 @@
-import { FunctionComponent } from "react";
+'use client'
+
+import { FunctionComponent, useState } from "react";
 import MethodHeader from "../component/Header/MethodHeader";
-import {FaPlusCircle} from 'react-icons/fa'
 import Image from "next/image";
+import Link from 'next/link'
+
+import { useAppSelector } from "@/hook/redux-toolkit/store";
 
 import table2c from '../../../public/assets/images/table2c.png'
 
@@ -9,11 +13,14 @@ interface Props {
 }
  
 const YourReserve: FunctionComponent<Props> = () => {
+     const [selectedDate, setSelectedDate] = useState(new Date());
+    const { status, tableName, seat } = useAppSelector((state) => state.customerTableReducer.value)
+
     const reservationDetails = {
-        date : 'October 29, 2023',
-        time: '7:00 AM',
-        nos: 4,
-        tableNo: 6,
+        date : selectedDate.toDateString(),
+        time: `${selectedDate.getHours()} : ${selectedDate.getMinutes()}`,
+        nos: seat,
+        tableNo: tableName,
     }
 
     return ( 
@@ -44,7 +51,9 @@ const YourReserve: FunctionComponent<Props> = () => {
                     </div>
                 </div>
                 <div className="transition-all text-gray-600 flex justify-center my-10 hover:scale-[1.04] cursor-pointer">
-                    <FaPlusCircle size={30}/>
+                    <Link href="/reserveTable/reserveFood">
+                        <p className="bg-admindarkColor px-7 rounded py-2 text-white text-sm font-semibold">Order food</p>
+                    </Link>
                 </div>
             </div>
         </div>
