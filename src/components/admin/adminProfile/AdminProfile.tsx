@@ -1,12 +1,19 @@
+'use client'
+
 import { FunctionComponent } from "react";
 import {FaLocationArrow} from 'react-icons/fa'
 import {FaLocationDot} from 'react-icons/fa6'
 import AdminMenu from "../components/adminMenu/AdminMenu";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 interface AdminPageProps {
     
 }
  
 const AdminProfile: FunctionComponent<AdminPageProps> = () => {
+    const router = useRouter();
+
     return (  
         <>
         <div className='bg-adminbgColor'>
@@ -36,7 +43,9 @@ const AdminProfile: FunctionComponent<AdminPageProps> = () => {
 
                     <div className="flex flex-col md:flex-row px-5 py-5 gap-5 mt-5">
                         <button className="transition-all hover:scale-[1.05]  bg-transparent hover:bg-adminblueColor text-[12px] border-[1px] border-adminblueColor py-2 px-5 ">Edit Profile</button>
+                        <Link href={'/login'}>
                         <button className="transition-all  bg-adminblueColor  font-semibold hover:shadow hover:scale-[1.05] text-[14px] border-[1px] border-adminblueColor py-2 px-5 text-gray-900">Logout</button>
+                        </Link>
                     </div>
                 </div>
             </div>

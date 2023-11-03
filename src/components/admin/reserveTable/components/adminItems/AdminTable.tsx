@@ -91,8 +91,8 @@ function AdminTable({onTableSelection}: any) {
 
     return (
         <div className='grid grid-cols-2 md:grid-cols-3 gap-5 '>
-
-        {tables.map((table, index) => (
+            
+            {tables.map((table, index) => (
             <div 
             key={index} 
             onClick={() => onTableSelection(table)}
@@ -115,7 +115,7 @@ function AdminTable({onTableSelection}: any) {
             ))} </p>
         </div>
             </div>
-        ))}
+            ))}
         
         </div>
     )

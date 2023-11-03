@@ -6,24 +6,6 @@ import Search from '@/components/component/search/Search'
 const OrderFoodComponent = () => {
   return (
     <div className='text-white'>
-      {/* Header Component ☑️
-        -back icon on left
-        -Method name on left
-        -cart on right
-        -Profile on right
-      */}
-
-      {/* Search Component ☑️ */}
-
-      {/* Menu Component   ☑️
-        -Tag lists
-        -Items vertical view (fetch all items)
-      */}
-
-      {/* Combination Menu  ☑️
-        -Items horizontal view
-      */}
-
       <div className='bg-primaryColor'>
 
         {/* Header */}

@@ -1,24 +1,177 @@
 'use client'
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import MethodHeader from "../component/Header/MethodHeader";
-import Image from "next/image";
+import Link from 'next/link';
 
-import table1 from '../../../public/assets/images/table1.png'
-import table2 from '../../../public/assets/images/table2.png'
-import table2c from '../../../public/assets/images/table2c.png'
-import table3 from '../../../public/assets/images/table3.png'
-import table4 from '../../../public/assets/images/table4.png'
-import Link from "next/link";
+import {FaSkull,FaArrowUp, FaArrowDown, FaTable} from 'react-icons/fa'
+
 
 interface Props {
 }
  
 const ReserveTable: FunctionComponent<Props> = () => {
+    const [selectedTable, setSelectedTable] = useState<number | null>(null);
+
+    const tables = [
+        {
+            name: "Table 1",
+            status: "available",
+            dish : [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 2",
+            status: "booked",
+            dish: [
+                {first: 'Buff Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 3",
+            status: "available",
+            dish: [
+                {first: 'Mix Momo', second: 'Mix veg momo'}
+            ],
+        },
+        {
+            name: "Table 4",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 5",
+            status: "booked",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 6",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 7",
+            status: "booked",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 8",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 9",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 10",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 11",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+        {
+            name: "Table 12",
+            status: "available",
+            dish: [
+                {first: 'Veg Momo', second: 'Pure vegitarian momo'}
+            ],
+        },
+    ]
+
+    const handleTableClick = (index: number) => {
+        setSelectedTable(index);
+    };
+
     return ( 
         <div className="bg-primaryColor min-h-screen">
+            {/* Header */}
             <MethodHeader methodTitle="Reserve Table"/>
-            <div className="flex flex-col min-h-screen justify-between ">
+            
+            <div className="flex flex-col justify-center min-h-screen md:h-screen">
+                {/* Divider */}
+                <div className="h-[15vh]"></div>
+
+                {/* Tables */}
+                <div className='mx-5 md:mx-20 grid grid-cols-2 md:grid-cols-4 gap-5 text-white'>
+                {tables.map((table, index) => (
+            <div 
+            key={index} 
+            className='transition-all hover:scale-[1.02] cursor-pointer '>
+                <div className={`p-3 pr-20 bg-admindarkColor ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
+                    <div className='flex items-center gap-2 mb-4'>
+                    <div className='p-1 bg-gray-600 rounded'>{table.status == 'available' ? <FaTable size={10}/> : <FaSkull size={10}/>}</div>
+                    <p className={`text-[10px] ${table.status == 'available' ? "text-admingreenColor" : "text-adminredColor"}`}>{table.status}</p>
+                    <div className={`p-1 rounded-3xl ${table.status == 'available' ? "text-admingreenColor bg-[#305230]" : "text-adminredColor bg-[#523030]"}`}>
+                        
+                        {table.status == 'available' ?<FaArrowUp size={6}/> : <FaArrowDown size={6}/>}
+                    </div>
+                    </div>
+                    <h1 className='md:text-xl font-semibold mb-2'>{table.name}</h1>
+                    <div className='text-[8px]'> 
+                        {table.dish.map((dishItem, index) => (
+                            <div key={index}>
+                                {dishItem.first}
+                                {dishItem.second}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+                ))}
+                </div>
+
+                {/* Next button */}
+                <div className='py-5 my-5 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
+                <Link href="reserveTable/conformReserve">
+                    <button className='text-[10px] font-bold transition-all text-white  bg-adminblueColor py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
+                        NEXT
+                    </button> 
+                </Link> 
+                </div>
+            </div>
+        </div>
+     );
+}
+ 
+export default ReserveTable;
+
+
+
+
+
+
+
+
+
+
+{/* 
+
+OLD CODE
+
+
+<div className="flex flex-col min-h-screen justify-between ">
                 <div className='my-10'></div>
                 <div className="mx-5 md:mx-60">
                 <h5 className="text-center">Choose your table</h5>
@@ -89,15 +242,11 @@ const ReserveTable: FunctionComponent<Props> = () => {
                 </div>
                 </div>
                 
-                {/* Order now button */}
                 <div className='py-5 bg-secondaryColor mt-8 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
-                <Link href="reserveTable/conformReserve"><button className='transition-all text-white  bg-gray-700 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
-                    NEXT
-                </button>  </Link>  
+                <Link href="reserveTable/conformReserve">
+                    <button className='transition-all text-white  bg-gray-700 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
+                        NEXT
+                    </button> 
+                </Link> 
                 </div>
-            </div>
-        </div>
-     );
-}
- 
-export default ReserveTable;
+            </div> */}
