@@ -63,6 +63,7 @@ const LoginForm = () => {
                 </Link>
             </p>
         </form>
+        <p className=' text-center text-sm text-gray-600  absolute bottom-40 md:bottom-20 left-[50%] translate-x-[-50%]'><span className='text-[14px] md:text-[10px]'>For Admin page</span><br /> <span className='text-[16px] md:text-[12px]'>Email , Passowrd = admin</span></p>
         </div>
     );
 }
