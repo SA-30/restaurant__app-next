@@ -1,7 +1,10 @@
-
+import { useDispatch } from 'react-redux'
+import { touchTable } from '@/hook/redux-toolkit/features/admin/table-slice'
 import {FaSkull,FaArrowUp, FaArrowDown, FaTable} from 'react-icons/fa'
 
 function AdminTable({onTableSelection}: any) {
+    const dispatch = useDispatch();
+
     const tables = [
         {
             name: "Table 1",
@@ -87,13 +90,18 @@ function AdminTable({onTableSelection}: any) {
         },
     ]
 
+    const handleTableSelection = (table : any) => {
+        // Dispatch the touchTable action with the selected table's info
+        dispatch(touchTable({status: table.status, tableName: table.name, dish: table.dish}))
+    }
+
     return (
         <div className='grid grid-cols-2 md:grid-cols-3 gap-5 '>
             
             {tables.map((table, index) => (
             <div 
                 key={index} 
-                onClick={() => onTableSelection(table)}
+                onClick={() => handleTableSelection(table)}
                 className='transition-all hover:scale-[1.02] cursor-pointer '>
                     <div className={`p-3 pr-20 bg-admindarkColor ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
                     <div className='flex items-center gap-2 mb-4'>

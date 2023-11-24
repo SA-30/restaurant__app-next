@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/hook/redux-toolkit/store';
 import {  FaWeight } from 'react-icons/fa';
 
 function AdminDetails({ selectedTable }: any) {
@@ -20,6 +21,9 @@ function AdminDetails({ selectedTable }: any) {
     const tax = totalPrice * 13/100;
     const GrandTotal = totalPrice + tax + 99;
 
+    const selectedTableFromRedux = useAppSelector((state) => state.tableReducer.value)
+    
+
 
     return (
         <div className='md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
@@ -27,8 +31,8 @@ function AdminDetails({ selectedTable }: any) {
                 <div>
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
-                            <h2 className='text-xl font-semibold mb-2  '>{selectedTable ?  selectedTable.name : 'Table'}</h2>
-                        <p className={`cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 ${selectedTable && selectedTable.status == 'available'? 'text-adminredColor': 'text-admingreenColor'}`}>{selectedTable ?  selectedTable.status : 'available'}</p>
+                            <h2 className='text-xl font-semibold mb-2  '>{selectedTableFromRedux ?  selectedTableFromRedux.tableName : 'Table'}</h2>
+                        <p className={`cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 ${selectedTableFromRedux && selectedTableFromRedux.status == 'available'? 'text-adminredColor': 'text-admingreenColor'}`}>{selectedTableFromRedux ?  selectedTableFromRedux.status : 'available'}</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
