@@ -1,7 +1,8 @@
+
 import {FaEdit, FaPlus, FaWeight } from "react-icons/fa"
 import AddNewItem from "../addNewItem/AddNewItem"
 
-function ManagementItem() {
+function ManagementItem({addItem}: any) {
     const items = [
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -74,11 +75,10 @@ function ManagementItem() {
 
     return (
         <div>
-            <div className=' grid grid-cols-2 md:grid-cols-5 gap-5 '>
-                <div className="transition-all flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
+            <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
+                <div onClick={() => {addItem()}} className="transition-all flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
                     <FaPlus size={10}/>
-                    <p className="text-[12px] ">Add new item</p>
-                    {/* <AddNewItem /> */}
+                    <p className="text-[12px]">Add new item</p>
                 </div>
                 {items.map((item, index) => (
                     <div key={index} className='transition-all border-[1px] hover:shadow-xl hover:shadow-[#5050ca17] cursor-pointer border-[#5050cab7] min-w-[150px] flex flex-col items-center rounded'>

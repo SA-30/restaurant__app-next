@@ -20,6 +20,7 @@ function AdminDetails({ selectedTable }: any) {
     const tax = totalPrice * 13/100;
     const GrandTotal = totalPrice + tax + 99;
 
+
     return (
         <div className='md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
             <div className='bg-admindarkColor flex flex-col px-5 mt-5 py-5'>
