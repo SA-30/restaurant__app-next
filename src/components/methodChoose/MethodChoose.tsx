@@ -13,11 +13,9 @@ const MethodChoose = () => {
         <div>
           {/* Replace this Method Choose with Notification Section about each of these parts.
             When clicked opens that section
+
+            this applies only for admin panel
         */}
-        <p className=" text-gray-400 text-sm bg-transparent">
-            Replace this Method Choose with Notification Section about each of these parts. <br />
-            When clicked opens that section
-        </p>
         </div>
 
         <div className=' flex flex-col md:flex-row gap-10'>
@@ -29,6 +27,8 @@ const MethodChoose = () => {
               <div className='px-5 py-3 text-sm font-bold text-white'>ORDER FOOD</div>
             </div>
           </Link>
+          {/*
+            Merging this with order food section
           <Link href='/takeAway'>
             <div className='transition-all hover:shadow-xl hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#064e06] rounded-2xl cursor-pointer'>
               <div className='h-32 bg-[#93bb93] w-full rounded-t-2xl flex flex-col justify-center items-center'>
@@ -36,7 +36,7 @@ const MethodChoose = () => {
               </div>
               <div className='px-5 py-3 text-sm font-bold text-white'>TAKE AWAY</div>
             </div>
-          </Link>
+          </Link> */}
           <Link href='/reserveTable'>
             <div className='transition-all hover:shadow-xl hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#155658] rounded-2xl cursor-pointer'>
               <div className='h-32 bg-[#2baeb3] w-full rounded-t-2xl flex flex-col justify-center items-center'>

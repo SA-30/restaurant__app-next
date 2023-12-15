@@ -1,13 +1,27 @@
 import { FaPerson, FaFilter } from "react-icons/fa6"
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/hook/redux-toolkit/store";
+import { orderFood } from "@/hook/redux-toolkit/features/admin/order-slice";
+import { useState } from "react";
+
+interface orderItem {
+    face: string;
+    name: string;
+    menu: string[];
+    price: number;
+    status: string;
+}
 
 function OrderList({onOrderSelection}: any) {
+   const [selectedTable, setSelectedTable] = useState<number | null>(null);
+
    const orderList = [
         {
             face:'🍗',
             name: 'monkey D Luffy',
             menu: [
-                {first: 'Spicy meat'},
-                {second: 'More meat'},
+                'Spicy meat',
+                'More meat',
             ],
             price: 500,
             status: 'completed',
@@ -16,8 +30,8 @@ function OrderList({onOrderSelection}: any) {
             face:'🍺',
             name: 'Roronoa Zoro',
             menu: [
-                {first: 'Old Booze'},
-                {second: 'More booze'},
+                'Old Booze',
+                'More booze',
             ],
             price: 400,
             status: 'pending',
@@ -26,8 +40,8 @@ function OrderList({onOrderSelection}: any) {
             face:'🚬',
             name: 'Vinsmoke Sanji',
             menu: [
-                {first: 'Plata pyaza'},
-                {second: 'Wine'},
+                 'Plata pyaza',
+                 'Wine',
             ],
             price: 600,
             status: 'completed',
@@ -36,8 +50,8 @@ function OrderList({onOrderSelection}: any) {
             face:'🤑',
             name: 'Catbuglar Nami',
             menu: [
-                {first: 'Grillez Money plant'},
-                {second: 'Pizza'},
+                'Grillez Money plant',
+                'Pizza',
             ],
             price: 200,
             status: 'completed',
@@ -46,8 +60,8 @@ function OrderList({onOrderSelection}: any) {
             face:'🔫',
             name: 'Brave Ussop',
             menu: [
-                {first: 'Chiken'},
-                {second: 'More chicken'},
+                'Chiken',
+                'More chicken',
             ],
             price: 400,
             status: 'completed',
@@ -56,8 +70,8 @@ function OrderList({onOrderSelection}: any) {
             face:'😈',
             name: 'Demon Child Robin',
             menu: [
-                {first: 'Strabery Icecream'},
-                {second: 'Soft taco'},
+                 'Strabery Icecream',
+                 'Soft taco',
             ],
             price: 100,
             status: 'completed',
@@ -66,8 +80,8 @@ function OrderList({onOrderSelection}: any) {
             face:'🦝',
             name: 'Cotton Candy Chopper',
             menu: [
-                {first: 'Cotton candy'},
-                {second: 'More Cotton candy'},
+                'Cotton candy',
+                'More Cotton candy',
             ],
             price: 50,
             status: 'completed',
@@ -76,8 +90,8 @@ function OrderList({onOrderSelection}: any) {
             face:'💀',
             name: 'Brook',
             menu: [
-                {first: 'Goat skull soup'},
-                {second: 'Booze'},
+                'Goat skull soup',
+                 'Booze',
             ],
             price: 500,
             status: 'completed',
@@ -86,13 +100,20 @@ function OrderList({onOrderSelection}: any) {
             face:'🐟',
             name: 'Jinbe',
             menu: [
-                {first: 'Grilled fish'},
-                {second: 'Cooked fish'},
+                'Grilled fish',
+                 'Cooked fish',
             ],
             price: 300,
             status: 'completed',
         },
     ]
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleSelection = (item: orderItem, index: number) => {
+        setSelectedTable(index)
+        dispatch(orderFood({face: item.face, status: item.status, customerName: item.name, price: item.price, dish: item.menu}))
+    }
 
     return (
         <div className=" bg-admindarkColor h-screen  pt-10  font-semibold">
@@ -110,9 +131,9 @@ function OrderList({onOrderSelection}: any) {
                 {orderList.map(( item, index) => (
                     <div 
                     key={index} 
-                    onClick={() => onOrderSelection(item)}
+                    onClick={() => handleSelection(item as orderItem, index)}
                     className="">
-                        <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center py-3   ${item.status == 'completed' ? 'hover:bg-[#806dd4d5]' : 'hover:bg-[#d46d94d5]' } ${index == 0? 'bg-[#806dd4d5]' : ''}`}>
+                        <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center  py-3 ${selectedTable === index ? item.status == 'completed' ?  "bg-[#806dd4d5]" : "bg-adminredColor" : "" } ${item.status == 'completed' ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
                         <div className="flex gap-3 items-center">
                             <div className={`${item.status == 'completed' ? 'bg-[#41ad4110]': 'bg-[#963d3d27]'} text-[16px] rounded-[50%] p-1 flex items-center`} >
                                 {item.face}
@@ -122,8 +143,7 @@ function OrderList({onOrderSelection}: any) {
                         <div className="md:mr-10 ml-5 md:ml-0">
                             {item.menu.map((fooditem, index) => (
                                 <div key={index}>
-                                    <p>{fooditem.first}</p>
-                                    <p>{fooditem.second}</p>
+                                    <p>{fooditem}</p>
                                 </div>
                             ))}
                             

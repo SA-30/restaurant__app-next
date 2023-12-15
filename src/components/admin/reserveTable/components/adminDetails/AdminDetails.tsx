@@ -2,17 +2,21 @@ import { useAppSelector } from '@/hook/redux-toolkit/store';
 import {  FaWeight } from 'react-icons/fa';
 
 function AdminDetails({ selectedTable }: any) {
+    const imgUrl = '/assets/images/momov.jpg';
+    const price = 'Rs 100';
+    const weight = '1 plate';
+
     const bookedItems = [
         {
-            imgUrl: '/assets/images/momov.jpg',
             title: 'Veg Momo, Pure vegitarian momo',
             weight: '1 plate',
+            imgUrl: '/assets/images/momov.jpg',
             price: 'Rs 100',
         },
         {
-            imgUrl: '/assets/images/momoc.jpg',
             title: 'Buff Momo, Tasty buff momo',
             weight: '1 plate',
+            imgUrl: '/assets/images/momoc.jpg',
             price: 'Rs 120',
         },
     ]
@@ -22,8 +26,6 @@ function AdminDetails({ selectedTable }: any) {
     const GrandTotal = totalPrice + tax + 99;
 
     const selectedTableFromRedux = useAppSelector((state) => state.tableReducer.value)
-    
-
 
     return (
         <div className='md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
@@ -32,7 +34,7 @@ function AdminDetails({ selectedTable }: any) {
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
                             <h2 className='text-xl font-semibold mb-2  '>{selectedTableFromRedux ?  selectedTableFromRedux.tableName : 'Table'}</h2>
-                        <p className={`cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 ${selectedTableFromRedux && selectedTableFromRedux.status == 'available'? 'text-adminredColor': 'text-admingreenColor'}`}>{selectedTableFromRedux ?  selectedTableFromRedux.status : 'available'}</p>
+                        <p className={`cursor-pointer text-[12px] p-2 border-[1px] flex justify-center items-center border-gray-600 ${selectedTableFromRedux && selectedTableFromRedux.status == 'available'? 'text-admingreenColor': 'text-adminredColor'}`}>{selectedTableFromRedux ?  selectedTableFromRedux.status : 'available'}</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
@@ -43,17 +45,18 @@ function AdminDetails({ selectedTable }: any) {
 
                 <div>
                     <div className='flex flex-col gap-10 mb-5'>
-                        {bookedItems.map((item, index) => (
+                        {selectedTableFromRedux.dish.map((item, index) => (
                             <div key={index}>
                                 <div className='  flex flex-row  rounded-2xl items-center gap-5'>
-                                <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgUrl})`}}></div>
-
+                                <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${imgUrl})`}}></div>
+                                
+                                
                                 <div className='flex flex-col  gap-2 w-full justify-center rounded-r-2xl'>
-                                    <h2 className='font-semibold text-sm'>{item.title}</h2>
+                                    <h2 className='font-semibold text-sm'>{item}</h2>
                                     <div className='flex gap-2 items-center justify-start'>
                                         <FaWeight className='opacity-50' size={10}/>
-                                        <p className='text-[12px] font-thin'>{item.weight}</p>
-                                        <h2 className='text-[12px] font-normal'>{item.price}</h2>
+                                        <p className='text-[12px] font-thin'>{weight}</p>
+                                        <h2 className='text-[12px] font-normal'>{price}</h2>
                                     </div>
                                 </div>
                                 </div>

@@ -7,14 +7,14 @@ type InitialState = {
 type TableState = {
     status: string,
     tableName: string,
-    dish: string,
+    dish: string[],
 }
 
 const initialState = {
     value: {
         status: 'available',
         tableName: 'Table',
-        dish: 'dishItem',
+        dish: ['dishItem'],
     } as TableState,
 } as InitialState;
 
@@ -22,7 +22,7 @@ export const table = createSlice({
     name: 'table',
     initialState,
     reducers: {
-        touchTable: (state, action: PayloadAction<{status: string, tableName: string, dish: string}>) => {
+        touchTable: (state, action: PayloadAction<{status: string, tableName: string, dish: string[]}>) => {
             const {status, tableName, dish} = action.payload;
 
             state.value.status = status;

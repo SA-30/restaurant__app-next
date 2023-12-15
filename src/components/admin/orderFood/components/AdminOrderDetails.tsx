@@ -1,6 +1,12 @@
 import {  FaWeight } from 'react-icons/fa';
+import { useAppSelector } from '@/hook/redux-toolkit/store';
 
 function AdminOrderDetails({selectedOrder}: any) {
+    const imgUrl = '/assets/images/momoc.jpg';
+    const weight = '1 plate';
+
+    const selectedOrderFromRedux = useAppSelector(state => state.orderReducer.value)
+
     const bookedItems = [
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -28,11 +34,11 @@ function AdminOrderDetails({selectedOrder}: any) {
                         <div className='flex justify-between items-center ' >
                             <div className='flex items-center gap-3'>
                                 <div className={`bg-[#41ad4110] text-[16px] rounded-[50%] p-2 flex items-center`}>
-                                {selectedOrder? selectedOrder.face : '🍗'}
+                                {selectedOrderFromRedux&& selectedOrderFromRedux.face  }
                             </div>
-                                <h2 className='text-lg font-normal'>{selectedOrder? selectedOrder.name : 'Monkey D Luffy'}</h2>
+                                <h2 className='text-lg font-normal'>{selectedOrderFromRedux && selectedOrderFromRedux.customerName}</h2>
                             </div>
-                        <p className={`cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrder && selectedOrder.status == 'completed'? 'bg-[#2e4e2e]' : 'bg-[#4e2e2e]'}`}>{selectedOrder? selectedOrder.status : 'Completed'}</p>
+                        <p className={`cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == 'completed'? 'bg-[#2e4e2e]' : 'bg-[#4e2e2e]'}`}>{selectedOrderFromRedux? selectedOrderFromRedux.status : 'Completed'}</p>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
@@ -43,20 +49,20 @@ function AdminOrderDetails({selectedOrder}: any) {
 
                 <div>
                     <div className='flex flex-col gap-10 mb-5'>
-                        {bookedItems.map((item, index) => (
+                        {selectedOrderFromRedux.dish.map((item, index) => (
                             <div 
                             key={index}
                             
                             >
                                 <div className='  flex flex-row  rounded-2xl items-center gap-5'>
-                                <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${item.imgUrl})`}}></div>
+                                <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${imgUrl})`}}></div>
 
                                 <div className='flex flex-col  gap-2 w-full justify-center rounded-r-2xl'>
-                                    <h2 className='font-semibold text-sm'>{item.title}</h2>
+                                    <h2 className='font-semibold text-sm'>{item}</h2>
                                     <div className='flex gap-2 items-center justify-start'>
                                         <FaWeight className='opacity-50' size={10}/>
-                                        <p className='text-[12px] font-thin'>{item.weight}</p>
-                                        <h2 className='text-[12px] font-normal'>{item.price}</h2>
+                                        <p className='text-[12px] font-thin'>{weight}</p>
+                                        <h2 className='text-[12px] font-normal'>{selectedOrderFromRedux.price}</h2>
                                     </div>
                                 </div>
                                 </div>

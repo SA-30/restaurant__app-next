@@ -1,5 +1,6 @@
 import {FaHome, FaPizzaSlice, FaBiking} from 'react-icons/fa'
 import {FaUserLock, FaGear, FaTable } from 'react-icons/fa6'
+import {AiOutlineOrderedList} from 'react-icons/ai'
 import Link from 'next/link'
 
 function AdminMenu() {
@@ -11,8 +12,7 @@ function AdminMenu() {
 
         <div className="flex gap-5 md:gap-10 md:flex-col ">
             <Link href='/admin/reserveTable'><div className=' hover:scale-[1.09] p-2 md:p-4 cursor-pointer transition-all hover:bg-[#7272e9] rounded-xl'><FaTable className="md:h-5 md:w-5" size={17}/></div></Link>
-            <Link href='/admin/orderFood'><div className=' hover:scale-[1.09] p-2 md:p-4 cursor-pointer transition-all hover:bg-[#7272e9] rounded-xl'><FaPizzaSlice className="md:h-5 md:w-5" size={17}/></div></Link>
-            <Link href='/admin/takeAway'><div className=' hover:scale-[1.09] p-2 md:p-4 cursor-pointer transition-all hover:bg-[#7272e9] rounded-xl'><FaBiking className="md:h-5 md:w-5" size={17}/></div></Link>
+            <Link href='/admin/orderFood'><div className=' hover:scale-[1.09] p-2 md:p-4 cursor-pointer transition-all hover:bg-[#7272e9] rounded-xl'><AiOutlineOrderedList className="md:h-5 md:w-5" size={17}/></div></Link>
             <Link href='/admin/itemsManagement'>
               <div className=' hover:scale-[1.09] p-2 md:p-4 cursor-pointer transition-all hover:bg-[#7272e9] rounded-xl'><FaGear className="md:h-5 md:w-5" size={17}/></div>
             </Link>

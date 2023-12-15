@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import reservetable from '../../../public/assets/images/reservetable.png';
 import orderfood from '../../../public/assets/images/orderfood.png';
-import takeaway from '../../../public/assets/images/takeaway.png';
 
 
 
@@ -25,6 +24,14 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
 
             {/* Admin Items */}
             <div className='hide-scroolbar flex-[11_11_0%]  '>
+              <div>
+                <h1 className="font-bold text-gray-400">todo</h1>
+                <ul className="font-light text-sm">
+                  <li> Redux toolkit </li>
+                  <li> Database </li>
+                  <li> Auth </li>
+                </ul>
+              </div>
                 <div className='flex flex-col items-center md:min-h-[100vh] md:flex-row  gap-5 md:justify-center md:gap-10'>
                     <Link href='/admin/reserveTable'>
                       <div className='transition-all hover:shadow-xl  hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#264f8b] rounded-2xl cursor-pointer'>
@@ -40,14 +47,6 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
                           <Image className="w-20 md:w-28" width={0}  src={orderfood} alt="orderfood"/>
                         </div>
                         <div className='px-5 py-3 text-sm font-bold text-white'>ORDER FOOD</div>
-                      </div>
-                    </Link>
-                    <Link href='/admin/takeAway'>
-                      <div className='transition-all hover:shadow-xl hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#064e06] rounded-2xl cursor-pointer'>
-                        <div className='h-24 md:h-32 bg-admingreenColor w-full rounded-t-2xl flex flex-col justify-center items-center'>
-                          <Image className="w-20 md:w-28" width={0} src={takeaway} alt="orderfood"/>
-                        </div>
-                        <div className='px-5 py-3 text-sm font-bold text-white'>TAKE AWAY</div>
                       </div>
                     </Link>
                     <Link href='/admin/itemsManagement'>
