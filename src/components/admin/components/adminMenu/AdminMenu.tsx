@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 function AdminMenu() {
   return (
-    <div className="flex md:flex-col w-full justify-between  items-center p-5 ">
+    <div className="flex bg-admindarkColor fixed  bottom-0 md:relative md:flex-col w-full justify-between  items-center p-5 ">
         <Link href='/admin'>
         <div className='transition-all hover:scale-[1.09] p-2 cursor-pointer bg-[#7272e9] rounded-2xl'> <FaHome className="md:h-7 md:w-7" size={22}/> </div>
         </Link>

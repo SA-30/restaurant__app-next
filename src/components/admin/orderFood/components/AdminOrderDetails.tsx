@@ -48,7 +48,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                 </div>
 
                 <div>
-                    <div className='flex flex-col gap-10 mb-5'>
+                    <div className='h-40 hide-scroolbar overflow-y-scroll  flex flex-col justify-center gap-10 mb-5'>
                         {selectedOrderFromRedux.dish.map((item, index) => (
                             <div 
                             key={index}
@@ -70,7 +70,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                         ))}
 
                     </div>
-                    <button className='w-full p-2 bg-transparent border-[1px] text-adminblueColor border-adminblueColor text-[12px]'>View All</button>
+                    {/* <button className=' w-full p-2 bg-transparent border-[1px] text-adminblueColor border-adminblueColor text-[12px]'>View All</button> */}
                 </div>
             </div>
 

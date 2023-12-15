@@ -10,7 +10,13 @@ function ManagementItems() {
     const addItem = () => {
         setitemForm(!itemForm)
     }
-    console.log(itemForm);
+
+    const item = {
+        imgUrl: '/assets/images/chauminv.jpg',
+        title: 'new item',
+        weight: '2 plate',
+        price: 'Rs 400',
+    }
     
   return (
     <div className='md:h-screen flex flex-col justify-between py-5 px-5 md:px-0'>
@@ -29,7 +35,7 @@ function ManagementItems() {
             </ul>
             {/* Tables */}
             <div className="hide-scroolbar h-[50vh] flex flex-col md:h-[55vh] overflow-scroll  pr-5 md:mr-0 md:p-2">
-                {itemForm? <div className=" z-[10]"><AddNewItem /></div> : <ManagementItem addItem={addItem}/>}
+                {itemForm? <div className=" z-[10]"><AddNewItem /></div> : <ManagementItem addItem={addItem} item={item}/>}
             </div>
         </div>
 

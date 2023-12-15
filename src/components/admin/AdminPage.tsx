@@ -18,7 +18,7 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
         <div className='bg-adminbgColor'>
         <div className='relative gap-10 h-screen flex flex-col-reverse md:flex-row  md:justify-between text-white '>
             {/* Admin Menus */}
-            <div className='flex-1 bg-admindarkColor flex  md:relative top-0'>
+            <div className=' flex-1 bg-admindarkColor flex md:relative top-0'>
                 <AdminMenu />
             </div>
 
@@ -27,7 +27,6 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
               <div>
                 <h1 className="font-bold text-gray-400">todo</h1>
                 <ul className="font-light text-sm">
-                  <li> Redux toolkit </li>
                   <li> Database </li>
                   <li> Auth </li>
                 </ul>
