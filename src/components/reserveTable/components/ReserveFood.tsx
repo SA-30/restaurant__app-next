@@ -1,0 +1,37 @@
+import MethodHeader from '@/components/component/Header/MethodHeader'
+import HorizontalMenu from '@/components/Menu/horizontalMenu/HorizontalMenu'
+import VerticalMenu from '@/components/Menu/verticalMenu/VerticalMenu'
+import Search from '@/components/component/search/Search'
+
+const ReserveFood = () => {
+  return (
+    <div className='text-white'>
+      <div className='bg-primaryColor'>
+
+        {/* Header */}
+        <div ><MethodHeader methodTitle='Reserve Food'/></div>
+        <div className='min-h-[10vh]'></div>
+
+        {/* Search */}
+        <div className='mx-5 flex  justify-center '><Search /></div>
+        
+        {/* Horizontal Menu */}
+        <HorizontalMenu />
+
+        {/* Vertical Menu */}
+        <VerticalMenu />
+
+        {/* TODO
+          -Add functionality to each components
+
+          -Add toaster for feedback
+          
+          -When user click + it gets added to the cart
+         */}
+
+      </div>
+    </div>
+  )
+}
+
+export default ReserveFood
