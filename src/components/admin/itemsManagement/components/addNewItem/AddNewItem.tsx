@@ -22,6 +22,7 @@ function AddNewItem({addItem}: any) {
   return (
     <div className="md:w-[60vw] w-auto fixed top-[45%] left-[50%] md:top-[55%] transform translate-x-[-50%] translate-y-[-50%] flex items-center justify-center py-10 px-10 md:py-5 md:px-40 bg-adminbgColor border-2 border-adminblueColor text-white">
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-5">
+
         <div className=' flex justify-centersdf  border-dotted border-[2px] border-adminblueColor'>
           <input
             id="image"

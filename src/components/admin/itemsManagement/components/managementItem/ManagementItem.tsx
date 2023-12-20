@@ -1,9 +1,9 @@
 import {FaEdit, FaPlus, FaWeight } from "react-icons/fa"
 import AddNewItem from "../addNewItem/AddNewItem"
 import { useEffect, useState } from "react"
-
 function ManagementItem({addItem, items}: any) {
     const [itemss, setItemss] = useState<any>()
+
     
     const obj = {
         imgUrl: '/assets/images/chauminv.jpg',
@@ -34,6 +34,7 @@ function ManagementItem({addItem, items}: any) {
                                 <FaWeight className='opacity-50' size={10}/>
                                 <p className='text-[12px] font-thin'>{item?.weight}</p>
                                 <h2 className='font-bold ml-5 text-[12px]'>{item?.price}</h2>
+
                             </div>
                             <div className='flex items-center justify-center w-full text-[12px] text-gray-200 mt-2'>
                                 <button onClick={() => editDish(item, index)} className="bg-[#4a4ab8bd] w-full py-3 flex justify-center items-center"><FaEdit size={15}/> &nbsp; Edit item</button>
