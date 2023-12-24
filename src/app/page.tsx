@@ -14,7 +14,7 @@ export default function Home() {
             <button className='transition-all  text-white bg-blue-500 px-10  text-sm py-3 rounded  w-full hover:shadow-lg hover:scale-105'  >Login</button>
           </Link>
           <Link href='/register'>
-            <button className='transition-all  text-white bg-blue-500 px-10  text-sm py-3 rounded hover:shadow-lg hover:scale-105 w-full'   >Register</button>
+            <button className='transition-all  text-white bg-blue-500 px-10  text-sm py-3 rounded hover:shadow-lg hover:scale-105 w-full'>Register</button>
           </Link>
         </div>
       </div>

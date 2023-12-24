@@ -25,10 +25,12 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
             {/* Admin Items */}
             <div className='hide-scroolbar flex-[11_11_0%]  '>
               <div>
-                <h1 className="font-bold text-gray-400">todo</h1>
+                <h1 className="font-bold text-gray-400">To acheive</h1>
                 <ul className="font-light text-sm">
-                  <li> Database </li>
-                  <li> Auth </li>
+                  <li> ------------- </li>
+                  <li> Server side codes </li>
+                  <li> - Database ( also data model for each portion ) </li>
+                  <li> - Auth ( Diff for customer and admin )</li>
                 </ul>
               </div>
                 <div className='flex flex-col items-center md:min-h-[100vh] md:flex-row  gap-5 md:justify-center md:gap-10'>
