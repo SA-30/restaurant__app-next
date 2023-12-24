@@ -83,7 +83,9 @@ function ManagementItems() {
                 <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px]  border-adminblueColor text-adminblueColor">All Item</button></li>
                 <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Combination</button></li>
                 <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Veg</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Non veg</button></li>
+                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Buff</button></li>
+                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Chicken</button></li>
+                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Chicken</button></li>
             </ul>
             {/* Tables */}
             <div className="hide-scroolbar h-[50vh] flex flex-col md:h-[55vh] overflow-scroll  pr-5 md:mr-0 md:p-2">

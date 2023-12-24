@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 
-const foodItemSchema = new mongoose.Schema({
+interface  foodItem {
+  name: String,
+  description: String,
+  price: Number,
+  category: String,
+  isCombination: Boolean,
+}
+
+const foodItemSchema = new mongoose.Schema<foodItem>({
   name: {
     type: String,
     required: true,
