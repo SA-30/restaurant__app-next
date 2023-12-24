@@ -44,7 +44,7 @@ const HorizontalMenu = () => {
                         <li className="active">Veg</li>
                         <li className="hover:pb-2 hover:border-b-2 hover:border-b-red-500 cursor-pointer">Buff</li>
                         <li className="hover:pb-2 hover:border-b-2 hover:border-b-red-500 cursor-pointer">Chicken</li>
-                        <li className="hover:pb-2 hover:border-b-2 hover:border-b-red-500 cursor-pointer">Egg</li>
+                        <li className="hover:pb-2 hover:border-b-2 hover:border-b-red-500 cursor-pointer">others</li>
                     </ul>
                 </div>
             </div>
