@@ -7,6 +7,11 @@ const cBurger = 'https://i.ibb.co/Gp2zFgZ/bugarc.jpg'
 const vegPizza = 'https://i.ibb.co/LY3d9SK/pizzav.jpg'
 const cPizza = 'https://i.ibb.co/82yVthD/pizzac.jpg'
 
+const riceOmlet = 'https://i.ibb.co/vDJ2dNF/friedriceomlet.jpg'
+const pooriTarkari = 'https://i.ibb.co/FsmxnMy/pooritarkari.jpg'
+const samosaTarkari = 'https://i.ibb.co/d6Cz1mw/samosatarkari.jpg'
+const chanaEgg = 'https://i.ibb.co/4KmXPFc/chanaegg.jpg'
+
 export {
     vegMomo,
     cMomo,
@@ -15,5 +20,9 @@ export {
     vegChaumin,
     cChaumin,
     vegPizza,
-    cPizza
+    cPizza,
+    riceOmlet,
+    pooriTarkari,
+    samosaTarkari,
+    chanaEgg
 }

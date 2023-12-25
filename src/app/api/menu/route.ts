@@ -11,6 +11,7 @@ export async function GET(req: NextRequest ) {
       const search = searchParams.get('search');
       const category = searchParams.get('category');
       const sort = searchParams.get('sort');
+      const isCombination = searchParams.get('isCombination');
 
       // Build the query object based on the provided parameters
       const query: any = {};
@@ -21,7 +22,12 @@ export async function GET(req: NextRequest ) {
       }
       
       if (category) {
-          query.category = category;
+        query.category = category;
+      }
+
+      // Add a filter for isCombination
+      if (isCombination) {
+        query.isCombination = isCombination === 'true'; // Convert to boolean
       }
 
       // Execute the query with sorting
