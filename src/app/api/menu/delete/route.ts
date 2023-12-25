@@ -1,9 +1,8 @@
 import { connectMongoDB } from "@/db/db";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 import FoodItemModel, { FoodItem } from "@/db/models/foodItem/foodItem";
 
-export async function DELETE(req: NextApiRequest){
+export async function DELETE(req: any){
     try {
         const itemId: string = req.query.id as string;
         await connectMongoDB()

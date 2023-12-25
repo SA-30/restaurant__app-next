@@ -1,9 +1,8 @@
 import { connectMongoDB } from "@/db/db";
 import FoodItemModel, {FoodItem} from "@/db/models/foodItem/foodItem";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
-export async function GET(req: NextApiRequest){
+export async function GET(req: any){
     try {
         await connectMongoDB()
 
