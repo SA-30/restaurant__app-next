@@ -5,6 +5,7 @@ import ManagementItem from "./managementItem/ManagementItem"
 import AddNewItem from "./addNewItem/AddNewItem"
 
 function ManagementItems() {
+    // now edit this 
     const [itemForm, setItemForm] = useState(false)
     const [items, setItems] = useState([
         {
