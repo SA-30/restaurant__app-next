@@ -1,11 +1,10 @@
 import { connectMongoDB } from "@/db/db";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 import FoodItemModel, {FoodItem} from "@/db/models/foodItem/foodItem";
 
-export async function POST(req: NextApiRequest){
+export async function POST(req: any){
     try {
-        const {name, description, price, category, isCombination}: FoodItem =  req.body
+        const {name, description, price, category, isCombination}: FoodItem =  await req.json()
         await connectMongoDB();
         await FoodItemModel.create({name, description, price, category, isCombination});
 

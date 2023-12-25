@@ -1,13 +1,13 @@
 import { connectMongoDB } from "@/db/db";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 import FoodItemModel, { FoodItem } from "@/db/models/foodItem/foodItem";
 
 
-export async function PUT(req: NextApiRequest) {
+export async function PUT(req: any) {
     try {
         const itemId: String = req.query.id as String
-        const updatedData: FoodItem = req.body
+        const updatedData: FoodItem = await req.json()
+        await connectMongoDB()
 
         // Check if the item exists
         const existingItem: FoodItem | null = await FoodItemModel.findById(itemId)
