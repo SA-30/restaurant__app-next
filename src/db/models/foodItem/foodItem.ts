@@ -6,6 +6,7 @@ export interface  FoodItem {
   price: Number,
   category: String,
   isCombination: Boolean,
+  imageUrl: String,
 }
 
 const foodItemSchema = new mongoose.Schema<FoodItem>({
@@ -30,8 +31,12 @@ const foodItemSchema = new mongoose.Schema<FoodItem>({
     type: Boolean,
     default: false,
   },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
 });
 
-const FoodItemModel = mongoose.model('FoodItem', foodItemSchema);
+const FoodItemModel = mongoose.models.FoodItem || mongoose.model('FoodItem', foodItemSchema);
 
 export default FoodItemModel;

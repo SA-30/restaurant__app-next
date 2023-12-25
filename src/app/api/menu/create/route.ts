@@ -4,9 +4,9 @@ import FoodItemModel, {FoodItem} from "@/db/models/foodItem/foodItem";
 
 export async function POST(req: any){
     try {
-        const {name, description, price, category, isCombination}: FoodItem =  await req.json()
+        const {name, description, price, category, isCombination, imageUrl}: FoodItem =  await req.json()
         await connectMongoDB();
-        await FoodItemModel.create({name, description, price, category, isCombination});
+        await FoodItemModel.create({name, description, price, category, isCombination, imageUrl});
 
         return NextResponse.json({message: "Item is added in the database"}, {status: 201});
     } catch (error) {
