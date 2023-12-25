@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface  foodItem {
+export interface  FoodItem {
   name: String,
   description: String,
   price: Number,
@@ -8,7 +8,7 @@ interface  foodItem {
   isCombination: Boolean,
 }
 
-const foodItemSchema = new mongoose.Schema<foodItem>({
+const foodItemSchema = new mongoose.Schema<FoodItem>({
   name: {
     type: String,
     required: true,
@@ -32,6 +32,6 @@ const foodItemSchema = new mongoose.Schema<foodItem>({
   },
 });
 
-const FoodItem = mongoose.model('Breakfast', foodItemSchema);
+const FoodItemModel = mongoose.model('FoodItem', foodItemSchema);
 
-export default FoodItem;
+export default FoodItemModel;
