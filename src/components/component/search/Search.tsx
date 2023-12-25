@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 const Search = ({onSearch}: any) => {
 const [items, setItems] = useState([]);
+const [error, setError] = useState(null)
 const [search, setSearch] = useState<string>('')
 
 const handleChange = (event: any) => {
@@ -40,8 +41,9 @@ const fetchMenuItems = async () => {
 
       const data = await res.json();
       setItems(data.items);
+      setError(null)
     } catch (error: any) {
-      console.log('Error loading menu items');
+      setError(error)
     }
   };
   
@@ -52,8 +54,8 @@ const fetchMenuItems = async () => {
         <FaSearch size={20}/>
       </div>
 
-      {search.trim() !== '' && (
-        <div className='absolute mt-7 bg-gray-800 text-white rounded-xl py-5 px-3 w-full'>
+      {search.trim() !== '' && !error && (
+        <div className='absolute z-[20] shadow-2xl mt-7 bg-gray-800 text-white rounded-xl py-5 px-3 w-full'>
           {items.length > 0 ? (
             items.map((item: any, index: number) => (
               <Link href='/items'>
