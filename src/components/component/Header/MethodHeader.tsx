@@ -20,7 +20,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = (props) => {
         </div>
         <div className='flex gap-5 items-center'>
             <Link href='/cart'> <FaShoppingBag size={20}/> </Link>
-            <Link href='#'> <FaPerson size={22}/> </Link>
+            <Link href='/orderFood'> <FaPerson size={22}/> </Link>
         </div>
       </div>
     </div>

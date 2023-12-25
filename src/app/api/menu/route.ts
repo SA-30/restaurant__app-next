@@ -16,8 +16,10 @@ export async function GET(req: NextRequest ) {
       const query: any = {};
 
       if (search) {
-          query.$text = { $search: search };
+        // Use a regular expression for partial matches
+        query.name = new RegExp(search, 'i');
       }
+      
       if (category) {
           query.category = category;
       }

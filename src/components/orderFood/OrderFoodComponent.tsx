@@ -13,10 +13,12 @@ const OrderFoodComponent = () => {
         <div className='min-h-[10vh]'></div>
 
         {/* Search */}
-        <div className='mx-5 flex  justify-center '><Search /></div>
+        <div className='mx-5 flex  justify-center '>
+          <Search />
+        </div>
         
         {/* Horizontal Menu */}
-        <HorizontalMenu />
+        <HorizontalMenu/>
 
         {/* Vertical Menu */}
         <VerticalMenu />
