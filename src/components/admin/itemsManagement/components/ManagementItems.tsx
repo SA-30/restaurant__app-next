@@ -7,6 +7,7 @@ import AddNewItem from "./addNewItem/AddNewItem";
 
 function ManagementItems() {
     const [itemForm, setItemForm] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [items, setItems] = useState([
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -58,6 +59,11 @@ function ManagementItems() {
         },
     ]);
 
+    // SelectedCategory 
+    const handleCategoryClick = (category: string) => {
+        setSelectedCategory(category)
+    }
+
     // AddItem
     const addItem = (newItem: any) => {
         setItems((prevItems) => [newItem, ...prevItems]);
@@ -81,12 +87,11 @@ function ManagementItems() {
         <div className=" bg-admindarkColor px-5 py-3 flex flex-col">
             <h2 className="font-semibold mb-5 text-[17px]">Project Management</h2>
             <ul className="mb-5 flex gap-10 text-[12px] text-gray-400">
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px]  border-adminblueColor text-adminblueColor">All Item</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Combination</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Veg</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Buff</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Chicken</button></li>
-                <li><button className="transition-all   bg-transparent px-1 py-1 border-b-[1px] border-admindarkColor hover:border-adminblueColor hover:text-adminblueColor">Chicken</button></li>
+                <li><button onClick={() => handleCategoryClick('all')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'all' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>All Item</button></li>
+                <li><button onClick={() => handleCategoryClick('combination')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'combination' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Combination</button></li>
+                <li><button onClick={() => handleCategoryClick('veg')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'veg' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Veg</button></li>
+                <li><button onClick={() => handleCategoryClick('buff')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'buff' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Buff</button></li>
+                <li><button onClick={() => handleCategoryClick('chicken')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'chicken' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Chicken</button></li>
             </ul>
             {/* Tables */}
             <div className="hide-scroolbar h-[50vh] flex flex-col md:h-[55vh] overflow-scroll  pr-5 md:mr-0 md:p-2">

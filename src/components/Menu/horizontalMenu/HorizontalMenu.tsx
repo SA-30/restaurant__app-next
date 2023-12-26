@@ -20,6 +20,7 @@ const HorizontalMenu = () => {
         try {
           setLoading(true);
 
+        //   For future - Instead of fetching on category change, Fetch data once and store on localstorage/cookies.
           const res = await fetch(`
           /api/menu?isCombination=false&category=${selectedCategory === 'all' ? '': selectedCategory}`,
         {
