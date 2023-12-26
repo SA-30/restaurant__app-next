@@ -1,29 +1,44 @@
-import {FaEdit, FaPlus, FaWeight } from "react-icons/fa"
-import AddNewItem from "../addNewItem/AddNewItem"
-import { useEffect, useState } from "react"
-function ManagementItem({addItem, items}: any) {
-    const [itemss, setItemss] = useState<any>()
+'use client'
 
-    
-    const obj = {
-        imgUrl: '/assets/images/chauminv.jpg',
-        title: 'new item',
-        weight: '2 plate',
-        price: 'Rs 400',
-    }
+import { useState } from "react";
+import {FaEdit, FaPlus, FaWeight } from "react-icons/fa"
+import EditItem from "../editItem/EditItem";
+
+interface ManagementItemProps {
+    items: any[];
+    setItemForm: any;
+  }
+
+  const ManagementItem: React.FC<ManagementItemProps> = ({ items, setItemForm }) => {
+    const [isEditing, setEditing] = useState(false);
+    const [editedItem, setEditedItem] = useState<any>(null);
 
     const editDish = (item: any, index: number) => {
-        console.log("Editing dish logic goes here...");
-    }
+        setEditedItem(item);
+        setEditing(true);
+    };
+
+    const cancelEdit = () => {
+        setEditedItem(null);
+        setEditing(false);
+    };
+
+    const handleEdit = (editedItem: any) => {
+        // Implement logic to update the item in the items array
+        console.log('Item edited:', editedItem);
+        setEditing(false);
+    };
 
     return (
         <div>
             <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
-                <div onClick={() => {addItem()}} className="transition-all flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
+                <div onClick={setItemForm} className="transition-all flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
                     <FaPlus size={10}/>
                     <p className="text-[12px]">Add new item</p>
                 </div>
-                {items.map((item: any, index: number) => (
+                {isEditing ? (
+                <EditItem item={editedItem} onEdit={handleEdit} onCancel={cancelEdit} />
+                ) : items.map((item: any, index: number) => (
                     <div key={index} className='transition-all border-[1px] hover:shadow-xl hover:shadow-[#5050ca17] cursor-pointer border-[#5050cab7] min-w-[150px] flex flex-col items-center rounded'>
                         <div className='h-20 w-20 mt-5 flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${item?.imgUrl})`}}>
                         </div>

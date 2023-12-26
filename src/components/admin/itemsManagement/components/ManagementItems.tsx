@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from "react"
-import ManagementItem from "./managementItem/ManagementItem"
-import AddNewItem from "./addNewItem/AddNewItem"
+import React, { useState } from "react";
+import ManagementItem from "./managementItem/ManagementItem";
+import AddNewItem from "./addNewItem/AddNewItem";
+
 
 function ManagementItems() {
-    // now edit this 
     const [itemForm, setItemForm] = useState(false)
     const [items, setItems] = useState([
         {
@@ -58,19 +58,11 @@ function ManagementItems() {
         },
     ]);
 
-    const addItem = (newItem:any) => {
-        setItems(prevItems => [newItem, ...prevItems]);
+    const addItem = (newItem: any) => {
+        setItems((prevItems) => [newItem, ...prevItems]);
         setItemForm(false);
     };
 
-
-    const item = {
-        imgUrl: '/assets/images/chauminv.jpg',
-        title: 'new item',
-        weight: '2 plate',
-        price: 'Rs 400',
-    }
-    
   return (
     <div className='md:h-screen flex flex-col justify-between py-5 px-5 md:px-0'>
         
@@ -90,10 +82,15 @@ function ManagementItems() {
             </ul>
             {/* Tables */}
             <div className="hide-scroolbar h-[50vh] flex flex-col md:h-[55vh] overflow-scroll  pr-5 md:mr-0 md:p-2">
-                {itemForm? <div className=" z-[10]"><AddNewItem addItem={addItem} /></div> : <ManagementItem addItem={addItem} items={items}/>}
+            {itemForm ? (
+                <div className="z-[10]">
+                    <AddNewItem addItem={addItem} />
+                </div>
+                ) : (
+                <ManagementItem items={items} setItemForm={setItemForm} />
+            )}
             </div>
         </div>
-
 
         <div className="flex flex-col md:flex-row gap-5 md:gap-5 px-5 py-5 bg-admindarkColor">
             <button onClick={() => {setItemForm(false)}} className="transition-all hover:scale-[1.05]  bg-transparent hover:bg-adminblueColor text-[12px] border-[1px] border-adminblueColor py-3 px-10 ">Discard Changes</button>
