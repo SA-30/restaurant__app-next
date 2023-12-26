@@ -94,7 +94,6 @@ function ManagementItems() {
 
         <div className="flex flex-col md:flex-row gap-5 md:gap-5 px-5 py-5 bg-admindarkColor">
             <button onClick={() => {setItemForm(false)}} className="transition-all hover:scale-[1.05]  bg-transparent hover:bg-adminblueColor text-[12px] border-[1px] border-adminblueColor py-3 px-10 ">Discard Changes</button>
-            <button onClick={() => {setItemForm(false)}} className="transition-all  bg-adminblueColor hover:shadow hover:scale-[1.05] text-[12px] border-[1px] border-adminblueColor py-3 px-10 ">Save Changes</button>
          </div>
     </div>
   )
