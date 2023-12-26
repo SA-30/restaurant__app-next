@@ -1,41 +1,63 @@
 'use client'
 
+import {FaEdit, FaPlus, FaTrash, FaWeight } from "react-icons/fa"
+import DeleteConfirmationDialog from "@/components/component/ConfirmationDialog/DeleteConfirmationDialog";
 import { useState } from "react";
-import {FaEdit, FaPlus, FaWeight } from "react-icons/fa"
-import EditItem from "../editItem/EditItem";
+// import EditItem from "../editItem/EditItem";
 
 interface ManagementItemProps {
     items: any[];
     setItemForm: any;
+    deleteItem: (itemToDelete: any) => void;
   }
 
-  const ManagementItem: React.FC<ManagementItemProps> = ({ items, setItemForm }) => {
-    const [isEditing, setEditing] = useState(false);
-    const [editedItem, setEditedItem] = useState<any>(null);
+  const ManagementItem: React.FC<ManagementItemProps> = ({ items, setItemForm, deleteItem }) => {
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState<any>(null);
+    
+    const showDeleteDialog = (item: any) => {
+        setItemToDelete(item);
+        setShowDeleteConfirmation(true);
+      };
+    
+      const hideDeleteDialog = () => {
+        setItemToDelete(null);
+        setShowDeleteConfirmation(false);
+      };
+    
+      const confirmDelete = () => {
+        if (itemToDelete) {
+          deleteItem(itemToDelete);
+          hideDeleteDialog();
+        }
+      };
 
-    const editDish = (item: any, index: number) => {
-        setEditedItem(item);
-        setEditing(true);
-    };
+    // const [isEditing, setEditing] = useState(false);
+    // const [editedItem, setEditedItem] = useState<any>(null);
 
-    const cancelEdit = () => {
-        setEditedItem(null);
-        setEditing(false);
-    };
+    // const editDish = (item: any, index: number) => {
+    //     setEditedItem(item);
+    //     setEditing(true);
+    // };
 
-    const handleEdit = (editedItem: any) => {
-        // Implement logic to update the item in the items array
-        console.log('Item edited:', editedItem);
-        setEditing(false);
-    };
+    // const cancelEdit = () => {
+    //     setEditedItem(null);
+    //     setEditing(false);
+    // };
+
+    // const handleEdit = (editedItemRes: any) => {
+
+    //     deleteItem(editedItemRes);
+    //     setEditing(false)
+    // };
 
     return (
         <div>
-            {
-                isEditing ? (
-                    <EditItem item={editedItem} onEdit={handleEdit} onCancel={cancelEdit} />
-                    ) : <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
-                    <div onClick={setItemForm} className="transition-all flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
+            {showDeleteConfirmation && (
+                <DeleteConfirmationDialog onCancel={hideDeleteDialog} onConfirm={confirmDelete} />
+            )}
+             <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
+                    <div onClick={setItemForm} className="transition-all min-h-[200px] flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
                         <FaPlus size={10}/>
                         <p className="text-[12px]">Add new item</p>
                     </div>
@@ -53,14 +75,13 @@ interface ManagementItemProps {
     
                                 </div>
                                 <div className='flex items-center justify-center w-full text-[12px] text-gray-200 mt-2'>
-                                    <button onClick={() => editDish(item, index)} className="bg-[#4a4ab8bd] w-full py-3 flex justify-center items-center"><FaEdit size={15}/> &nbsp; Edit item</button>
+                                    {/* <button onClick={() => editDish(item, index)} className="bg-[#4a4ab8bd] w-full py-3 flex justify-center items-center"><FaEdit size={15}/> &nbsp; Edit item</button> */}
+                                    <button  onClick={() => showDeleteDialog(item)} className="bg-red-500 w-full py-3 flex justify-center items-center mt-2"><FaTrash size={15}/> &nbsp; Delete item</button>
                                 </div>
                             </div>
                         </div> 
                     ))}
                 </div>
-            }
-            
         </div>
     )
 }

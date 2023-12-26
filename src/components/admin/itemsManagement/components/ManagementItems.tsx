@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ManagementItem from "./managementItem/ManagementItem";
 import AddNewItem from "./addNewItem/AddNewItem";
 
@@ -58,10 +58,18 @@ function ManagementItems() {
         },
     ]);
 
+    // AddItem
     const addItem = (newItem: any) => {
         setItems((prevItems) => [newItem, ...prevItems]);
         setItemForm(false);
     };
+
+    // DeleteItem
+    const deleteItem = (itemToDelete: any) => {
+        setItems((prevItems) =>
+          prevItems.filter((item) => item !== itemToDelete)
+        );
+      };
 
   return (
     <div className='md:h-screen flex flex-col justify-between py-5 px-5 md:px-0'>
@@ -87,7 +95,7 @@ function ManagementItems() {
                     <AddNewItem addItem={addItem} />
                 </div>
                 ) : (
-                <ManagementItem items={items} setItemForm={setItemForm} />
+                <ManagementItem items={items} setItemForm={setItemForm} deleteItem={deleteItem}/>
             )}
             </div>
         </div>

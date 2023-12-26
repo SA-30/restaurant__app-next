@@ -59,7 +59,7 @@ function AddNewItem({addItem}: any) {
         </div> */}
         <input
           placeholder="Name"
-          className="pb-2 outline-none bg-transparent border-b-[1px] border-adminblueColor appearance-none"
+          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
           type="text"
           value={newItem.title}   
           name="title"
@@ -68,7 +68,7 @@ function AddNewItem({addItem}: any) {
         />
         <input
           placeholder="Weight"
-          className="pb-2 outline-none bg-transparent border-b-[1px] border-adminblueColor appearance-none"
+          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
           type="text"
           value={newItem.weight}
           name="weight"
@@ -77,7 +77,7 @@ function AddNewItem({addItem}: any) {
         />
         <input
           placeholder="Price"
-          className="pb-2 outline-none bg-transparent border-b-[1px] border-adminblueColor appearance-none"
+          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
           type="text"
           value={newItem.price}
           name="price"

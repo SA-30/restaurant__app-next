@@ -21,38 +21,38 @@ const EditItem: React.FC<EditItemProps> = ({ item, onEdit, onCancel }) => {
   };
 
   return (
-    <div className="edit-item-form p-4 border rounded bg-white text-black">
+    <div className="edit-item-form p-4 border-2 border-gray-500 rounded text-black">
       {/* Input fields for editing */}
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+        <label className="block text-gray-500 text-sm font-bold mb-2">Title:</label>
         <input
           type="text"
           name="title"
           value={editedItem.title}
           onChange={handleInputChange}
-          className="border rounded w-full py-2 px-3"
+          className="border text-sm font-bold rounded w-full py-2 px-3"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Weight:</label>
+        <label className="block text-gray-500 text-sm font-bold mb-2">Weight:</label>
         <input
           type="text"
           name="weight"
           value={editedItem.weight}
           onChange={handleInputChange}
-          className="border rounded w-full py-2 px-3"
+          className="border text-sm font-bold rounded w-full py-2 px-3"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Price:</label>
+        <label className="block text-gray-500 text-sm font-bold mb-2">Price:</label>
         <input
           type="text"
           name="price"
           value={editedItem.price}
           onChange={handleInputChange}
-          className="border rounded w-full py-2 px-3"
+          className="border text-sm font-bold rounded w-full py-2 px-3"
         />
       </div>
 
