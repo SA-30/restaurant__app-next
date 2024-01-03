@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react"
 import HorizontalItem from "./item/HorizontalItem"
-import { FaPlus, FaWeight } from "react-icons/fa";
+// import { FaPlus, FaWeight } from "react-icons/fa";
 
+// Make a type file and import from there
 type MenuItem = {
     imageUrl: string;
     name: string;
@@ -16,7 +17,6 @@ type MenuItem = {
 const cafe = './assets/images/cafe2.png'
 
 const HorizontalMenu = () => {
-    const [items, setItems] = useState<MenuItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -26,6 +26,7 @@ const HorizontalMenu = () => {
         fetchMenuItems();
     }, []);
 
+    // Create custom hook for this function
     const fetchMenuItems = async () => {
         try {
           setLoading(true);
@@ -43,7 +44,6 @@ const HorizontalMenu = () => {
             }
     
             const data = await res.json();
-            setItems(data.items);
             setAllItems(data.items); // Store all items locally
         } catch (error: any) {
             setError(error.message || "Error loading menu items");

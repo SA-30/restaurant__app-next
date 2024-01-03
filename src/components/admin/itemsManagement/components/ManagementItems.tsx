@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ManagementItem from "./managementItem/ManagementItem";
 import AddNewItem from "./addNewItem/AddNewItem";
 
+// Make a type file and import from there
 type MenuItem = {
     imageUrl: string;
     name: string;
@@ -17,63 +18,13 @@ function ManagementItems() {
     const [itemForm, setItemForm] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('')
     const [loading, setLoading] = useState(true)
-    const [items, setItems] = useState([
-        {
-            imgUrl: '/assets/images/momov.jpg',
-            title: 'Veg Momo',
-            weight: '1 plate',
-            price: 'Rs 100',
-        },
-        {
-            imgUrl: '/assets/images/momoc.jpg',
-            title: 'Buff Momo',
-            weight: '1 plate',
-            price: 'Rs 120',
-        },
-        {
-            imgUrl: '/assets/images/chauminc.jpg',
-            title: 'Buff Chaumin',
-            weight: '1 plate',
-            price: 'Rs 160',
-        },
-        {
-            imgUrl: '/assets/images/chauminv.jpg',
-            title: 'Veg Chaumin',
-            weight: '1 plate',
-            price: 'Rs 120',
-        },
-        {
-            imgUrl: '/assets/images/momov.jpg',
-            title: 'Veg Momo',
-            weight: '1 plate',
-            price: 'Rs 100',
-        },
-        {
-            imgUrl: '/assets/images/momoc.jpg',
-            title: 'Buff Momo',
-            weight: '1 plate',
-            price: 'Rs 120',
-        },
-        {
-            imgUrl: '/assets/images/chauminc.jpg',
-            title: 'Buff Chaumin',
-            weight: '1 plate',
-            price: 'Rs 160',
-        },
-        {
-            imgUrl: '/assets/images/chauminv.jpg',
-            title: 'Veg Chaumin',
-            weight: '1 plate',
-            price: 'Rs 120',
-        },
-    ]);
-    const [itemss, setItemss] = useState<MenuItem[]>([])
     const [allItems, setAllItems] = useState<MenuItem[]>([])
 
     useEffect(() => {
         fetchMenuItems()
     }, [])
 
+    // Create custom hook for this function
     const fetchMenuItems = async () => {
         try {
             setLoading(true)
@@ -90,7 +41,6 @@ function ManagementItems() {
             }
 
             const result = await res.json()
-            setItemss(result.items)
             setAllItems(result.items); // Store all items locally
         } catch (error: any) {
             console.error(error.message)
@@ -115,7 +65,6 @@ function ManagementItems() {
 
     // AddItem
     const addItem = (newItem: any) => {
-        setItems((prevItems) => [newItem, ...prevItems]);
         setItemForm(false);
     };
 
