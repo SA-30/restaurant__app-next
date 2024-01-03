@@ -7,8 +7,6 @@ import Link from "next/link";
 import reservetable from '../../../public/assets/images/reservetable.png';
 import orderfood from '../../../public/assets/images/orderfood.png';
 
-
-
 interface AdminPageProps {
 }
  

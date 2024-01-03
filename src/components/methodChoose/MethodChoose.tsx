@@ -19,7 +19,7 @@ const MethodChoose = () => {
         </div>
 
         <div className=' flex flex-col md:flex-row gap-10'>
-          <Link href='/orderFood'>
+          <Link href='/'>
             <div className='transition-all hover:shadow-xl hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#581515]  rounded-2xl cursor-pointer'>
               <div className='h-32 bg-red-400 w-full rounded-t-2xl flex flex-col justify-center items-center'>
                 <Image width={200} src={orderfood} alt="orderfood"/>
