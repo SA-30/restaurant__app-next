@@ -24,12 +24,7 @@ const AdminPage: FunctionComponent<AdminPageProps> = () => {
 
             {/* Admin Items */}
             <div className='relative hide-scroolbar flex-[11_11_0%]  '>
-              <div className="absolute">
-                <h1 className="font-bold text-gray-400">To acheive</h1>
-                <ul className="font-light text-sm">
-                  <li> - Auth ( Diff for customer and admin ) </li>
-                </ul>
-              </div>
+              
                 <div className='flex flex-col items-center md:min-h-[100vh] md:flex-row  gap-5 md:justify-center md:gap-10'>
                     <Link href='/admin/reserveTable'>
                       <div className='transition-all hover:shadow-xl  hover:scale-[1.02] w-40 flex flex-col items-center justify-center bg-[#264f8b] rounded-2xl cursor-pointer'>
