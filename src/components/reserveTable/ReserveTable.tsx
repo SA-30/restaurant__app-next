@@ -103,7 +103,7 @@ const ReserveTable: FunctionComponent<Props> = () => {
     return ( 
         <div className="bg-primaryColor min-h-screen">
             {/* Header */}
-            <MethodHeader methodTitle="Reserve Table"/>
+            <MethodHeader />
             
             <div className="flex flex-col justify-center min-h-screen md:h-screen">
                 {/* Divider */}

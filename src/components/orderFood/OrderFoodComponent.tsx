@@ -9,7 +9,7 @@ const OrderFoodComponent = () => {
       <div className='bg-primaryColor'>
 
         {/* Header */}
-        <div ><MethodHeader methodTitle='Order food'/></div>
+        <div ><MethodHeader /></div>
         <div className='min-h-[10vh]'></div>
 
         {/* Search */}

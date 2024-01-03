@@ -9,13 +9,11 @@ import { useAppSelector } from "@/hook/redux-toolkit/store";
 import table2c from '../../../public/assets/images/table2c.png'
 import MethodHeader from "../component/Header/MethodHeader";
 
-
 interface Props {
-
 }
  
 const ConformReserve: FunctionComponent<Props> = () => {
-     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const { status, tableName, seat } = useAppSelector((state) => state.customerTableReducer.value)
 
     const reservationDetails = {
@@ -27,7 +25,7 @@ const ConformReserve: FunctionComponent<Props> = () => {
 
     return ( 
         <div className="bg-gray-700 min-h-screen flex flex-col justify-between  text-[10px] md:text-sm">
-            <MethodHeader methodTitle="Conform Reservation"/>
+            <MethodHeader />
             {/* DIV 1 */}
             <div className="px-5 md:px-60">
                 <h1 className="text-white text-2xl mt-20 md:mt-20 md:mb-5 font-semibold">Conform Reservation?</h1>

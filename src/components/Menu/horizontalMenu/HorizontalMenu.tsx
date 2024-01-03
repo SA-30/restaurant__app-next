@@ -73,10 +73,6 @@ const HorizontalMenu = () => {
                             className={`cursor-pointer ${selectedCategory === 'buff' ? 'active' : ''}`}
                             onClick={() => handleCategoryClick('buff')}
                         > Buff </li>
-                        {/* <li
-                            className={` ${selectedCategory === 'buff' ? 'active' : ''}`}
-                            onClick={() => handleCategoryClick('chicken')}
-                        > Chicken </li> */}
                     </ul>
                 </div>
             </div>
@@ -85,7 +81,9 @@ const HorizontalMenu = () => {
                 <div className=" flex flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar">
                     {Array.from({length: 5}).map((_, index: number) => (
                         <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
-                        {/* <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover' style={{ backgroundImage: `url(${cafe})`}}></div> */}
+                        <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover'>
+                        {/* style={{ backgroundImage: `url(${cafe})`}} */}
+                        </div>
                         <div className='flex flex-col p-4 gap-2'>
                             <h2 className='font-bold'></h2>
                             <div className='flex gap-2 items-center justify-start'>
@@ -94,9 +92,9 @@ const HorizontalMenu = () => {
                             </div>
                             <div className='flex items-center justify-between'>
                                 <h2 className='font-bold'></h2>
-                                <div className='cursor-pointer bg-gray-600 p-2 rounded-full'>
-                                    {/* <FaPlus size={10}/> */}
-                                </div>
+                                {/* <div className='cursor-pointer bg-gray-600 p-2 rounded-full'>
+                                    <FaPlus size={10}/>
+                                </div> */}
                             </div>
                         </div>
                     </div>
