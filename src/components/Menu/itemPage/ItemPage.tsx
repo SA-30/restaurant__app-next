@@ -11,7 +11,7 @@ const ItemPage: FunctionComponent<Props> = () => {
     return ( 
         <div className="bg-primaryColor flex flex-col justify-between min-h-screen text-white">
             {/* Header */}
-            <div ><MethodHeader methodTitle='Order food'/></div>
+            <div ><MethodHeader /></div>
             
             {/* Lower Section */}
             <div className=" flex flex-col items-center ">
