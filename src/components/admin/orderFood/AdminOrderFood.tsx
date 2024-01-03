@@ -5,7 +5,6 @@ import AdminMenu from "../components/adminMenu/AdminMenu";
 import AdminOrderDetails from "./components/AdminOrderDetails";
 import AdminOrderList from "./components/AdminOrderList";
 interface AdminPageProps {
-    
 }
  
 const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {

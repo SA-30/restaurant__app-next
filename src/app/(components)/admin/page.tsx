@@ -1,9 +1,9 @@
-import AdminPage from "@/components/admin/AdminPage"
+import AdminOrderFood from '@/components/admin/orderFood/AdminOrderFood'
 
 function page() {
   return (
     <div>
-      <AdminPage/>
+      <AdminOrderFood />
     </div>
   )
 }
