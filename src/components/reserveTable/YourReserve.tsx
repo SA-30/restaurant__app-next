@@ -25,7 +25,7 @@ const YourReserve: FunctionComponent<Props> = () => {
 
     return ( 
         <div className="bg-primaryColor h-screen flex flex-col">
-            <MethodHeader methodTitle="Your Reserve"/>
+            <MethodHeader/>
             
             <div className="flex-1 bg-red-200">s</div>
             <div className="flex-1 px-5 pt-16 md:mx-60">

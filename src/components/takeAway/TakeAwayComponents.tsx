@@ -27,7 +27,7 @@ const TakeAwayComponents = () => {
       <div className='bg-primaryColor'>
 
         {/* Header */}
-        <div ><MethodHeader methodTitle='Takeaway Orders'/></div>
+        <div ><MethodHeader /></div>
         <div className='min-h-[10vh]'></div>
 
         {/* Search */}

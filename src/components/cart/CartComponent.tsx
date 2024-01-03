@@ -24,7 +24,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     return (
         <div className='min-h-[100vh] bg-primaryColor flex flex-col justify-between'>
             {/* Header */}
-            <div ><MethodHeader methodTitle='Cart'/></div>
+            <div ><MethodHeader/></div>
             <div className='my-10'></div>
 
             {/* Order Summary */}

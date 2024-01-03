@@ -9,7 +9,7 @@ const ReserveFood = () => {
       <div className='bg-primaryColor'>
 
         {/* Header */}
-        <div ><MethodHeader methodTitle='Reserve Food'/></div>
+        <div ><MethodHeader/></div>
         <div className='min-h-[10vh]'></div>
 
         {/* Search */}

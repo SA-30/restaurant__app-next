@@ -11,7 +11,7 @@ const PaymentComponent = () => {
     return (
         <div className='min-h-[100vh] bg-primaryColor flex flex-col justify-between'>
             {/* Header */}
-            <div ><MethodHeader methodTitle='Payment'/></div>
+            <div ><MethodHeader/></div>
             <div className='my-10'></div>
             
             {/* Grand Total - use redux for state managemnt*/}
