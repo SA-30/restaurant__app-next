@@ -4,6 +4,14 @@ import { useEffect, useState } from "react"
 import HorizontalItem from "./item/HorizontalItem"
 import { FaPlus, FaWeight } from "react-icons/fa";
 
+type MenuItem = {
+    imageUrl: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+  };
+
 const cafe = './assets/images/cafe2.png'
 
 const HorizontalMenu = () => {
@@ -11,43 +19,51 @@ const HorizontalMenu = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('');
+    const [allItems, setAllItems] = useState<MenuItem[]>([]);
 
     useEffect(() => {
         fetchMenuItems();
-    }, [selectedCategory]);
+    }, []);
 
     const fetchMenuItems = async () => {
         try {
           setLoading(true);
 
-        //   For future - Instead of fetching on category change, Fetch data once and store on localstorage/cookies.
-          const res = await fetch(`
-          /api/menu?isCombination=false&category=${selectedCategory === 'all' ? '': selectedCategory}`,
-        {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+            // Fetch data once when the component mounts
+            const res = await fetch(`/api/menu?isCombination=false`, {
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+            });
+          
+            if (!res.ok) {
+              throw new Error("Failed to fetch menu items");
+            }
     
-          if (!res.ok) {
-            throw new Error("Failed to fetch menu items");
-          }
-    
-          const data = await res.json();
-          setItems(data.items);
+            const data = await res.json();
+            setItems(data.items);
+            setAllItems(data.items); // Store all items locally
         } catch (error: any) {
-          setError(error.message || "Error loading menu items");
+            setError(error.message || "Error loading menu items");
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
     };
 
-    if (error) return <div>{error}</div>;
+    const filterItems = () => {
+        if (selectedCategory === '') {
+            return allItems;
+        }
+
+        return allItems.filter(item => item.category === selectedCategory);
+    };
 
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
     };
+
+    if (error) return <div>{error}</div>;
 
     return (
         <div className="mt-10">
@@ -62,8 +78,8 @@ const HorizontalMenu = () => {
                 <div className="md:flex md:justify-center">
                     <ul className="flex px-5 mt-5 gap-5 md:gap-14">
                         <li 
-                            className={`cursor-pointer ${selectedCategory === 'all' ? 'active' : ''}`}
-                            onClick={() => handleCategoryClick('all')}
+                            className={`cursor-pointer ${selectedCategory === '' ? 'active' : ''}`}
+                            onClick={() => handleCategoryClick('')}
                         > All </li>
                         <li 
                             className={`cursor-pointer ${selectedCategory === 'veg' ? 'active' : ''}`}
@@ -76,11 +92,11 @@ const HorizontalMenu = () => {
                     </ul>
                 </div>
             </div>
-
-            {selectedCategory === '' && loading === true && (
-                <div className=" flex flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar">
-                    {Array.from({length: 5}).map((_, index: number) => (
-                        <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
+            
+            <div className=" flex flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar">
+                {loading && ( 
+                    Array.from({length: 5}).map((_, index: number) => (
+                    <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
                         <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover'>
                         {/* style={{ backgroundImage: `url(${cafe})`}} */}
                         </div>
@@ -98,17 +114,16 @@ const HorizontalMenu = () => {
                             </div>
                         </div>
                     </div>
-                    ))}
-                </div>
-            )}
+                )))}
 
-            <div className="flex flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar" style={{ height: items.length > 0 ? 'auto' : '300px' }}>
-                {items.length > 0 ? (
-                    items.map((item: any, index) => (
+                {!loading && filterItems().length > 0 && (
+                    filterItems().map((item: any, index) => (
                         <HorizontalItem key={index} imgUrl={item.imageUrl} title={item.name} weight={item.description} price={item.price}/>
                     ))
-                ) : (
-                    null
+                )}
+
+                {!loading && selectedCategory === '' && filterItems().length === 0 && (
+                    <div className="text-white">No items available.</div>
                 )}
             </div>
         </div>
