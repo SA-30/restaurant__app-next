@@ -10,12 +10,13 @@ type MenuItem = {
     description: string;
     price: number;
     category: string;
-  };
+    isCombination: Boolean,
+};
 
 const cafe = './assets/images/cafe2.png'
 
 const HorizontalMenu = () => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<MenuItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -33,7 +34,7 @@ const HorizontalMenu = () => {
             const res = await fetch(`/api/menu?isCombination=false`, {
               method: "GET",
               headers: {
-                  "Content-Type": "application/json",
+                "Content-Type": "application/json",
               },
             });
           

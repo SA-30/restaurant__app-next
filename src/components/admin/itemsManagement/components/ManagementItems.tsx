@@ -4,10 +4,19 @@ import React, { useEffect, useState } from "react";
 import ManagementItem from "./managementItem/ManagementItem";
 import AddNewItem from "./addNewItem/AddNewItem";
 
+type MenuItem = {
+    imageUrl: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    isCombination: Boolean,
+};
 
 function ManagementItems() {
     const [itemForm, setItemForm] = useState(false)
-    const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [selectedCategory, setSelectedCategory] = useState<string>('')
+    const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([
         {
             imgUrl: '/assets/images/momov.jpg',
@@ -58,6 +67,46 @@ function ManagementItems() {
             price: 'Rs 120',
         },
     ]);
+    const [itemss, setItemss] = useState<MenuItem[]>([])
+    const [allItems, setAllItems] = useState<MenuItem[]>([])
+
+    useEffect(() => {
+        fetchMenuItems()
+    }, [])
+
+    const fetchMenuItems = async () => {
+        try {
+            setLoading(true)
+
+            const res = await fetch('/api/menu', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "Application/json"
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to fetch menu items");
+            }
+
+            const result = await res.json()
+            setItemss(result.items)
+            setAllItems(result.items); // Store all items locally
+        } catch (error: any) {
+            console.error(error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const filterItems = () => {
+        if (selectedCategory === '') {
+            return allItems;
+        }
+
+        // console.log(allItems.filter(item => item.category === selectedCategory));
+        return allItems.filter(item => item.category === selectedCategory);
+    };
 
     // SelectedCategory 
     const handleCategoryClick = (category: string) => {
@@ -72,7 +121,7 @@ function ManagementItems() {
 
     // DeleteItem
     const deleteItem = (itemToDelete: any) => {
-        setItems((prevItems) =>
+        setAllItems((prevItems) =>
           prevItems.filter((item) => item !== itemToDelete)
         );
       };
@@ -87,8 +136,7 @@ function ManagementItems() {
         <div className=" bg-admindarkColor px-5 py-3 flex flex-col">
             <h2 className="font-semibold mb-5 text-[17px]">Project Management</h2>
             <ul className="mb-5 flex gap-10 text-[12px] text-gray-400">
-                <li><button onClick={() => handleCategoryClick('all')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'all' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>All Item</button></li>
-                <li><button onClick={() => handleCategoryClick('combination')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'combination' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Combination</button></li>
+                <li><button onClick={() => handleCategoryClick('')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'all' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>All Item</button></li>
                 <li><button onClick={() => handleCategoryClick('veg')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'veg' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Veg</button></li>
                 <li><button onClick={() => handleCategoryClick('buff')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'buff' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Buff</button></li>
                 <li><button onClick={() => handleCategoryClick('chicken')} className={`transition-all   bg-transparent px-1 py-1 border-b-[1px] ${selectedCategory === 'chicken' ? 'text-adminblueColor border-adminblueColor' : 'border-admindarkColor text-gray-400'} text-adminblueColor hover:border-adminblueColor hover:text-adminblueColor`}>Chicken</button></li>
@@ -100,7 +148,9 @@ function ManagementItems() {
                     <AddNewItem addItem={addItem} />
                 </div>
                 ) : (
-                <ManagementItem items={items} setItemForm={setItemForm} deleteItem={deleteItem}/>
+                    loading ? (<div>loading items...</div>) : (
+                    <ManagementItem items={filterItems()} setItemForm={setItemForm} deleteItem={deleteItem}/>
+                )
             )}
             </div>
         </div>

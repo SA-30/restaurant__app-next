@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import ManagementItems from "./components/ManagementItems";
-import AddNewItem from "./components/addNewItem/AddNewItem";
 
 interface AdminPageProps {
     
