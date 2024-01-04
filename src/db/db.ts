@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const url = process.env.DATABASE_URL as string
+const url = "mongodb+srv://htdrestaurant:myheartgosalalalala@restaurant.abno73r.mongodb.net/"
 
 export const connectMongoDB = async () => {
     try {
