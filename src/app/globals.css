@@ -41,3 +41,10 @@ button{
 .order-list > div > p, .order-list>div>div>p{
     @apply text-[12px] font-normal text-gray-300;
 }
+
+.unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}

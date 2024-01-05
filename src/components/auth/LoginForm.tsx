@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc'
 import { FormEvent, useState } from 'react';
 import { useRouter } from "next/navigation";
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -33,9 +35,16 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="flex justify-center items-center h-[100vh] bg-primaryColor text-white">
+        <div className="relative flex justify-center items-center h-[100vh] bg-primaryColor text-white">
+
+            <div className='z-1'>
+                <Image draggable={false} className='unselectable absolute top-10 left-10 filter blur-[5px]' src='/assets/images/login/burgur1.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='hidden md:block unselectable absolute bottom-10 right-10 filter blur-[5px]' src='/assets/images/login/burgu2.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='hidden md:block unselectable absolute top-10 right-10 filter blur-[5px]' src='/assets/images/login/pizza1.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='unselectable absolute bottom-10 left-10 filter blur-[5px]' src='/assets/images/login/pizza5.png' height={50} width={300} alt='burgur'></Image>
+            </div>
         
-        <div className="w-64 p-4 bg-gray-800 shadow-lg rounded-lg border-t-4 border-blue-900">
+        <div className="z-10 w-64 p-4 bg-gray-800 shadow-lg rounded-lg border-t-4 border-blue-900">
             <form onSubmit={handleSubmit} >
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 <div className="mb-4">
@@ -72,7 +81,6 @@ const LoginForm = () => {
             </form>
             <div onClick={() =>  handleOAuth()} className='bg-gray-200  text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</div>
         </div>
-        <p className=' text-center text-sm text-gray-600  absolute bottom-40 md:bottom-20 left-[50%] translate-x-[-50%]'><span className='text-[14px] md:text-[10px]'>For Admin page</span><br /> <span className='text-[16px] md:text-[12px]'>Email , Passowrd = admin</span></p>
         </div>
     );
 }

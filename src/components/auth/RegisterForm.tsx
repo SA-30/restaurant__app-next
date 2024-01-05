@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import React,{useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -64,8 +65,16 @@ const RegisterForm = () => {
     }
 
     return (
-        <div className="flex justify-center items-center h-[100vh] bg-primaryColor text-white">
-            <div className="w-64 p-4 bg-gray-800 shadow-lg rounded-lg  border-t-4 border-blue-900">
+        <div className="relative flex justify-center items-center h-[100vh] bg-primaryColor text-white">
+
+<div className='z-1'>
+                <Image draggable={false} className='unselectable absolute top-10 md:left-10 filter blur-[5px]' src='/assets/images/login/burgur1.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='hidden md:block unselectable absolute bottom-10 right-10 filter blur-[5px]' src='/assets/images/login/burgu2.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='hidden md:block unselectable absolute top-10 right-10 filter blur-[5px]' src='/assets/images/login/pizza1.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='unselectable absolute bottom-10 md:left-10 filter blur-[5px]' src='/assets/images/login/pizza5.png' height={50} width={300} alt='burgur'></Image>
+            </div>
+
+            <div className="z-10 w-64 p-4 bg-gray-800 shadow-lg rounded-lg  border-t-4 border-blue-900">
                 <form onSubmit={handleSubmit} >
                 <h2 className="text-2xl font-bold mb-4">Signup</h2>
                 <div className="mb-4">
