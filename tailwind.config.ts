@@ -22,6 +22,7 @@ const config: Config = {
         adminblueColor: '#7FBFFF',   // Light blue for accents
         adminredColor: '#FF8C8C',    // Light red for alerts or highlights
         admingreenColor: '#A2FF9B',  // Light green for positive elements
+
       },
     },
   },
