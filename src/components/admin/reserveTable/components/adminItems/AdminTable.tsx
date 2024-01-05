@@ -81,18 +81,18 @@ function AdminTable({onTableSelection}: any) {
     }
 
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-5 '>
+        <div className='text-black  grid grid-cols-2 md:grid-cols-3 gap-5 '>
             
             {tables.map((table, index) => (
             <div 
                 key={index} 
                 onClick={() => handleTableSelection(table, index)}
-                className='transition-all hover:scale-[1.02] cursor-pointer '
+                className='shadow-sm  transition-all hover:scale-[1.02] cursor-pointer '
             >
-                <div className={`p-3 pr-20 bg-admindarkColor ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-adminredColor" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
+                <div className={`p-3 pr-20 bg-adminbgColor font-bold  ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-[adminredColor]" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
                 <div className='flex items-center gap-2 mb-4'>
-                <div className='p-1 bg-gray-600 rounded'>{table.status == 'available' ? <FaTable size={10}/> : <FaSkull size={10}/>}</div>
-                    <p className={`text-[10px] ${table.status == 'available' ? "text-admingreenColor" : "text-adminredColor"}`}>{table.status}</p>
+                <div className='p-1 bg-gray-300 rounded'>{table.status == 'available' ? <FaTable size={10}/> : <FaSkull size={10}/>}</div>
+                    <p className={`text-[10px] ${table.status == 'available' ? "text-[#3A7326]" : "text-adminredColor"}`}>{table.status}</p>
                     <div className={`p-1 rounded-3xl ${table.status == 'available' ? "text-admingreenColor bg-[#305230]" : "text-adminredColor bg-[#523030]"}`}>
                         {table.status == 'available' ?<FaArrowUp size={6}/> : <FaArrowDown size={6}/>}
                     </div>
@@ -100,9 +100,9 @@ function AdminTable({onTableSelection}: any) {
                 <h1 className='text-xl font-semibold mb-2'>{table.name}</h1>
                 <div className='text-[8px]'> 
                 {table.status == 'available' ?
-                <div><br /><br /> </div>
+                <div><br /><br /></div>
                 :
-                <div>
+                <div className='font-semibold'>
                     {table.dish.map((dishItem, index) => (
                     <div key={index}>
                         {dishItem}
