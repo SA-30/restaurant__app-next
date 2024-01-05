@@ -22,7 +22,9 @@ const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
                 </div>
                 <div className='flex items-center justify-between '>
                     <h2 className='font-bold'>{props.price}</h2>
-                    <div className='cursor-pointer bg-gray-600 p-2 rounded-full'><FaPlus size={10}/></div>
+                    <div className='cursor-pointer bg-white p-2 rounded-full'>
+                        <FaPlus className='text-orange-500 h-4 w-4 md:h-5 md:w-5' size={20}/>
+                    </div>
                 </div>
             </div>
             </div>
