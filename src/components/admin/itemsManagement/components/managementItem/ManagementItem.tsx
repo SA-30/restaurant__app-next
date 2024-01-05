@@ -57,7 +57,7 @@ interface ManagementItemProps {
                 <DeleteConfirmationDialog onCancel={hideDeleteDialog} onConfirm={confirmDelete} />
             )}
              <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
-                    <div onClick={setItemForm} className="transition-all min-h-[200px] flex flex-col border-[1px] border-adminblueColor justify-center items-center text-adminblueColor cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
+                    <div onClick={setItemForm} className="transition-all min-h-[200px] flex flex-col border-[1px] border-adminblueColor justify-center items-center text-gray-800 cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
                         <FaPlus size={10}/>
                         <p className="text-[12px]">Add new item</p>
                     </div>
@@ -67,15 +67,15 @@ interface ManagementItemProps {
                             </div>
     
                             <div key={index} className='flex flex-col items-center w-full pt-5 gap-2'>
-                                <h2 className='font-semibold'>{item?.name}</h2>
-                                <div className='flex gap-2 items-center justify-center text-gray-400'>
+                                <h2 className='font-semibold text-black'>{item?.name}</h2>
+                                <div className='flex gap-2 items-center justify-center text-gray-800'>
                                     <FaWeight className='opacity-50' size={10}/>
-                                    <p className='text-[12px] font-thin'>{item?.description}</p>
-                                    <h2 className='font-bold ml-5 text-[12px]'>{item?.price}</h2>
+                                    <p className='text-[12px] font-semibold '>{item?.description}</p>
+                                    <h2 className='font-black ml-5 text-[12px]'>{item?.price}</h2>
                                     {/* <h2 className='font-bold ml-5 text-[12px]'>{item?.category}</h2> */}
     
                                 </div>
-                                <div className='flex items-center justify-center w-full text-[12px] text-gray-200 mt-2'>
+                                <div className='flex items-center justify-center w-full text-[12px] text-white mt-2'>
                                     {/* <button onClick={() => editDish(item, index)} className="bg-[#4a4ab8bd] w-full py-3 flex justify-center items-center"><FaEdit size={15}/> &nbsp; Edit item</button> */}
                                     <button  onClick={() => showDeleteDialog(item)} className="bg-red-500 w-full py-3 flex justify-center items-center mt-2"><FaTrash size={15}/> &nbsp; Delete item</button>
                                 </div>
