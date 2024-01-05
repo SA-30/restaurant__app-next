@@ -11,6 +11,8 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [creatingUser, setCreatingUser] = useState(false);
+    const [userCreated, setUserCreated] = useState(false);
 
     const router = useRouter();
 
@@ -18,48 +20,50 @@ const RegisterForm = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setCreatingUser(true);
 
         if(!name || !email || !password){
             setError("Please fill all fields!!!");
             return;
         }
 
-        // try {
-        //     const resUser = await fetch('api/userExists', {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({ email })
-        //     })
+        try {
+            const resUser = await fetch('api/userExists', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email })
+            })
 
-        //     const { user } = await resUser.json();
+            const { user } = await resUser.json();
 
-        //     if( user ) {
-        //         setError("User already Exists!!!");
-        //     }
+            if( user ) {
+                setError("User already Exists!!!");
+            }
 
-        //     const res = await fetch('api/register', {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({
-        //             name, email, password
-        //         })
-        //     })
+            const res = await fetch('api/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, email, password
+                })
+            })
 
-        //     if(res.ok){
-        //         const form = e.target;
-        //         form.reset();
-        //         router.push('/login')
-        //     } else {
-        //         console.log("User registration failed");
-                
-        //     }
-        // } catch (error) {
-        //     console.log("Error during registration", error);
-        // }
+            if(res.ok){
+                const form = e.target;
+                form.reset();
+                router.push('/login');
+                alert("Successfully Created User");
+                setCreatingUser(false);
+            } else {
+                console.log("User registration failed");
+            }
+        } catch (error) {
+            console.log("Error during registration", error);
+        }
 
         router.push('/login')
     }
@@ -82,6 +86,7 @@ const RegisterForm = () => {
                     type="text"
                     className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Full Name"
+                    disabled={creatingUser}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -92,6 +97,7 @@ const RegisterForm = () => {
                     className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Email"
                     value={email}
+                    disabled={creatingUser}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 </div>
@@ -102,11 +108,13 @@ const RegisterForm = () => {
                     className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Password"
                     value={password}
+                    disabled={creatingUser}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 </div>
                 <button
                 type="submit"
+                disabled={creatingUser}
                 className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
                 >
                 Sign up
