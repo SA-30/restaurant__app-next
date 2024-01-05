@@ -116,7 +116,7 @@ function OrderList({onOrderSelection}: any) {
     }
 
     return (
-        <div className=" bg-admindarkColor h-screen  pt-10  font-semibold">
+        <div className=" bg-gray-200  h-screen  pt-10  font-semibold">
 
             {/* OrderDetailsTitles */}
             <div className="px-5">
@@ -127,7 +127,7 @@ function OrderList({onOrderSelection}: any) {
             <div className="border-b-[1px] border-gray-600 my-4"></div>
 
             {/* Order Lists */}
-            <div className="hide-scroolbar h-[50vh] overflow-scroll">
+            <div className="hide-scroolbar h-[50vh] overflow-scroll ">
                 {orderList.map(( item, index) => (
                     <div 
                     key={index} 
@@ -138,22 +138,22 @@ function OrderList({onOrderSelection}: any) {
                             <div className={`${item.status == 'completed' ? 'bg-[#41ad4110]': 'bg-[#963d3d27]'} text-[16px] rounded-[50%] p-1 flex items-center`} >
                                 {item.face}
                             </div>
-                            <p>{item.name}</p>
+                            <p className="!text-black !font-semibold">{item.name}</p>
                         </div>
                         <div className="md:mr-10 ml-5 md:ml-0">
                             {item.menu.map((fooditem, index) => (
                                 <div key={index}>
-                                    <p>{fooditem}</p>
+                                    <p className="!text-black">{fooditem}</p>
                                 </div>
                             ))}
                             
                         </div>
                         <div>
-                            <p>Rs {item.price}</p>
+                            <p className="!text-black !font-bold">Rs {item.price}</p>
                         </div>
                         <div>
                             <div>
-                                <p className={`cursor-pointer text-[12px] mr-10 px-2 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${item.status == 'completed' ? 'bg-[#2e4e2e94]': 'bg-[#963d3d7e]'}`}>{item.status}</p>
+                                <p className={`cursor-pointer w-full !text-[10px] md:text-[12px] mr-10 px-5 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${item.status == 'completed' ? 'bg-[#2e4e2e94]': 'bg-[#963d3d7e]'}`}>{item.status}</p>
                             </div>
                         </div>
                         </div>
@@ -171,14 +171,14 @@ export const OrderListDetails = () => {
         <div className="">
             <div className="flex justify-between">
                 <h2>Order Report</h2>
-                <h2 className="flex items-center gap-2 border-[1px] p-2 border-gray-600 text-[12px] text-gray-300 cursor-pointer font-normal rounded"><FaFilter size={12}/>Filter Order</h2>
+                <h2 className="flex items-center gap-2 border-[1px] p-2 border-gray-600 text-[12px] text-black cursor-pointer font-normal rounded"><FaFilter size={12}/>Filter Order</h2>
                 
             </div>
-            <div className="grid grid-cols-4 mt-4 gap-10">
-                <h3>Customer</h3>
-                <h3 className="ml-5 md:ml-0">Menu</h3>
-                <h3>Total Payment</h3>
-                <h3>Status</h3>
+            <div className="grid grid-cols-4 mt-4 gap-10 ">
+                <h3 className="text-black">Customer</h3>
+                <h3 className="text-black">Menu</h3>
+                <h3 className="text-black">Total Payment</h3>
+                <h3 className="text-black">Status</h3>
             </div>
         </div>
     )

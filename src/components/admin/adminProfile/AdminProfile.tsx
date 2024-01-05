@@ -52,8 +52,8 @@ const AdminProfile: FunctionComponent<AdminPageProps> = () => {
                         <p>{formData.name == ''? 'Your Location' : formData.location}</p>
                     </div>
                     <div className="md:text-[12px] text-gray-500 mt-1">{formData.name == ''? 'Your phone no' : formData.number}</div>
-                    <div className="flex flex-col md:flex-row px-5 py-5 gap-5 mt-5">
-                        <button onClick={() => {setEditProfile(true)}} className="transition-all hover:scale-[1.05]  bg-transparent hover:bg-adminblueColor text-[12px] border-[1px] border-adminblueColor py-2 px-5 ">Edit Profile</button>
+                    <div className="flex flex-col items-center  md:flex-row px-5 py-5 gap-5 mt-5">
+                        <button onClick={() => {setEditProfile(true)}} className="transition-all hover:scale-[1.05]  bg-transparent hover:bg-adminblueColor text-[12px] border-[1px] border-adminblueColor py-2 px-5 text-black font-bold">Edit Profile</button>
                         <Link href={'/login'}>
                         <button className="transition-all  bg-adminblueColor  font-semibold hover:shadow hover:scale-[1.05] text-[14px] border-[1px] border-adminblueColor py-2 px-5 text-gray-900">Logout</button>
                         </Link>

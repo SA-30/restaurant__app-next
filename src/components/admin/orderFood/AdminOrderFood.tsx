@@ -24,7 +24,7 @@ const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
             </div>
 
             {/* Admin Items */}
-            <div className='hide-scroolbar flex-[7_7_0%]  overflow-scroll'>
+            <div className='hide-scroolbar  flex-[7_7_0%]  overflow-scroll'>
                 <AdminOrderList onOrderSelection={handleOrderSelection} />
             </div>
             <div className='flex-[4_4_0%] '>
