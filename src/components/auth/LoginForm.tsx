@@ -5,29 +5,29 @@ import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc'
 import { FormEvent, useState } from 'react';
 import { useRouter } from "next/navigation";
+import { signIn } from 'next-auth/react';
 
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loginProcess, setLoginProcess] = useState(false)
 
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        setLoginProcess(true)
 
         if(!email || !password){
             setError("Please fill all fields!!!");
             return;
         }
 
-        if(email == 'admin' && password == 'admin'){
-            router.replace('/admin');
-            return;
-        }
-
-        router.replace("dashboard");
+        await signIn('Credentials', {email, password})
+        
+        setLoginProcess(false)
     } 
 
     const handleOAuth = () => {
@@ -45,11 +45,13 @@ const LoginForm = () => {
             </div>
         
         <div className="z-10 w-64 p-4 bg-gray-800 shadow-lg rounded-lg border-t-4 border-blue-900">
-            <form onSubmit={handleSubmit} >
+            <form  onSubmit={handleSubmit} >
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 <div className="mb-4">
                 <input
                     type="text"
+                    name='email'
+                    disabled={loginProcess}
                     className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Email"
                     value={email}
@@ -59,6 +61,8 @@ const LoginForm = () => {
                 <div className="mb-4">
                 <input
                     type="password"
+                    name='password'
+                    disabled={loginProcess}
                     className="w-full bg-gray-800 p-2  border-b-[1px]  border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Password"
                     value={password}
@@ -67,6 +71,7 @@ const LoginForm = () => {
                 </div>
                 <button
                 type="submit"
+                disabled={loginProcess}
                 className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none "
                 >
                 Login

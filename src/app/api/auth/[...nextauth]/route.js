@@ -1,0 +1,51 @@
+import { connectMongoDB } from "@/db/db";
+import User from "@/db/models/user";
+import bcrypt from 'bcrypt';
+import NextAuth from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+
+const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      id: 'Credentials',
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "jsmith@example.com" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials, req) {
+        const email = credentials?.email; 
+        const password = credentials?.password;
+        await connectMongoDB()
+
+        const user = await User.findOne({email}) 
+        const passwordCheck = user && bcrypt.compareSync(password, user.password)
+        if(passwordCheck){
+          return user
+        }
+
+        return null
+      }
+    })
+  ]
+})
+
+export { handler as GET, handler as POST }
+
+
+// import NextAuth from "next-auth/next";
+// import GoogleProvider from "next-auth/providers/google"
+
+// const authOptions = {
+//     providers: [
+//         GoogleProvider({
+//             clientId: "",
+//             clientSecret: "",
+//         }),
+//     ],
+// };
+
+// const handler = NextAuth(authOptions)
+
+// export { handler as GET, handler as POST };

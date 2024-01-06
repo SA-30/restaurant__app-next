@@ -12,7 +12,6 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [creatingUser, setCreatingUser] = useState(false);
-    const [userCreated, setUserCreated] = useState(false);
 
     const router = useRouter();
 
@@ -40,6 +39,7 @@ const RegisterForm = () => {
 
             if( user ) {
                 setError("User already Exists!!!");
+                alert("User already Exists!!!")
             }
 
             const res = await fetch('api/register', {

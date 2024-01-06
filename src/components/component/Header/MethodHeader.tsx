@@ -2,16 +2,19 @@
 
 import Link from 'next/link';
 
-import {FaArrowLeft, FaHome , FaShoppingBag} from 'react-icons/fa';
+import { FaHome , FaShoppingBag} from 'react-icons/fa';
+import { AiOutlineLogout} from 'react-icons/Ai';
 import {BsHandIndex,BsPersonFillGear} from 'react-icons/bs'
-import {AiFillCustomerService} from 'react-icons/ai'
 import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 
 interface MethodHeaderProps {
 }
 
 const MethodHeader: React.FC<MethodHeaderProps> = () => {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
+  const session = useSession();
+  const status = session.status;
 
   return (
     <div className='text-white fixed h-16 w-full px-5 p-5 md:px-20 bg-gray-800 border-b-[1px] border-gray-600 z-[1]'>
@@ -25,17 +28,21 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
             <Link href='/cart'> <FaShoppingBag size={20}/> </Link>
             <Link href='/reserveTable'> <BsHandIndex size={20}/> </Link>
             
-            {isLogin === false ? 
+            {status !== "authenticated" && ( 
               <Link href='/login'><p className='transition-all flex gap-2 justify-center items-center py-1 px-3 bg-[white] text-[#ff6600] hover:text-white hover:bg-[#ff6600] rounded-md text-sm font-semibold hover:rounded'>
                 Login<BsPersonFillGear size={15}/>
                 </p>
-              </Link> :
-              <Link href='/profile'> 
-                <div className='transition-all hover:text-gray-400 rounded-full p-1 text-white'>
-                  <BsPersonFillGear size={25}/>
-                </div>
-              </Link>
-            }
+              </Link> 
+            )}
+
+            {status === "authenticated" && (
+              
+              <div className='transition-all flex gap-5  rounded-full p-1 text-white'>
+                <Link href='/profile'> <BsPersonFillGear className="hover:text-gray-400" size={25}/></Link>
+                <AiOutlineLogout onClick={signOut} className="hover:text-red-600 text-red-500" size={25}/>
+              </div>
+            
+            )}
             
             
         </div>
