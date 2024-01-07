@@ -5,6 +5,7 @@ import React,{useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
     const [name, setName] = useState('');
@@ -127,7 +128,7 @@ const RegisterForm = () => {
                     </Link>
                 </p>
                 </form>
-                <div className='bg-gray-200  text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</div>
+                <div onClick={() =>  signIn('google')} className='bg-gray-200  text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</div>
             </div>
         </div>
     );
