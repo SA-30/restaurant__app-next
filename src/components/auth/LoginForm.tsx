@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FcGoogle } from 'react-icons/fc'
+// import { FcGoogle } from 'react-icons/fc'
 import { FormEvent, useState } from 'react';
 import { signIn } from 'next-auth/react';
 
@@ -78,7 +78,7 @@ const LoginForm = () => {
                     </Link>
                 </p>
             </form>
-            <button onClick={() =>  signIn('google')} className='bg-gray-200 w-full text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</button>
+            {/* <button type='button' onClick={() =>  signIn('google')} className='bg-gray-200 w-full text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</button> */}
         </div>
         </div>
     );

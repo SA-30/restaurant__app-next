@@ -45,3 +45,4 @@ export async function GET(req: NextRequest ) {
       return NextResponse.json({ message: "Error fetching menu items" }, { status: 500 });
   }
 }
+

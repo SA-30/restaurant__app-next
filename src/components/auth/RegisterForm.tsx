@@ -92,6 +92,16 @@ const RegisterForm = () => {
                     onChange={(e) => setName(e.target.value)}
                 />
                 </div>
+                {/* <div className="mb-4">
+                <input
+                    type="number"
+                    className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
+                    placeholder="Number"
+                    disabled={creatingUser}
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
+                />
+                </div> */}
                 <div className="mb-4">
                 <input
                     type="email"
@@ -128,7 +138,7 @@ const RegisterForm = () => {
                     </Link>
                 </p>
                 </form>
-                <div onClick={() =>  signIn('google')} className='bg-gray-200  text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</div>
+                {/* <div onClick={() =>  signIn('google')} className='bg-gray-200  text-black p-2  rounded-2xl cursor-pointer hover:shadow-md mt-5 flex items-center justify-center gap-2 text-[10px] font-bold'><FcGoogle size={20}/>Sign in using google</div> */}
             </div>
         </div>
     );
