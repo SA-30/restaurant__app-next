@@ -35,10 +35,27 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     }
 
     useEffect(() => {
+        fetch('/api/menu/profile', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({}),
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            // Handle the case where the user is already an admin
+            setIsAdmin(data?.admin || false);
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
         fetch('/api/menu/profile').then(response => {
             response.json().then(data => {
-                setIsAdmin(data?.isAdmin)
-                console.log(data);
+                setIsAdmin((prev) => data?.admin)
             })
         })
 
@@ -49,8 +66,17 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
         <>
         <div className='bg-primaryColor'>
             <div><MethodHeader /></div>
+            
             <div className='flex-[11_11_0%]'>
+            
                 {!editProfile ? <div className="h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
+                {isAdmin && 
+                    <Link href='/admin'>
+                        <div className="text-white p-2 bg-gray-800 rounded-md font-bold mb-5">
+                            Goto Admin page
+                        </div>
+                    </Link>
+                }
                 <div className={`bg-[#1e6a758c] text-[40px] rounded-[50%] p-5 flex items-center`} >
                     🍗
                 </div>

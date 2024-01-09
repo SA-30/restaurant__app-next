@@ -5,13 +5,13 @@ const userInfoSchema = new Schema({
         type: String,
         required: true,
     },
-    isAdmin: {
+    admin: {
         type: Boolean,
         default: false,
-    }
+    },
     },  
     {timestamps: true}
 );
 
-const UserInfo = models?.UserInfo || mongoose.model("UserInfo", userInfoSchema);
+const UserInfo = models.UserInfo || mongoose.model("UserInfo", userInfoSchema);
 export default UserInfo;
