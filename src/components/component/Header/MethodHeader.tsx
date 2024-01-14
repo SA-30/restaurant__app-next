@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 
-import { FaHome , FaShoppingBag} from 'react-icons/fa';
-import { AiOutlineLogout} from 'react-icons/Ai';
+import { FaHome , FaShoppingBag } from 'react-icons/fa';
+import { AiOutlineLogout} from 'react-icons/ai';
 import {BsHandIndex,BsPersonFillGear} from 'react-icons/bs'
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';

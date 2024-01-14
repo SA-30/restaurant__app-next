@@ -5,7 +5,7 @@ import ManagementItem from "./managementItem/ManagementItem";
 import AddNewItem from "./addNewItem/AddNewItem";
 
 // Make a type file and import from there
-type MenuItem = {
+export type MenuItem = {
     imageUrl: string;
     name: string;
     description: string;
@@ -64,16 +64,27 @@ function ManagementItems() {
     }
 
     // AddItem
-    const addItem = (newItem: any) => {
+    const handleAddNewItem = async (newItem: any) => {
         setItemForm(false);
+        setAllItems((prevItems) => [newItem, ...prevItems]);
+        console.log(newItem);
+        console.log(allItems[1]);
+        
+        await fetch('/api/menu', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ newItem })
+        })
     };
 
     // DeleteItem
     const deleteItem = (itemToDelete: any) => {
-        setAllItems((prevItems) =>
-          prevItems.filter((item) => item !== itemToDelete)
-        );
-      };
+      setAllItems((prevItems) =>
+        prevItems.filter((item) => item !== itemToDelete)
+      );
+    };
 
   return (
     <div className='md:h-screen flex flex-col justify-between py-5 px-5 md:px-0'>
@@ -94,7 +105,7 @@ function ManagementItems() {
             <div className="hide-scroolbar h-[50vh] flex flex-col md:h-[55vh] overflow-scroll  pr-5 md:mr-0 md:p-2">
             {itemForm ? (
                 <div className="z-[10]">
-                    <AddNewItem addItem={addItem} />
+                    <AddNewItem addItem={handleAddNewItem} />
                 </div>
                 ) : (
                     loading ? (<div>loading items...</div>) : (

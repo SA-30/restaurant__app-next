@@ -2,13 +2,14 @@
 
 import React,{ useState } from 'react';
 
-
 function AddNewItem({addItem}: any) {
   const [newItem, setNewItem] = useState({
-    imgUrl: '/assets/images/cafe2.png',
-    title: '',
-    weight: '',
-    price: '',
+    imageUrl: '/assets/images/cafe2.png',
+    name: '',
+    description: '',
+    isCombination: false,
+    category:'buff',
+    price: 0, 
   });
 
   const handleFileInputChange = (e: any) => {
@@ -19,7 +20,7 @@ function AddNewItem({addItem}: any) {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setNewItem((prevItem) => ({ ...prevItem, [name]: value }));
+    setNewItem((prevItem) => ({ ...prevItem, [name]: name === 'price' ? Number(value) : value }));
   };
 
   const handleSubmit = (e: any) => {
@@ -27,10 +28,12 @@ function AddNewItem({addItem}: any) {
     addItem(newItem);
 
     setNewItem({
-      imgUrl: '/assets/images/cafe2.png',
-      title: '',
-      weight: '',
-      price: '',
+      imageUrl: '/assets/images/cafe2.png',
+      name: '',
+      description: '',
+      isCombination: false,
+      category:'buff',
+      price: 0,
     });
   };
 
@@ -61,8 +64,8 @@ function AddNewItem({addItem}: any) {
           placeholder="Name"
           className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
           type="text"
-          value={newItem.title}   
-          name="title"
+          value={newItem.name}   
+          name="name"
           autoComplete="off"
           onChange={handleInputChange}
         />
@@ -70,15 +73,15 @@ function AddNewItem({addItem}: any) {
           placeholder="Weight"
           className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
           type="text"
-          value={newItem.weight}
-          name="weight"
+          value={newItem.description}
+          name="description"
           autoComplete="off"
           onChange={handleInputChange}
         />
         <input
           placeholder="Price"
           className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
-          type="text"
+          type="number"
           value={newItem.price}
           name="price"
           autoComplete="off"

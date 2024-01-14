@@ -1,15 +1,16 @@
 'use client'
 
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import AdminOrderDetails from "./components/AdminOrderDetails";
 import AdminOrderList from "./components/AdminOrderList";
+
 interface AdminPageProps {
 }
  
 const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
-
+    
     const handleOrderSelection = (table: any) => {
         setSelectedOrder(table);
     };

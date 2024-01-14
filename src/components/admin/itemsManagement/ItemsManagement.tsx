@@ -1,12 +1,29 @@
+'use client'
+
 import { FunctionComponent } from "react";
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import ManagementItems from "./components/ManagementItems";
+import {useProfile} from "@/hook/useProfile"
 
 interface AdminPageProps {
     
 }
  
 const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
+    const { data: profileData } = useProfile();
+    const isAdmin = profileData?.admin;
+
+    console.log(isAdmin);
+
+    // if(!profileData) {
+    //     return (
+    //         <Link href='/'><div className="flex h-screen justify-center items-center ">
+    //             <p className="bg-red-300 py-2 px-5 rounded-md font-bold text-gray-600">Home Page</p>
+    //         </div></Link>
+    //     );
+    // }
+
+    if(isAdmin){
     return (  
         <>
         {/* <AddNewItem/> */}
@@ -25,7 +42,7 @@ const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
             </div>
         </div>
         </>
-    );
+    )}
 }
  
 export default ItemsManagement;

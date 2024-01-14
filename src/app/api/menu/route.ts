@@ -41,8 +41,21 @@ export async function GET(req: NextRequest ) {
       return NextResponse.json({ items }, { status: 200 });
   } catch (error) {
       console.error("Error fetching menu items:", error);
-
       return NextResponse.json({ message: "Error fetching menu items" }, { status: 500 });
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    console.log("Submited menu items");
+    const newItem = await req.json()
+    console.log(newItem);
+    // Add item to database
+
+    return NextResponse.json({message: "Menu items submitted successfully"}, {status: 200});
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({message: "Error posting menu items"}, {status: 500});
   }
 }
 

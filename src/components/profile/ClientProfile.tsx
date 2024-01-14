@@ -16,7 +16,7 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     const session = useSession()
     const username = session.data?.user?.name;
     
-
+    const {status} = session
     const [editProfile, setEditProfile] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const [formData, setFormData] = useState({
@@ -59,7 +59,7 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
             })
         })
 
-    }, [])
+    }, [session, status])
 
 
     return (  
