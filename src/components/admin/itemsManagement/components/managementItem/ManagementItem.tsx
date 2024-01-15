@@ -67,11 +67,16 @@ interface ManagementItemProps {
                             </div>
     
                             <div key={index} className='flex flex-col items-center w-full pt-5 gap-2'>
-                                <h2 className='font-semibold text-black'>{item?.name}</h2>
+                                <h2 className='font-semibold text-black'>
+                                    {item?.name} 
+                                    <span className="ml-2 text-[10px] font-bold">
+                                        ({item?.category})
+                                    </span>
+                                </h2>
                                 <div className='flex gap-2 items-center justify-center text-gray-800'>
                                     <FaWeight className='opacity-50' size={10}/>
                                     <p className='text-[12px] font-semibold '>{item?.description}</p>
-                                    <h2 className='font-black ml-5 text-[12px]'>{item?.price}</h2>
+                                    <h2 className='font-black ml-5 text-[12px]'>Rs. {item?.price}</h2>
                                     {/* <h2 className='font-bold ml-5 text-[12px]'>{item?.category}</h2> */}
     
                                 </div>

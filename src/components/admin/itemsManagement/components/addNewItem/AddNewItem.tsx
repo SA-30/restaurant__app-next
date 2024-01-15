@@ -8,8 +8,8 @@ function AddNewItem({addItem}: any) {
     name: '',
     description: '',
     isCombination: false,
-    category:'buff',
-    price: 0, 
+    category: 'buff',
+    price: 0,
   });
 
   const handleFileInputChange = (e: any) => {
@@ -60,33 +60,55 @@ function AddNewItem({addItem}: any) {
             Upload Photo
           </label>
         </div> */}
-        <input
-          placeholder="Name"
-          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
-          type="text"
-          value={newItem.name}   
-          name="name"
-          autoComplete="off"
-          onChange={handleInputChange}
-        />
-        <input
-          placeholder="Weight"
-          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
-          type="text"
-          value={newItem.description}
-          name="description"
-          autoComplete="off"
-          onChange={handleInputChange}
-        />
-        <input
-          placeholder="Price"
-          className="border text-sm font-bold rounded w-full py-2 px-3 text-black outline-none"
-          type="number"
-          value={newItem.price}
-          name="price"
-          autoComplete="off"
-          onChange={handleInputChange}
-        />
+        <div className='flex items-center'>
+          <label htmlFor="name" className='text-black mr-2 text-sm font-bold'>name : </label>
+          <input
+            placeholder="Name"
+            className="border text-sm font-bold rounded  py-2 px-3 text-black outline-none"
+            type="text"
+            value={newItem.name}   
+            name="name"
+            autoComplete="off"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='flex items-center'>
+          <label htmlFor="weight" className='text-black mr-2 text-sm font-bold'>weight : </label>
+          <input
+            placeholder="Weight"
+            className="border text-sm font-bold rounded py-2 px-3 text-black outline-none"
+            type="text"
+            value={newItem.description}
+            name="description"
+            autoComplete="off"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='flex items-center'>
+          <label htmlFor="price" className='text-black mr-2 text-sm font-bold'>price : </label>
+          <input
+            placeholder="Price"
+            className="border text-sm font-bold rounded  py-2 px-3 text-black outline-none"
+            type="number"
+            value={newItem.price}
+            name="price"
+            autoComplete="off"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='flex items-center'>
+          <label htmlFor="category" className='text-black mr-2 text-sm font-bold'>category : </label>
+          <select
+            className="border text-sm font-bold rounded py-2 px-3 text-black outline-none"
+            value={newItem.category}
+            name="category"
+            onChange={handleInputChange}
+          >
+            <option value="Veg">Veg</option>
+            <option value="Buff">Buff</option>
+            <option value="Chicken">Chicken</option>
+          </select>
+        </div>
         <button type='submit' className="transition-all bg-adminblueColor hover:shadow hover:scale-[1.05] text-[12px] border-[1px] border-adminblueColor mt-3 py-2 px-10">
           Add
         </button>

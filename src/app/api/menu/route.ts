@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
   try {
     console.log("Submited menu items");
     const newItem = await req.json()
-    console.log(newItem);
+    console.log(newItem?.newItem);
     // Add item to database
 
     return NextResponse.json({message: "Menu items submitted successfully"}, {status: 200});

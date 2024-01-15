@@ -67,8 +67,6 @@ function ManagementItems() {
     const handleAddNewItem = async (newItem: any) => {
         setItemForm(false);
         setAllItems((prevItems) => [newItem, ...prevItems]);
-        console.log(newItem);
-        console.log(allItems[1]);
         
         await fetch('/api/menu', {
             method: "POST",
