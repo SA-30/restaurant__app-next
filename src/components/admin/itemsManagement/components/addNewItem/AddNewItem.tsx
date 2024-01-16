@@ -1,14 +1,17 @@
 'use client'
 
 import React,{ useState } from 'react';
+import EditableImage from '@/components/component/EditableImage';
 
 function AddNewItem({addItem}: any) {
+  
+  const [ image, setImage ] = useState(''); 
   const [newItem, setNewItem] = useState({
     imageUrl: '/assets/images/cafe2.png',
     name: '',
     description: '',
     isCombination: false,
-    category: 'buff',
+    category: '',
     price: 0,
   });
 
@@ -23,43 +26,57 @@ function AddNewItem({addItem}: any) {
     setNewItem((prevItem) => ({ ...prevItem, [name]: name === 'price' ? Number(value) : value }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    addItem(newItem);
 
-    setNewItem({
-      imageUrl: '/assets/images/cafe2.png',
-      name: '',
-      description: '',
-      isCombination: false,
-      category:'buff',
-      price: 0,
-    });
+    if(newItem.name !== '' && newItem.description !== '' && newItem.price !== 0 && newItem.category !== '') {
+      const data = newItem
+      try {
+        const response = await fetch('/api/menu/create', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const newItemFromAPI = await response.json(); 
+    
+          // Reset the form
+          setNewItem({
+            imageUrl: '/assets/images/cafe2.png',
+            name: '',
+            description: '',
+            isCombination: false,
+            category: '',
+            price: 0,
+          });
+        } else {
+          console.error('Failed to create item');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      addItem(newItem);
+    } else {
+      alert('Please enter all fields');
+      addItem(newItem);
+    }
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setNewItem((prevItem) => ({ ...prevItem, category: value }));
   };
 
   return (
     <div className="md:w-[60vw] w-auto fixed top-[45%] left-[50%] md:top-[55%] transform translate-x-[-50%] translate-y-[-50%] flex items-center justify-center py-10 px-10 md:py-5 md:px-40 bg-adminbgColor border-2 border-adminblueColor text-white">
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-5">
 
-        {/* <div className=' flex justify-centersdf  border-dotted border-[2px] border-adminblueColor'>
-          <input
-            id="image"
-            placeholder="Image"
-            name="imgUrl"
-            value={newItem.imgUrl}
-            hidden
-            className="pb-2 outline-none bg-transparent border-b-[1px] border-adminblueColor"
-            type="file"
-            accept="image/*"
-            onChange={handleFileInputChange}
-          />
-          <label
-            htmlFor="image"
-            className="p-5 cursor-pointer transition duration-300 ease-in-out w-full text-center"
-          >
-            Upload Photo
-          </label>
-        </div> */}
+        <div className='flex items-center'>
+          <EditableImage link={image} setLink={setImage}/>
+        </div>
         <div className='flex items-center'>
           <label htmlFor="name" className='text-black mr-2 text-sm font-bold'>name : </label>
           <input
@@ -102,11 +119,12 @@ function AddNewItem({addItem}: any) {
             className="border text-sm font-bold rounded py-2 px-3 text-black outline-none"
             value={newItem.category}
             name="category"
-            onChange={handleInputChange}
+            onChange={handleCategoryChange}
           >
-            <option value="Veg">Veg</option>
-            <option value="Buff">Buff</option>
-            <option value="Chicken">Chicken</option>
+            <option value="veg">select</option>
+            <option value="veg">veg</option>
+            <option value="buff">buff</option>
+            <option value="chicken">chicken</option>
           </select>
         </div>
         <button type='submit' className="transition-all bg-adminblueColor hover:shadow hover:scale-[1.05] text-[12px] border-[1px] border-adminblueColor mt-3 py-2 px-10">

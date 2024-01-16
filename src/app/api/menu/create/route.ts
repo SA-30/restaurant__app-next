@@ -7,7 +7,8 @@ export async function POST(req: any){
         const {name, description, price, category, isCombination, imageUrl}: FoodItem =  await req.json()
         await connectMongoDB();
         await FoodItemModel.create({name, description, price, category, isCombination, imageUrl});
-
+        console.log("values-> ", {name, description, price, category, isCombination, imageUrl});
+        
         return NextResponse.json({message: "Item is added in the database"}, {status: 201});
     } catch (error) {
         console.error("Error adding item to database:", error);

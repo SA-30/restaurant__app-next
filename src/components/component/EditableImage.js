@@ -24,7 +24,7 @@ export default function EditableImage ({link, setLink}) {
 
     return (
         <>
-            <div>
+            <div className="flex gap-5 items-center">
                 {link && (
                     <Image 
                         className="rounded-lg w-full h-full mb-1"
@@ -33,6 +33,16 @@ export default function EditableImage ({link, setLink}) {
                         height={250}
                         alt={'avatar'}
                     />
+                )}
+                
+                <label className="">
+                    <input type="file" className="hidden" onChange={handleFileChange}/>
+                    <span className="text-black font-bold text-[10px] block border border-gray-300 rounded-lg p-2 text-center cursor-pointer">Edit</span>
+                </label>
+                {!link && (
+                    <div className=" bg-gray-200 p-4 text-gray-500 rounded-lg mb-1">
+                        No image
+                    </div>
                 )}
             </div>
         </>
