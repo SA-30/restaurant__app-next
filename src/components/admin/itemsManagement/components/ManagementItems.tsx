@@ -70,10 +70,21 @@ function ManagementItems() {
     };
 
     // DeleteItem
-    const deleteItem = (itemToDelete: any) => {
+    const deleteItem = async (itemToDelete: any) => {
+
       setAllItems((prevItems) =>
         prevItems.filter((item) => item !== itemToDelete)
       );
+
+        // delete in db
+        try {
+            const response = await fetch(`/api/menu/delete`, {
+                method: "DELETE",
+                body: JSON.stringify({itemToDelete})
+            });
+        } catch (error) {
+            console.log("error deleting the menu items: ", error);
+        }
     };
 
   return (

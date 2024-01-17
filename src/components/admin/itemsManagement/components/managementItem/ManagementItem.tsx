@@ -26,30 +26,12 @@ interface ManagementItemProps {
       };
     
       const confirmDelete = () => {
+        
         if (itemToDelete) {
           deleteItem(itemToDelete);
           hideDeleteDialog();
         }
       };
-
-    // const [isEditing, setEditing] = useState(false);
-    // const [editedItem, setEditedItem] = useState<any>(null);
-
-    // const editDish = (item: any, index: number) => {
-    //     setEditedItem(item);
-    //     setEditing(true);
-    // };
-
-    // const cancelEdit = () => {
-    //     setEditedItem(null);
-    //     setEditing(false);
-    // };
-
-    // const handleEdit = (editedItemRes: any) => {
-
-    //     deleteItem(editedItemRes);
-    //     setEditing(false)
-    // };
 
     return (
         <div>
