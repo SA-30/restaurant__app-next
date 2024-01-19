@@ -1,7 +1,7 @@
 'use client'
 
 import { FunctionComponent, useState, useEffect } from "react";
-import {FaLocationDot} from 'react-icons/fa6'
+import {FaLocationDot, FaPeopleGroup, FaPeoplePulling} from 'react-icons/fa6'
 import Link from "next/link";
 import EditAdminForm from "../admin/adminProfile/EditAdminForm";
 import MethodHeader from "../component/Header/MethodHeader";
@@ -71,11 +71,20 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
             
                 {!editProfile ? <div className="h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
                 {isAdmin && 
-                    <Link href='/admin'>
-                        <div className="text-white p-2 bg-gray-800 rounded-md font-bold mb-5">
-                            Goto Admin page
-                        </div>
-                    </Link>
+                    <div className="">
+                        <Link href='/admin'>
+                            <div className="flex  items-center justify-center gap-2 px-5 text-white p-2 bg-gray-800  rounded-md text-center font-bold mb-5">
+                                <p>Admin page</p>
+                            </div>
+                        </Link>
+                        <Link href='/users'>
+                            <div className="flex  items-center justify-center gap-2  text-white p-2 bg-gray-800 rounded-md text-center font-bold mb-5">
+                                <FaPeopleGroup className='text-green-600'  size={30}/>
+                                <p>Clients</p>
+                            </div>
+                        </Link>
+                    </div>
+                    
                 }
                 <div className={`bg-[#1e6a758c] text-[40px] rounded-[50%] p-5 flex items-center`} >
                     🍗
