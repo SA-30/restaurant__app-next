@@ -5,16 +5,19 @@ import Link from 'next/link';
 import { FaHome , FaShoppingBag } from 'react-icons/fa';
 import { AiOutlineLogout} from 'react-icons/ai';
 import {BsHandIndex,BsPersonFillGear} from 'react-icons/bs'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
+import { CartContext } from '@/components/appContext';
 
 interface MethodHeaderProps {
 }
 
 const MethodHeader: React.FC<MethodHeaderProps> = () => {
-  const [isLogin, setIsLogin] = useState(false);
   const session = useSession();
   const status = session.status;
+
+  const {cartProducts} = useContext(CartContext);
+  console.log(cartProducts);
 
   return (
     <div className='text-white fixed h-16 w-full px-5 p-5 md:px-20 bg-gray-800 border-b-[1px] border-gray-600 z-[1]'>
