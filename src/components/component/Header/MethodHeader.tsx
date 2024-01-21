@@ -28,7 +28,12 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
             
         </div>
         <div className='flex gap-5 items-center'>
-            <Link href='/cart'> <FaShoppingBag size={20}/> </Link>
+              <Link href='/cart'> 
+                <div className='relative'>
+                  <FaShoppingBag size={20}/> 
+                  <div className='absolute text-sm  flex justify-center items-center bg-red-800 rounded-[50%] h-5  w-5 text-center -mt-2 ml-2 text-white'>{cartProducts.length}</div>
+                </div>
+              </Link>
             <Link href='/reserveTable'> <BsHandIndex size={20}/> </Link>
             
             {status !== "authenticated" && ( 

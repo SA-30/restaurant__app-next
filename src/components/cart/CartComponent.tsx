@@ -1,12 +1,14 @@
 'use client'
 
-import {FaWeight, FaPlus} from 'react-icons/fa';
+import {FaWeight, FaPlus, FaTrash} from 'react-icons/fa';
 import MethodHeader from '../component/Header/MethodHeader';
 import OrderSummary from './orderSummary/OrderSummary';
 import GrandTotal from './GrandTotal/GrandTotal';
 
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
+import Image from 'next/image'
 import Link from 'next/link';
+import { CartContext } from '../appContext';
 
 interface MethodHeaderProps{
     // title: string,
@@ -17,29 +19,73 @@ interface MethodHeaderProps{
 const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
+    const { cartProducts, removeCartProduct } = useContext(CartContext);
+    let total = 0;
+    for( const p of cartProducts) {
+        total += p.price;
+    }
+
     const updateTotalPrice = (price: number) => {
         setTotalPrice(price);
     };
 
+    const handlePayment = () => {
+        console.log("payment done...");
+    }
+
     return (
-        <div className='min-h-[100vh] bg-primaryColor flex flex-col justify-between'>
+        <div className='min-h-[100vh] bg-primaryColor flex flex-col '>
             {/* Header */}
             <div ><MethodHeader/></div>
             <div className='my-10'></div>
+            <h1 className='text-red-600 text-center font-bold text-5xl my-5'>Cart</h1>
+            
+            <div className='flex md:flex-row flex-col m-2 md:m-0 sm:gap-0 gap-10 justify-around'>
+                <div className='flex flex-col  gap-2 '>
+                    {cartProducts?.length === 0 && (
+                        <div>No products in your shopping cart!!!</div>
+                    )}
 
-            {/* Order Summary */}
-            <div> <OrderSummary updateTotalPrice={updateTotalPrice} /> </div>
-
-            <div className='my-5'></div>
-
-            {/* Total Price component */}
-            <div> <GrandTotal totalPrice={totalPrice}/> </div>
-
-            {/* Order now button */}
-            <div className='py-5 bg-secondaryColor mt-8 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
-                <Link href="/payment"><button className='transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
-                    ORDER NOW
-                </button>  </Link>  
+                    {cartProducts?.length > 0 && cartProducts.map((product: any, index: number) => (
+                        <div key={index} className='flex  gap-5'>
+                            <div className='grid grid-cols-4 w-[500px] items-center  border-2 border-[#b9b9b9] py-2 px-5'>
+                                <div>
+                                    <img src={product.imgUrl} width={40} height={40} alt={product.title} />
+                                </div>
+                                <div className='flex justify-start'>{product.title}</div>
+                                <div className='font-semibold flex justify-end'>Rs. {product.price}</div>
+                                <div className='flex justify-end'>
+                                    <button 
+                                        className=''
+                                        type='button' 
+                                        onClick={() => removeCartProduct(index)}>
+                                        <FaTrash size={20}/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <div className='grid grid-cols-4 md:w-[500px] items-center  border-2 border-[#b9b9b9] py-2 px-5'>
+                        <span></span>
+                        <span>subtotal</span>
+                        <span className='flex justify-end font-bold '>Rs {total} </span> 
+                    </div>
+                </div>
+                <div className='bg-gray-200 p-4 rounded-sm'>
+                    <h2 className='font-bold mb-4'>Checkout</h2>
+                    <form onSubmit={handlePayment}>
+                        <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
+                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" placeholder='977*******'/> <br />
+                        <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
+                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" placeholder='location'/> <br />
+                        <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
+                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment'/>  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
+                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
+                        <button className='py-2 px-5 rounded bg-red-500 text-white w-full mt-5' type='submit'>
+                            Pay <span className='font-normal text-[10px] text-gray-200'>Rs</span> {total}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     )
