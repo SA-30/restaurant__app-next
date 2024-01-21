@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { CartContext } from '../appContext';
 
+
 interface MethodHeaderProps{
     // title: string,
     // weight: string,
@@ -29,8 +30,12 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
         setTotalPrice(price);
     };
 
-    const handlePayment = () => {
+    const handlePayment = (e: any) => {
+        e.preventDefault();
         console.log("payment done...");
+
+        // redirect user to done payment page
+        window.location.href = `/payment?clear-cart=1`;
     }
 
     return (
