@@ -62,7 +62,7 @@ const page = () => {
       </div>
       
       <div className='col-span-2 p-4 m-2 bg-red-200 rounded-lg mr-20'>
-        <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Purchase history</div>
+        <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Order history</div>
         <div className='flex text-sm flex-col gap-2'>
           {purchaseHistoryList.map((item, index) => (
             <div key={index} className='p-2 bg-red-100 items-center grid grid-cols-3 text-center rounded-lg'>
