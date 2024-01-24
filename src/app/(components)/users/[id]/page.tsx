@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaPeopleArrows} from 'react-icons/fa'
 import {useParams} from 'next/navigation'
+import MethodHeader from '@/components/component/Header/MethodHeader'
 
 const page = () => {
   const [user, setUser] = useState(null)
@@ -19,7 +20,9 @@ const page = () => {
 
   return (
     <>
-    <div className='h-screen  grid items-center gap-2 md:grid-cols-3'>
+    <div ><MethodHeader/></div>
+    <div className='min-h-[10vh]'></div>
+    <div className='h-[90vh]  grid items-center gap-2 md:grid-cols-3'>
       <div className='col-span-1 '>
         <div className='flex items-center justify-center gap-3'>
           <FaPeopleArrows className="p-2 rounded-[50%]  bg-red-600 text-white" size={50}/>

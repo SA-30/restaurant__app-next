@@ -1,5 +1,6 @@
 'use client'
 
+import MethodHeader from '@/components/component/Header/MethodHeader';
 import { useProfile } from '@/hook/useProfile';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -26,7 +27,11 @@ const UsersPage = () => {
 
   if(isAdmin){
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div>
+        <div ><MethodHeader/></div>
+        <div className='min-h-[10vh]'></div>
+        <div className='flex flex-col justify-center items-center'>
+        
         <h1 className='font-bold text-lg p-5 uppercase'>users page</h1>
         <div className='px-5'>
             {users?.length > 0 &&
@@ -44,6 +49,7 @@ const UsersPage = () => {
                 ))
             }
         </div>
+    </div>
     </div>
   )};
 }
