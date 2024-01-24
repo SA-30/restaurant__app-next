@@ -9,6 +9,34 @@ const page = () => {
   const [user, setUser] = useState(null)
   const {id} = useParams();
 
+  const purchaseHistoryList = [
+    {
+      items: ['Veg momo', 'Chicken momo', 'Pizza'],
+      totalPrice: 1120,
+      status: 'Paid'
+    },
+    {
+      items: ['Large pizza', 'Chicken momo', 'etc...'],
+      totalPrice: 1500,
+      status: 'Pending'
+    },
+    {
+      items: ['Pizza'],
+      totalPrice: 200,
+      status: 'Paid'
+    },
+    {
+      items: ['Burger'],
+      totalPrice: 450,
+      status: 'Paid'
+    },
+    {
+      items: ['Chicken pizza'],
+      totalPrice: 650,
+      status: 'Paid'
+    }
+  ];
+
   useEffect(() => {
     fetch('/api/users').then(res => {
       res.json().then(users => {
@@ -34,28 +62,15 @@ const page = () => {
       </div>
       
       <div className='col-span-2 p-4 m-2 bg-red-200 rounded-lg mr-20'>
-        <div className='font-semibold text-sm mb-3'>Details</div>
+        <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Purchase history</div>
         <div className='flex text-sm flex-col gap-2'>
-          <div className='p-2 bg-red-100 flex justify-between rounded-lg'>
-            <p>Momo veg, chicken, pizza</p>
-            <p className='font-semibold'>Rs. 1120</p>
-          </div>
-          <div className='p-2 bg-red-100 flex justify-between rounded-lg'>
-            <p>Large pizza, Chicken momo, etc...</p>
-            <p className='font-semibold'>Rs. 1500</p>
-          </div>
-          <div className='p-2 bg-red-100 flex justify-between rounded-lg'>
-            <p>Pizza</p>
-            <p className='font-semibold'>Rs. 200</p>
-          </div>
-          <div className='p-2 bg-red-100 flex justify-between rounded-lg'>
-            <p>Burger</p>
-            <p className='font-semibold'>Rs. 450</p>
-          </div>
-          <div className='p-2 bg-red-100 flex justify-between rounded-lg'>
-            <p>Chicken pizza</p>
-            <p className='font-semibold'>Rs. 650</p>
-          </div>
+          {purchaseHistoryList.map((item, index) => (
+            <div key={index} className='p-2 bg-red-100 items-center grid grid-cols-3 text-center rounded-lg'>
+              <p>{item.items.join(', ')}</p>
+              <p className='font-semibold'>Rs. {item.totalPrice}</p>
+              <p className={`p-2 bg-gray-500 rounded-md ${item.status === 'Paid' ? 'bg-green-400' : 'bg-red-400'}`}>{item.status}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
