@@ -3,7 +3,7 @@
 import {  FaWeight, FaCross } from 'react-icons/fa';
 import {AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useAppSelector } from '@/hook/redux-toolkit/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function AdminOrderDetails({selectedOrder}: any) {
     const [pending, setPending] = useState(false)
@@ -13,9 +13,32 @@ function AdminOrderDetails({selectedOrder}: any) {
 
     const selectedOrderFromRedux = useAppSelector(state => state.orderReducer.value)
    
-    const totalPrice = 120;
-    const tax = totalPrice * 13/100;
-    const GrandTotal = totalPrice + tax + 99;
+    // Calculate total price, tax, and grand total dynamically
+    useEffect(() => {
+      const calculateTotal = () => {
+        if (Array.isArray(selectedOrderFromRedux.dish)) {
+            const subtotal = selectedOrderFromRedux.dish.reduce((acc, product) => {
+                return acc + parseFloat(product.price);
+            }, 0);
+
+            const tax = subtotal * 13 / 100;
+            const deliveryFee = 0;
+
+            const grandTotal = subtotal + tax + deliveryFee;
+
+            setTotalPrice(subtotal);
+            setTax(tax);
+            setGrandTotal(grandTotal);
+            };
+        };
+
+    calculateTotal();
+  }, [selectedOrderFromRedux.dish]);
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+
 
     const handlePending = () => {
         setPending(true)
@@ -113,14 +136,14 @@ function AdminOrderDetails({selectedOrder}: any) {
                     </div>
                     <div className='flex justify-between mt-1'>
                         <h3 className='text-gray-800 font-semibold text-[12px]'>Delivery Fee</h3>
-                        <h3 className='text-gray-800 font-semibold text-[12px]'>Rs 99</h3>
+                        <h3 className='text-gray-800 font-semibold text-[12px]'>Rs 0</h3>
                     </div>
                     </div>
                     {/* DIVIDER */}
                     <div className='border-gray-700 border-t-2 mb-2 mt-3'></div>
                         <div className='flex justify-between mt-4'>
                             <h3 className='font-bold text-[13px]'>Grand Total</h3>
-                            <h3 className=' font-semibold'>Rs &nbsp; {GrandTotal}</h3>
+                            <h3 className=' font-semibold'>Rs &nbsp; {grandTotal}</h3>
                         </div>
                     </div>
                 </div>   
