@@ -2,7 +2,7 @@ import { FaPerson, FaFilter } from "react-icons/fa6"
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/hook/redux-toolkit/store";
 import { orderFood } from "@/hook/redux-toolkit/features/admin/order-slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface orderItem {
     face: string;
@@ -12,107 +12,44 @@ interface orderItem {
     status: string;
 }
 
+interface Product {
+    imgUrl: string;
+    title: string;
+    weight: string;
+    price: string;
+    size: number | null;
+}
+
+interface OrderItem {
+    email: string,
+    phone: string,
+    address: string,
+    cartProducts: Product[],
+    paid: boolean,
+}
+
 function OrderList({onOrderSelection}: any) {
    const [selectedTable, setSelectedTable] = useState<number | null>(null);
-
-   const orderList = [
-        {
-            face:'🍗',
-            name: 'monkey D Luffy',
-            menu: [
-                'Spicy meat',
-                'More meat',
-            ],
-            price: 500,
-            status: 'completed',
-        },
-        {
-            face:'🍺',
-            name: 'Roronoa Zoro',
-            menu: [
-                'Old Booze',
-                'More booze',
-            ],
-            price: 400,
-            status: 'pending',
-        },
-        {
-            face:'🚬',
-            name: 'Vinsmoke Sanji',
-            menu: [
-                 'Plata pyaza',
-                 'Wine',
-            ],
-            price: 600,
-            status: 'completed',
-        },
-        {
-            face:'🤑',
-            name: 'Catbuglar Nami',
-            menu: [
-                'Grillez Money plant',
-                'Pizza',
-            ],
-            price: 200,
-            status: 'completed',
-        },
-        {
-            face:'🔫',
-            name: 'Brave Ussop',
-            menu: [
-                'Chiken',
-                'More chicken',
-            ],
-            price: 400,
-            status: 'completed',
-        },
-        {
-            face:'😈',
-            name: 'Demon Child Robin',
-            menu: [
-                 'Strabery Icecream',
-                 'Soft taco',
-            ],
-            price: 100,
-            status: 'completed',
-        },
-        {
-            face:'🦝',
-            name: 'Cotton Candy Chopper',
-            menu: [
-                'Cotton candy',
-                'More Cotton candy',
-            ],
-            price: 50,
-            status: 'completed',
-        },
-        {
-            face:'💀',
-            name: 'Brook',
-            menu: [
-                'Goat skull soup',
-                 'Booze',
-            ],
-            price: 500,
-            status: 'completed',
-        },
-        {
-            face:'🐟',
-            name: 'Jinbe',
-            menu: [
-                'Grilled fish',
-                 'Cooked fish',
-            ],
-            price: 300,
-            status: 'completed',
-        },
-    ]
+   const [orderData, setOrderData] = useState<OrderItem[]>([]);
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const handleSelection = (item: orderItem, index: number) => {
+    useEffect(() => {
+
+        fetch('/api/order').then(response => {
+            response.json().then(data => {
+                setOrderData(data)
+            })
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+    }, [,selectedTable])
+
+    const handleSelection = (item: OrderItem, index: number) => {
         setSelectedTable(index)
-        dispatch(orderFood({face: item.face, status: item.status, customerName: item.name, price: item.price, dish: item.menu}))
+        dispatch(orderFood({face: item.email[0], status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
     }
 
     return (
@@ -128,32 +65,40 @@ function OrderList({onOrderSelection}: any) {
 
             {/* Order Lists */}
             <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                {orderList.map(( item, index) => (
+                
+
+
+                {orderData.map(( data, index) => (
                     <div 
                     key={index} 
-                    onClick={() => handleSelection(item as orderItem, index)}
+                    onClick={() => handleSelection(data as OrderItem, index)}
                     className="">
-                        <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center  py-3 ${selectedTable === index ? item.status == 'completed' ?  "bg-[#806dd4d5]" : "bg-adminredColor" : "" } ${item.status == 'completed' ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
+                        <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#806dd4d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
                         <div className="flex gap-3 items-center">
-                            <div className={`${item.status == 'completed' ? 'bg-[#41ad4110]': 'bg-[#963d3d27]'} text-[16px] rounded-[50%] p-1 flex items-center`} >
-                                {item.face}
+                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center`} >
+                                {data?.email[0]}
                             </div>
-                            <p className="!text-black !font-semibold">{item.name}</p>
+                            <p className="!text-black !font-semibold">{data?.email}</p>
                         </div>
                         <div className="md:mr-10 ml-5 md:ml-0">
-                            {item.menu.map((fooditem, index) => (
+                            {data?.cartProducts.map((product, index) => (
                                 <div key={index}>
-                                    <p className="!text-black">{fooditem}</p>
+                                    <p className="!text-black">{product?.title}</p>
                                 </div>
                             ))}
                             
                         </div>
                         <div>
-                            <p className="!text-black !font-bold">Rs {item.price}</p>
+                            <div className="!text-black !font-bold"> 
+                                <p className=" !text-black !font-bold">
+                                    <span className="font-semibold text-[10px]">Rs </span> 
+                                    {data?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0)}
+                                </p>
+                            </div>
                         </div>
                         <div>
                             <div>
-                                <p className={`cursor-pointer w-full !text-[10px] md:text-[12px] mr-10 px-5 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${item.status == 'completed' ? 'bg-[#2e4e2e94]': 'bg-[#963d3d7e]'}`}>{item.status}</p>
+                                <p className={`cursor-pointer w-full !text-[10px] md:text-[12px] mr-10 px-5 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${data.paid == true ? 'bg-[#50af50d7]': 'bg-[#e04949dc]'}`}>{data.paid == true ? 'paid' : 'Pending'}</p>
                             </div>
                         </div>
                         </div>
@@ -273,4 +218,35 @@ const orderList = [
         },
     ]
 
+    /* {orderList.map(( item, index) => (
+                    <div 
+                    key={index} 
+                    onClick={() => handleSelection(item as orderItem, index)}
+                    className="">
+                        <div className={`transition-all order-list px-5 grid grid-cols-4  gap-10 items-center  py-3 ${selectedTable === index ? item.status == 'completed' ?  "bg-[#806dd4d5]" : "bg-adminredColor" : "" } ${item.status == 'completed' ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
+                        <div className="flex gap-3 items-center">
+                            <div className={`${item.status == 'completed' ? 'bg-[#41ad4110]': 'bg-[#963d3d27]'} text-[16px] rounded-[50%] p-1 flex items-center`} >
+                                {item.face}
+                            </div>
+                            <p className="!text-black !font-semibold">{item.name}</p>
+                        </div>
+                        <div className="md:mr-10 ml-5 md:ml-0">
+                            {item.menu.map((fooditem, index) => (
+                                <div key={index}>
+                                    <p className="!text-black">{fooditem}</p>
+                                </div>
+                            ))}
+                            
+                        </div>
+                        <div>
+                            <p className="!text-black !font-bold">Rs {item.price}</p>
+                        </div>
+                        <div>
+                            <div>
+                                <p className={`cursor-pointer w-full !text-[10px] md:text-[12px] mr-10 px-5 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${item.status == 'completed' ? 'bg-[#2e4e2e94]': 'bg-[#963d3d7e]'}`}>{item.status}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                ))} 
 */

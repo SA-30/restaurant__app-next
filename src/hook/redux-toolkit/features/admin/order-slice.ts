@@ -6,19 +6,27 @@ type InitialState = {
 
 type OrderState = {
     face: string,
-    status: string,
+    status: boolean,
     customerName: string,
     price: number,
-    dish: string[],
+    dish: Product[],
+}
+
+interface Product {
+    imgUrl: string;
+    title: string;
+    weight: string;
+    price: string;
+    size: number | null;
 }
 
 const initialState = {
     value: {
-        face: '🍓',
-        status: '...',
+        face: '🙂',
+        status: false,
         customerName: 'Choose an order',
         price: 0,
-        dish: ['dishItem'],
+        dish: {}
     } as OrderState,
 } as InitialState;
 
@@ -26,7 +34,7 @@ export const order = createSlice({
     name: 'table',
     initialState,
     reducers: {
-        orderFood: (state, action: PayloadAction<{face: string, status: string, customerName: string, price: number, dish: string[]}>) => {
+        orderFood: (state, action: PayloadAction<{face: string, status: boolean, customerName: string, price: number, dish: Product[]}>) => {
             const {face, status, customerName,price, dish} = action.payload;
 
             state.value.face = face;

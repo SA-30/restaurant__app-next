@@ -1,30 +1,31 @@
-import {  FaWeight } from 'react-icons/fa';
+'use client'
+
+import {  FaWeight, FaCross } from 'react-icons/fa';
+import {AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useAppSelector } from '@/hook/redux-toolkit/store';
+import { useState } from 'react';
 
 function AdminOrderDetails({selectedOrder}: any) {
+    const [pending, setPending] = useState(false)
+
     const imgUrl = '/assets/images/momoc.jpg';
     const weight = '1 plate';
 
     const selectedOrderFromRedux = useAppSelector(state => state.orderReducer.value)
-
-    const bookedItems = [
-        {
-            imgUrl: '/assets/images/momov.jpg',
-            title: 'Veg Momo, Pure vegitarian momo',
-            weight: '1 plate',
-            price: 'Rs 100',
-        },
-        {
-            imgUrl: '/assets/images/momoc.jpg',
-            title: 'Buff Momo, Tasty buff momo',
-            weight: '1 plate',
-            price: 'Rs 120',
-        },
-    ]
-
+   
     const totalPrice = 120;
     const tax = totalPrice * 13/100;
     const GrandTotal = totalPrice + tax + 99;
+
+    const handlePending = () => {
+        setPending(true)
+    }
+
+    const handlePaid = () => {
+        // send data to api/order route to
+        // set paid to true
+        setPending(false)
+    }
 
     return (
         <div className='text-black  md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
@@ -33,44 +34,59 @@ function AdminOrderDetails({selectedOrder}: any) {
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
                             <div className='flex items-center gap-3'>
-                                <div className={`bg-[#41ad4110] text-[16px] rounded-[50%] p-2 flex items-center`}>
-                                {selectedOrderFromRedux&& selectedOrderFromRedux.face  }
+                                <div className={`bg-[#e9485088] text-[16px] rounded-[50%] p-2 flex items-center h-[2rem] w-[2rem] justify-center`}>
+                                {selectedOrderFromRedux && selectedOrderFromRedux.face  }
                             </div>
                                 <h2 className='text-lg font-bold'>{selectedOrderFromRedux && selectedOrderFromRedux.customerName}</h2>
                             </div>
-                        <p className={`text-white cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == 'completed'? 'bg-[#2e4e2e]' : 'bg-[#4e2e2e]'}`}>{selectedOrderFromRedux? selectedOrderFromRedux.status : 'Completed'}</p>
+                            <div className={`relative flex flex-col gap-3 ${pending && 'border-2 border-gray-500 p-2 pt-6 rounded-md'}`}>
+                                {!pending && 
+                                    <div
+                                        onClick={handlePending}
+                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#56ad56]' : 'bg-[#aa5959]'}`}
+                                    >
+                                        <p>{ selectedOrderFromRedux.status == false ? 'Pending' : 'Paid'}</p>
+                                    </div>
+                                }
+                                { pending && (
+                                    <div>
+                                        <div 
+                                            onClick={() => setPending(false)}
+                                            className='absolute z-10 top-0 left-[50%] translate-x-[-50%] '><AiOutlineFullscreenExit size={20}/></div>
+                                        <div 
+                                            onClick={handlePaid}
+                                            className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center bg-[#56ad56]`}
+                                        >
+                                            <p>Paid</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
                     </div>
                     <div>
-
                     </div>
                 </div>
-
                 <div>
-                    <div className='h-40 hide-scroolbar overflow-y-scroll  flex flex-col justify-center gap-10 mb-5'>
-                        {selectedOrderFromRedux.dish.map((item, index) => (
-                            <div 
-                            key={index}
-                            
-                            >
-                                <div className='  flex flex-row  rounded-2xl items-center gap-5'>
-                                <div className='h-[40px] w-[50px]  flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${imgUrl})`}}></div>
+                    <div className='h-40 hide-scroolbar overflow-y-scroll flex flex-col justify-center gap-10 mb-5'>
+                        {(Array.isArray(selectedOrderFromRedux.dish) ? selectedOrderFromRedux.dish : []).map((product, index) => (
+                            <div key={index} className='flex flex-row rounded-2xl items-center gap-5'>
+                                {/* Render the product image */}
+                                <div className='h-[40px] w-[50px] flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${product.imgUrl})` }}></div>
 
-                                <div className='flex flex-col  gap-2 w-full justify-center rounded-r-2xl'>
-                                    <h2 className='font-bold text-sm'>{item}</h2>
+                                {/* Render product details */}
+                                <div className='flex flex-col gap-2 w-full justify-center rounded-r-2xl'>
+                                    <h2 className='font-bold text-sm'>{product.title}</h2>
                                     <div className='flex gap-2 items-center justify-start'>
-                                        <FaWeight className='opacity-50' size={10}/>
-                                        <p className='text-[12px] font-medium'>{weight}</p>
-                                        <h2 className='text-[12px] font-bold'>{selectedOrderFromRedux.price}</h2>
+                                        <FaWeight className='opacity-50' size={10} />
+                                        <p className='text-[12px] font-medium'>{product.weight}</p>
+                                        <h2 className='text-[12px] font-bold'>{product.price}</h2>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         ))}
-
                     </div>
-                    {/* <button className=' w-full p-2 bg-transparent border-[1px] text-adminblueColor border-adminblueColor text-[12px]'>View All</button> */}
                 </div>
             </div>
 

@@ -19,6 +19,8 @@ interface MethodHeaderProps{
 
 const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [address, setAddress] = useState('')
+    const [phone, setPhone] = useState('');
 
     const { cartProducts, removeCartProduct } = useContext(CartContext);
     let total = 0;
@@ -30,12 +32,27 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
         setTotalPrice(price);
     };
 
-    const handlePayment = (e: any) => {
+    const handlePayment = async (e: any) => {
         e.preventDefault();
-        console.log("payment done...");
 
-        // redirect user to done payment page
-        window.location.href = `/payment?clear-cart=1`;
+        console.log("works here client");
+
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                address,
+                cartProducts
+            }),
+        })
+
+        if(response.ok){
+            // redirect user to done payment page
+            window.location.href = `/payment?clear-cart=1`;
+        }
     }
 
     return (
@@ -80,11 +97,11 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                     <h2 className='font-bold mb-4'>Checkout</h2>
                     <form onSubmit={handlePayment}>
                         <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
-                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" placeholder='977*******'/> <br />
+                        <input value={phone} onChange={(e) => setPhone(e.target.value)} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" placeholder='977*******' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
-                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" placeholder='location'/> <br />
+                        <input value={address} onChange={(e) => setAddress(e.target.value)} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" placeholder='location' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
-                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment'/>  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
+                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' required/>  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
                         <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
                         <button className='py-2 px-5 rounded bg-red-500 text-white w-full mt-5' type='submit'>
                             Pay <span className='font-normal text-[10px] text-gray-200'>Rs</span> {total}

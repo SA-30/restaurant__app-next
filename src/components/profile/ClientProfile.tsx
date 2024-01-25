@@ -13,6 +13,34 @@ interface ClientProfileprops {
 }
  
 const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
+    const purchaseHistoryList = [
+        {
+          items: ['Veg momo', 'Chicken momo', 'Pizza'],
+          totalPrice: 1120,
+          status: 'Paid'
+        },
+        {
+          items: ['Large pizza', 'Chicken momo', 'etc...'],
+          totalPrice: 1500,
+          status: 'Pending'
+        },
+        {
+          items: ['Pizza'],
+          totalPrice: 200,
+          status: 'Paid'
+        },
+        {
+          items: ['Burger'],
+          totalPrice: 450,
+          status: 'Paid'
+        },
+        {
+          items: ['Chicken pizza'],
+          totalPrice: 650,
+          status: 'Paid'
+        }
+    ];
+      
     const session = useSession()
     const username = session.data?.user?.name;
     
@@ -67,7 +95,7 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
         <div className='bg-primaryColor'>
             <div><MethodHeader /></div>
             
-            <div className='flex-[11_11_0%]'>
+            <div className='flex-[11_11_0%] flex justify-center items-center gap-10'>
             
                 {!editProfile ? <div className="h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
                 {isAdmin && 
@@ -102,8 +130,25 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                     </Link>
                 </div>
                 </div> : <EditAdminForm toggleForm={toggleForm} formDatas={formDatas} />}
+            
+            {!isAdmin && (
+                <div className="flex justify-center items-center h-screen">
+                    <div className='col-span-2 p-4 m-2 bg-red-200 rounded-lg mr-20'>
+                        <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Order history</div>
+                        <div className='flex text-sm flex-col gap-2  overscroll-y-scroll'>
+                        {purchaseHistoryList.map((item, index) => (
+                            <div key={index} className='p-2 bg-red-100 items-center grid grid-cols-3 text-center rounded-lg'>
+                            <p>{item.items.join(', ')}</p>
+                            <p className='font-semibold'>Rs. {item.totalPrice}</p>
+                            <p className={`p-2 bg-gray-500 rounded-md ${item.status === 'Paid' ? 'bg-green-400' : 'bg-red-400'}`}>{item.status}</p>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                </div>
+            )}
             </div>
-            </div>
+        </div>
         </>
     );
 }
