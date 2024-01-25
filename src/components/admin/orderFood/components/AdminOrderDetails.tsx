@@ -21,6 +21,7 @@ function AdminOrderDetails({selectedOrder}: any) {
         setPending(true)
     }
 
+    // hit api/order/id endpoint update paid to true
     const handlePaid = () => {
         // send data to api/order route to
         // set paid to true
