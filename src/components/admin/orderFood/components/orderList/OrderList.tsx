@@ -65,9 +65,6 @@ function OrderList({onOrderSelection}: any) {
 
             {/* Order Lists */}
             <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                
-
-
                 {orderData.map(( data, index) => (
                     <div 
                     key={index} 

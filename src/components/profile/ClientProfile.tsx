@@ -11,6 +11,22 @@ import { signOut, useSession } from "next-auth/react"
 
 interface ClientProfileprops {
 }
+
+interface Product {
+    imgUrl: string;
+    title: string;
+    weight: string;
+    price: string;
+    size: number | null;
+}
+
+interface OrderItem {
+    email: string,
+    phone: string,
+    address: string,
+    cartProducts: Product[],
+    paid: boolean,
+}
  
 const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     const purchaseHistoryList = [
@@ -47,6 +63,9 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     const {status} = session
     const [editProfile, setEditProfile] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [orderData, setOrderData] = useState<OrderItem[]>([]);
+    const [selectedTable, setSelectedTable] = useState<number | null>(null);
+
     const [formData, setFormData] = useState({
         name: '',
         location: '',
@@ -89,13 +108,28 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
 
     }, [session, status])
 
+    useEffect(() => {
+        fetch('/api/order').then(response => {
+            response.json().then(data => {
+                setOrderData(data)
+            })
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    }, [])
+
+    const handleSelection = (item: OrderItem, index: number) => {
+        setSelectedTable(index)
+    }
+
 
     return (  
         <>
         <div className='bg-primaryColor'>
             <div><MethodHeader /></div>
             
-            <div className='flex-[11_11_0%] flex justify-center items-center gap-10'>
+            <div className='flex-[11_11_0%] flex flex-col md:flex-row justify-center items-center gap-20'>
             
                 {!editProfile ? <div className="h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
                 {isAdmin && 
@@ -133,16 +167,38 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
             
             {!isAdmin && (
                 <div className="flex justify-center items-center h-screen">
-                    <div className='col-span-2 p-4 m-2 bg-red-200 rounded-lg mr-20'>
+                    <div className='flex flex-col items-center justify-center p-4 m-2 bg-[#e4e4f0] rounded-lg md:mr-20'>
                         <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Order history</div>
-                        <div className='flex text-sm flex-col gap-2  overscroll-y-scroll'>
-                        {purchaseHistoryList.map((item, index) => (
-                            <div key={index} className='p-2 bg-red-100 items-center grid grid-cols-3 text-center rounded-lg'>
-                            <p>{item.items.join(', ')}</p>
-                            <p className='font-semibold'>Rs. {item.totalPrice}</p>
-                            <p className={`p-2 bg-gray-500 rounded-md ${item.status === 'Paid' ? 'bg-green-400' : 'bg-red-400'}`}>{item.status}</p>
+                        <div className="hide-scroolbar  overflow-scroll ">
+                        {orderData.map(( data, index) => (
+                            <div 
+                            key={index} 
+                            className="">
+                                <div className={`transition-all order-list px-5 grid grid-cols-3 border-b border-[#80808074] gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#806dd4d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
+                                <div className="md:mr-10 ml-5 md:ml-0">
+                                    {data?.cartProducts.map((product, index) => (
+                                        <div key={index}>
+                                            <p className="!text-black">{product?.title}</p>
+                                        </div>
+                                    ))}
+                                    
+                                </div>
+                                <div>
+                                    <div className="!text-black !font-bold"> 
+                                        <p className=" !text-black !font-bold">
+                                            <span className="font-semibold text-[10px]">Rs </span> 
+                                            {data?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0)}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <p className={`cursor-pointer w-full !text-[10px] md:text-[12px] md:mr-10 px-5 py-1 rounded-2xl flex justify-center items-center  text-admingreenColor ${data.paid == true ? 'bg-[#50af50d7]': 'bg-[#e04949dc]'}`}>{data.paid == true ? 'paid' : 'Pending'}</p>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                        ))}
+                            ))}
                         </div>
                     </div>
                 </div>
