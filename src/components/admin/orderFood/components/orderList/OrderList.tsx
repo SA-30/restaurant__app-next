@@ -73,6 +73,8 @@ function OrderList({onOrderSelection}: any) {
         dispatch(orderFood({face: item.email[0], id: item._id, status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
     }
 
+    // add pagination, filtering
+
     return (
         <div className=" bg-gray-200  h-screen  pt-10  font-semibold">
 
