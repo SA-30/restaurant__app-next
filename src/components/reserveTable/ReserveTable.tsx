@@ -123,7 +123,7 @@ const ReserveTable: FunctionComponent<Props> = () => {
                         key={index}
                         onClick={() => handleTableClick(table, index)}
                         className='transition-all hover:scale-[1.02] cursor-pointer '>
-                    <div className={`p-3 pr-20 bg-gray-800 ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-adminredColor" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}
+                    <div className={`p-3 pr-20 bg-gray-800 ${ selectedTable === index ? table.status === "available" ? "bg-[black]" : "bg-[black]" : "" } ${table.status === 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}
                     
                     >
                     <div className='flex items-center gap-2 mb-4'>
