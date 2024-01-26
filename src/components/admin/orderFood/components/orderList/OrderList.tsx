@@ -36,6 +36,7 @@ function OrderList({onOrderSelection}: any) {
    const [orderData, setOrderData] = useState<OrderItem[]>([]);
    const [arrayOrderData, setArrayOrderData] = useState<OrderItem[]>([]);
    const [activeFilter, setActiveFilter] = useState('all');
+   const [page, setPage] = useState(0)
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -74,9 +75,17 @@ function OrderList({onOrderSelection}: any) {
     }
 
     // add pagination, filtering
+    const totalPages = Math.ceil(arrayOrderData.length / 5)
+
+    const handlePageClick = (newPage: number) => {
+        setPage(newPage)
+    }
+
+    const startIndex = page * 5;
+    const endIndex = (page + 1) * 5;
 
     return (
-        <div className=" bg-gray-200  h-screen  pt-10  font-semibold">
+        <div className=" bg-gray-200  min-h-[75vh]  pt-10  font-semibold">
 
             {/* OrderDetailsTitles */}
             <div className="px-5">
@@ -105,7 +114,7 @@ function OrderList({onOrderSelection}: any) {
 
             {/* Order Lists */}
             <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                {arrayOrderData.map(( data, index) => (
+                {arrayOrderData.slice(startIndex, endIndex).map((data, index) => (
                     <div 
                     key={index} 
                     onClick={() => handleSelection(data as OrderItem, index)}
@@ -145,6 +154,17 @@ function OrderList({onOrderSelection}: any) {
                         </div>
                         </div>
                     </div>
+                ))}
+            </div>
+            <div className="py-5 gap-2 flex justify-center items-center">
+                {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
+                    <button
+                        className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
+                        key={index}
+                        onClick={() => handlePageClick(index)}
+                    >
+                        {index + 1}
+                    </button>
                 ))}
             </div>
         </div>
