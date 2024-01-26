@@ -14,7 +14,7 @@ export async function GET (req: any) {
     const url = new URL(req.url);
     const _id = url.searchParams.get('_id');
     if(_id){
-        // return Response.json(await Order.findById(_id));
+        return Response.json(await Order.findById(_id));
     }
     
     if (email) {

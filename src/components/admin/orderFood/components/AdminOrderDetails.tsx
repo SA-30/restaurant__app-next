@@ -67,7 +67,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                                 {!pending && 
                                     <div
                                         onClick={handlePending}
-                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#56ad56]' : 'bg-[#aa5959]'}`}
+                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#50af50d7]' : 'bg-[#e04949dc]'}`}
                                     >
                                         <p>{ selectedOrderFromRedux.status == false ? 'Pending' : 'Paid'}</p>
                                     </div>
@@ -79,7 +79,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                                             className='absolute z-10 top-0 left-[50%] translate-x-[-50%] '><AiOutlineFullscreenExit size={20}/></div>
                                         <div 
                                             onClick={handlePaid}
-                                            className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded-2xl flex justify-center items-center bg-[#56ad56]`}
+                                            className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center bg-[#50af50d7]`}
                                         >
                                             <p>Paid</p>
                                         </div>
@@ -93,9 +93,9 @@ function AdminOrderDetails({selectedOrder}: any) {
                     </div>
                 </div>
                 <div>
-                    <div className='h-40 hide-scroolbar overflow-y-scroll flex flex-col justify-center gap-10 mb-5'>
+                    <div className='h-40  overflow-y-scroll flex flex-col  gap-5 mb-5 '>
                         {(Array.isArray(selectedOrderFromRedux.dish) ? selectedOrderFromRedux.dish : []).map((product, index) => (
-                            <div key={index} className='flex flex-row rounded-2xl items-center gap-5'>
+                            <div key={index} className='flex flex-row  items-center gap-5 border-b border-gray-600 pb-2'>
                                 {/* Render the product image */}
                                 <div className='h-[40px] w-[50px] flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${product.imgUrl})` }}></div>
 

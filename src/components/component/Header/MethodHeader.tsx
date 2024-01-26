@@ -45,9 +45,9 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
 
             {status === "authenticated" && (
               
-              <div className='transition-all flex gap-5  rounded-full p-1 text-white'>
+              <div className='transition-all cursor-pointer flex gap-5  rounded-full p-1 text-white'>
                 <Link href='/profile'> <BsPersonFillGear className="hover:text-gray-400" size={25}/></Link>
-                <AiOutlineLogout onClick={signOut} className="hover:text-red-600 text-red-500" size={25}/>
+                <AiOutlineLogout onClick={signOut} className="hover:text-red-300 text-red-500" size={25}/>
               </div>
             
             )}

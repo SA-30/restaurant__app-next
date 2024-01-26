@@ -3,7 +3,13 @@
 import { SessionProvider } from 'next-auth/react'
 import { createContext, useState, ReactNode, useEffect  } from 'react';
 
-export const CartContext = createContext({});
+export const CartContext = createContext({
+    cartProducts: [],
+    setCartProducts: () => {},
+    addToCart: () => {},
+    clearCart: () => {},
+    removeCartProduct: () => {}
+});
 
 export function AppProvider({children}) {
     const [cartProducts, setCartProducts] = useState([]);
