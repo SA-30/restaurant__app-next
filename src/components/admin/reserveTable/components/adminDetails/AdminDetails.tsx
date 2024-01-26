@@ -28,7 +28,7 @@ function AdminDetails({ selectedTable }: any) {
     const selectedTableFromRedux = useAppSelector((state) => state.tableReducer.value)
 
     return (
-        <div className='md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
+        <div className='md:h-screen flex flex-col md:justify-center gap-5 md:gap-0 md:mr-5'>
             <div className='bg-white text-black flex flex-col px-5 mt-5 py-5'>
                 <div>
                     <div className='flex flex-col justify-between '>
@@ -64,9 +64,10 @@ function AdminDetails({ selectedTable }: any) {
                         ))}
 
                     </div>
-                    {/* <button className='w-full p-2 bg-transparent border-[1px] text-adminblueColor border-adminblueColor text-[12px]'>View All</button> */}
                 </div>
             </div>
+
+            <div className='border-b-2 border-gray-800'></div>
 
             {/* Total Payment */}
             <div className='bg-white text-black px-10 pt-5 mb-32 md:mb-5'>

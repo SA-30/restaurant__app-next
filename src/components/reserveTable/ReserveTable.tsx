@@ -90,15 +90,22 @@ const ReserveTable: FunctionComponent<Props> = () => {
         setTableStatus(table.status);
 
         if(table.status == 'available'){
-
             dispatch(customerTouchTable({status: table.status, tableName: table.name, seat: table.seat}))    
         }
     };
 
-    
     const handleNext = () => {
         if(tableStatus == 'available') router.push('reserveTable/conformReserve')
     }
+
+    // functionality to add
+    // -) click table and color stays
+    // 1) add/remove tables
+    // 2) remove middle layer/route
+    // 3) add table info to db
+
+    // unrelated but fix contextapi cart section for users
+    // bug - one users cart shows on every users page.
 
     return ( 
         <div className="bg-primaryColor min-h-screen">

@@ -89,11 +89,11 @@ function AdminTable({onTableSelection}: any) {
                 onClick={() => handleTableSelection(table, index)}
                 className='shadow-sm  transition-all hover:scale-[1.02] cursor-pointer '
             >
-                <div className={`p-3 pr-20 bg-adminbgColor font-bold  ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-[adminredColor]" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
+                <div className={`p-3 pr-20 bg-adminbgColor font-bold  ${ selectedTable === index ? table.status === "available" ? "bg-admingreenColor" : "bg-adminredColor" : "" } ${table.status == 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}>
                 <div className='flex items-center gap-2 mb-4'>
                 <div className='p-1 bg-gray-300 rounded'>{table.status == 'available' ? <FaTable size={10}/> : <FaSkull size={10}/>}</div>
-                    <p className={`text-[10px] ${table.status == 'available' ? "text-[#3A7326]" : "text-adminredColor"}`}>{table.status}</p>
-                    <div className={`p-1 rounded-3xl ${table.status == 'available' ? "text-admingreenColor bg-[#305230]" : "text-adminredColor bg-[#523030]"}`}>
+                    <p className={`text-[10px] ${table.status == 'available' ? "text-[#3A7326]" : "text-[#ff3a3a]"}`}>{table.status}</p>
+                    <div className={`p-1 rounded-3xl ${table.status == 'available' ? "text-admingreenColor bg-[#305230]" : "text-[#ff5d5d] bg-[#523030]"}`}>
                         {table.status == 'available' ?<FaArrowUp size={6}/> : <FaArrowDown size={6}/>}
                     </div>
                 </div>
