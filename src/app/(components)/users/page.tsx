@@ -6,14 +6,15 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 interface User {
+    _id: string;
     name: string;
     email: string;
 }
 
 const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([])
-  const { data: profileData } = useProfile();
-  const isAdmin = profileData?.admin;
+//   const { data: profileData } = useProfile();
+//   const isAdmin = profileData?.admin;
 
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const UsersPage = () => {
     })
   }, [])
 
-  if(isAdmin){
+//   if(isAdmin){
   return (
     <div>
         <div ><MethodHeader/></div>
@@ -36,7 +37,7 @@ const UsersPage = () => {
         <div className='px-5'>
             {users?.length > 0 &&
                 users.map(user => (
-                    <div className='grid bg-gray-300  rounded-lg mb-2 p-4'>
+                    <div key={user._id} className='grid bg-gray-300  rounded-lg mb-2 p-4'>
                         <div className='grid items-center grid-cols-3 gap-10 px-5'>
                             <span className='font-bold'>{user.name}</span>
                         
@@ -52,6 +53,6 @@ const UsersPage = () => {
     </div>
     </div>
   )};
-}
+// }
 
 export default UsersPage

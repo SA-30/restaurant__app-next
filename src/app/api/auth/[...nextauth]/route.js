@@ -2,10 +2,11 @@ import { connectMongoDB } from "@/db/db";
 import clientPromise from '@/lib/mongoConnect';
 import User from "@/db/models/user";
 import bcrypt from 'bcrypt';
-import NextAuth from "next-auth"
+import NextAuth, { getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import UserInfo from "@/db/models/userInfo";
 
 
 export const authOptions = {
@@ -38,6 +39,23 @@ export const authOptions = {
       }
     })
   ]
+}
+
+
+export async function isAdmin() {
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email;
+
+  if(!userEmail){
+    return false;
+  }
+
+  const userInfo = await UserInfo.find({email: userEmail})
+  if(!userInfo) {
+    return false;
+  }
+  
+  return userInfo[0].admin;
 }
 
 const handler = NextAuth(authOptions)

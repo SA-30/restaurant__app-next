@@ -1,15 +1,12 @@
 'use client'
 
-import {  FaWeight, FaCross } from 'react-icons/fa';
+import {  FaWeight } from 'react-icons/fa';
 import {AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useAppSelector } from '@/hook/redux-toolkit/store';
 import { useEffect, useState } from 'react';
 
 function AdminOrderDetails({selectedOrder}: any) {
-    const [pending, setPending] = useState(false)
-
-    const imgUrl = '/assets/images/momoc.jpg';
-    const weight = '1 plate';
+    const [pending, setPending] = useState(false);
 
     const selectedOrderFromRedux = useAppSelector(state => state.orderReducer.value)
    
@@ -41,13 +38,21 @@ function AdminOrderDetails({selectedOrder}: any) {
 
 
     const handlePending = () => {
-        setPending(true)
+        if(selectedOrderFromRedux.status == false)
+            setPending(true)
     }
 
-    // hit api/order/id endpoint update paid to true
-    const handlePaid = () => {
-        // send data to api/order route to
-        // set paid to true
+    const handlePaid = async (id: string) => {
+        await fetch('/api/checkout', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id,
+            }),
+        })
+
         setPending(false)
     }
 
@@ -63,22 +68,22 @@ function AdminOrderDetails({selectedOrder}: any) {
                             </div>
                                 <h2 className='text-lg font-bold'>{selectedOrderFromRedux && selectedOrderFromRedux.customerName}</h2>
                             </div>
-                            <div className={`relative flex flex-col gap-3 ${pending && 'border-2 border-gray-500 p-2 pt-6 rounded-md'}`}>
+                            <div className={`relative flex flex-col gap-3 ${pending && 'border-2 border-gray-500 p-2 rounded-md'}`}>
                                 {!pending && 
                                     <div
                                         onClick={handlePending}
-                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#50af50d7]' : 'bg-[#e04949dc]'}`}
+                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center z-[0] ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#50af50d7]' : 'bg-[#e04949dc]'}`}
                                     >
                                         <p>{ selectedOrderFromRedux.status == false ? 'Pending' : 'Paid'}</p>
                                     </div>
                                 }
                                 { pending && (
-                                    <div>
+                                    <div className='flex justify-center items-center gap-5'>
                                         <div 
                                             onClick={() => setPending(false)}
-                                            className='absolute z-10 top-0 left-[50%] translate-x-[-50%] '><AiOutlineFullscreenExit size={20}/></div>
+                                            className=' z-10  '><AiOutlineFullscreenExit size={20}/></div>
                                         <div 
-                                            onClick={handlePaid}
+                                            onClick={() => handlePaid(selectedOrderFromRedux.id)}
                                             className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center bg-[#50af50d7]`}
                                         >
                                             <p>Paid</p>

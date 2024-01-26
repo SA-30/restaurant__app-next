@@ -22,6 +22,7 @@ interface Product {
 }
 
 interface OrderItem {
+    _id: string,
     email: string,
     phone: string,
     address: string,
@@ -33,6 +34,8 @@ interface OrderItem {
 function OrderList({onOrderSelection}: any) {
    const [selectedTable, setSelectedTable] = useState<number | null>(null);
    const [orderData, setOrderData] = useState<OrderItem[]>([]);
+   const [arrayOrderData, setArrayOrderData] = useState<OrderItem[]>([]);
+   const [activeFilter, setActiveFilter] = useState('all');
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -41,7 +44,6 @@ function OrderList({onOrderSelection}: any) {
         fetch('/api/order').then(response => {
             response.json().then(data => {
                 setOrderData(data.reverse())
-                console.log(data);
             })
         })
         .catch(error => {
@@ -50,9 +52,25 @@ function OrderList({onOrderSelection}: any) {
 
     }, [,selectedTable])
 
+    // Filter the order based on paid - pending - all
+    useEffect(() => {
+        if (activeFilter === 'all') {
+            setArrayOrderData(orderData);
+        } else {
+            const filteredOrders = orderData.filter(order => {
+                if (activeFilter === 'paid') {
+                    return order.paid === true;
+                } else if (activeFilter === 'pending') {
+                    return order.paid === false;
+                }
+            });
+            setArrayOrderData(filteredOrders);
+        }
+    }, [activeFilter, orderData]);
+
     const handleSelection = (item: OrderItem, index: number) => {
         setSelectedTable(index)
-        dispatch(orderFood({face: item.email[0], status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
+        dispatch(orderFood({face: item.email[0], id: item._id, status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
     }
 
     return (
@@ -60,7 +78,24 @@ function OrderList({onOrderSelection}: any) {
 
             {/* OrderDetailsTitles */}
             <div className="px-5">
-                <OrderListDetails />
+                <div className="">
+                    <div className="flex justify-between">
+                        <h2>Order Report</h2>
+                        <div className="flex items-center gap-2 border-gray-600 text-[12px] text-black cursor-pointer font-normal">
+                            <h3 onClick={() => setActiveFilter('all')} className={`rounded text-[12px] ${activeFilter === 'all' ? 'bg-gray-800' : 'bg-gray-400'}  text-white p-2`}>all</h3>
+                            <h3 onClick={() => setActiveFilter('paid')} className={`rounded text-[12px] ${activeFilter === 'paid' ? 'bg-green-500' : 'bg-green-300'}  text-white p-2`}>paid</h3>
+                            <h3 onClick={() => setActiveFilter('pending')} className={`rounded text-[12px] ${activeFilter === 'pending' ? 'bg-red-500' : 'bg-red-300'}  text-white p-2`}>pending</h3>
+                        </div>
+                        
+                    </div>
+                    <div className="grid grid-cols-3 md:grid-cols-5 mt-4 gap-10 ">
+                        <h3 className="text-black">Customer</h3>
+                        <h3 className="sm:block hidden text-black">Menu</h3>
+                        <h3 className="sm:block hidden text-black">Time</h3>
+                        <h3 className="text-black text-center sm:text-start">Total Payment</h3>
+                        <h3 className="text-black">Status</h3>
+                    </div>
+                </div>
             </div>
 
             {/* Divider */}
@@ -68,12 +103,12 @@ function OrderList({onOrderSelection}: any) {
 
             {/* Order Lists */}
             <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                {orderData.map(( data, index) => (
+                {arrayOrderData.map(( data, index) => (
                     <div 
                     key={index} 
                     onClick={() => handleSelection(data as OrderItem, index)}
                     className="">
-                        <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#806dd4d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
+                        <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#6dd491d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#6dd48cd5]' : 'hover:bg-adminredColor' }`}>
                         <div className="flex gap-3 items-center">
                             <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center`} >
                                 {data?.email[0]}
@@ -115,24 +150,3 @@ function OrderList({onOrderSelection}: any) {
 }
 
 export default OrderList
-
-export const OrderListDetails = () => {
-    return (
-        <div className="">
-            <div className="flex justify-between">
-                <h2>Order Report</h2>
-                <h2 className="flex items-center gap-2 border-[1px] p-2 border-gray-600 text-[12px] text-black cursor-pointer font-normal rounded"><FaFilter size={12}/>Filter Order</h2>
-                
-            </div>
-            <div className="grid grid-cols-3 md:grid-cols-5 mt-4 gap-10 ">
-                <h3 className="text-black">Customer</h3>
-                <h3 className="sm:block hidden text-black">Menu</h3>
-                <h3 className="sm:block hidden text-black">Time</h3>
-                <h3 className="text-black text-center sm:text-start">Total Payment</h3>
-                <h3 className="text-black">Status</h3>
-            </div>
-        </div>
-    )
-}
-
-
