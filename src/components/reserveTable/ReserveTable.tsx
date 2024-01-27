@@ -99,7 +99,6 @@ const ReserveTable: FunctionComponent<Props> = () => {
     }
 
     // functionality to add
-    // -) click table and color stays
     // 1) add/remove tables
     // 2) remove middle layer/route
     // 3) add table info to db
