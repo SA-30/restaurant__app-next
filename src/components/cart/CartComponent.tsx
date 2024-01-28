@@ -87,7 +87,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                                         className=''
                                         type='button' 
                                         onClick={() => removeCartProduct(index)}>
-                                        <FaTrash className="transition-all text-black hover:text-red-500 hover:scale-[1.4]" size={25}/>
+                                        <FaTrash className="transition-all text-white hover:text-red-500 hover:scale-[1.4]" size={25}/>
                                     </button>
                                 </div>
                             </div>
