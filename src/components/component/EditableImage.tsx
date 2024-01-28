@@ -22,7 +22,7 @@ export default function EditableImage ({ setLink }: editableImage) {
                     <CldUploadButton 
                         className="p-2 bg-gray-400 font-bold text-white rounded w-20  m-5" 
                         uploadPreset="next_cloudinary_app" 
-                        onUpload={(results: CldUploadWidgetResults) => {
+                        onUpload={(results: any) => {
                             if (results.event === 'success') {
                                 setImageId(results.info?.public_id)
                             }
