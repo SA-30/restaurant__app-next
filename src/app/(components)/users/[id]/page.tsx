@@ -6,49 +6,50 @@ import {useParams} from 'next/navigation'
 import MethodHeader from '@/components/component/Header/MethodHeader'
 
 const page = () => {
-  const [user, setUser] = useState(null)
-  const {id} = useParams();
+  // const [user, setUser] = useState(null)
+  // const {id} = useParams();
 
-  const purchaseHistoryList = [
-    {
-      items: ['Veg momo', 'Chicken momo', 'Pizza'],
-      totalPrice: 1120,
-      status: 'Paid'
-    },
-    {
-      items: ['Large pizza', 'Chicken momo', 'etc...'],
-      totalPrice: 1500,
-      status: 'Pending'
-    },
-    {
-      items: ['Pizza'],
-      totalPrice: 200,
-      status: 'Paid'
-    },
-    {
-      items: ['Burger'],
-      totalPrice: 450,
-      status: 'Paid'
-    },
-    {
-      items: ['Chicken pizza'],
-      totalPrice: 650,
-      status: 'Paid'
-    }
-  ];
+  // const purchaseHistoryList = [
+  //   {
+  //     items: ['Veg momo', 'Chicken momo', 'Pizza'],
+  //     totalPrice: 1120,
+  //     status: 'Paid'
+  //   },
+  //   {
+  //     items: ['Large pizza', 'Chicken momo', 'etc...'],
+  //     totalPrice: 1500,
+  //     status: 'Pending'
+  //   },
+  //   {
+  //     items: ['Pizza'],
+  //     totalPrice: 200,
+  //     status: 'Paid'
+  //   },
+  //   {
+  //     items: ['Burger'],
+  //     totalPrice: 450,
+  //     status: 'Paid'
+  //   },
+  //   {
+  //     items: ['Chicken pizza'],
+  //     totalPrice: 650,
+  //     status: 'Paid'
+  //   }
+  // ];
 
-  useEffect(() => {
-    fetch('/api/users').then(res => {
-      res.json().then(users => {
-        const user = users.find((u: any ) => u._id === id)
-        setUser(user)
-      })
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch('/api/users').then(res => {
+  //     res.json().then(users => {
+  //       const user = users.find((u: any ) => u._id === id)
+  //       setUser(user)
+  //     })
+  //   })
+  // }, [])
 
   return (
     <>
-    <div ><MethodHeader/></div>
+     <h1 className='h-screen flex justify-center items-center text-black '>User Details Page</h1>
+    {/* <div ><MethodHeader/></div>
     <div className='min-h-[10vh]'></div>
     <div className='h-[90vh]  grid items-center gap-2 md:grid-cols-3'>
       <div className='col-span-1 '>
@@ -73,7 +74,7 @@ const page = () => {
           ))}
         </div>
       </div>
-    </div>
+    </div> */}
   </>
   )
 }
