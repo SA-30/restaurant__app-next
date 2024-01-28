@@ -23,14 +23,6 @@ const OrderFoodComponent = () => {
         {/* Vertical Menu */}
         <VerticalMenu />
 
-        {/* TODO
-          -Add functionality to each components
-
-          -Add toaster for feedback
-          
-          -When user click + it gets added to the cart
-         */}
-
       </div>
     </div>
   )

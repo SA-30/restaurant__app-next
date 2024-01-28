@@ -13,8 +13,6 @@ const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
     const { data: profileData } = useProfile();
     const isAdmin = profileData?.admin;
 
-    console.log(isAdmin);
-
     // if(!profileData) {
     //     return (
     //         <Link href='/'><div className="flex h-screen justify-center items-center ">

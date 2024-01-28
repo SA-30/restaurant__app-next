@@ -1,7 +1,10 @@
+'use client'
+
 import {FaWeight, FaPlus} from 'react-icons/fa';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { CartContext } from '@/components/appContext';
+import { CldImage } from 'next-cloudinary';
 
 interface MethodHeaderProps{
     imgUrl: string,
@@ -20,9 +23,16 @@ const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
     return (
         <div>
             <div className='bg-gray-800 shadow-lg shadow-gray-800/25 text-white flex flex-row  rounded-2xl'>
-            <Link  href="/items">
-                <div className='flex-1 h-36 w-96 bg-red-400 flex items-center justify-center rounded-l-2xl bg-center bg-cover' style={{ backgroundImage: `url(${props.imgUrl})`}}></div>
-            </Link>
+            <div className="">
+                {props.imgUrl && <CldImage
+                    width="200"
+                    height="200"
+                    src={props.imgUrl}
+                    sizes="100vw"
+                    alt=""
+                    className="w-[200px] h-[150px] rounded-l-2xl"
+                />}
+            </div>
             <div className='flex-1 flex flex-col p-4 gap-2 w-[100px]  justify-center rounded-r-2xl'>
                 <h2 className='font-bold'>{props.title}</h2>
                 <div className='flex gap-2 items-center justify-start'>

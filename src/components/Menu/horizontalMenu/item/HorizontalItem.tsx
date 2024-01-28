@@ -4,6 +4,8 @@ import {FaWeight, FaPlus} from 'react-icons/fa';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { CartContext } from '@/components/appContext';
+import { CldImage } from 'next-cloudinary';
+
 
 interface MethodHeaderProps{
     imgUrl: string,
@@ -21,9 +23,16 @@ const HorizontalItem: React.FC<MethodHeaderProps> = (props) => {
     
     return (
         <div className='transition-all bg-gray-800   min-w-[150px] flex flex-col rounded-2xl text-white'>
-            <Link href='/items'>
-                <div className='h-40 md:h-52 md:min-w-[200px]  flex items-center justify-center rounded-t-2xl bg-center bg-cover' style={{ backgroundImage: `url(${props.imgUrl})`}}> </div>
-            </Link>
+            <div className="">
+                {props.imgUrl && <CldImage
+                    width="400"
+                    height="400"
+                    src={props.imgUrl}
+                    sizes="100vw"
+                    alt=""
+                    className="w-full  min-h-[200px] rounded-t-2xl h-40"
+                />}
+            </div>
             <div className='flex flex-col p-4 gap-2'>
                 <h2 className='relative font-bold flex justify-between'>
                     <div className=''>{props.title ?? '---'}</div>

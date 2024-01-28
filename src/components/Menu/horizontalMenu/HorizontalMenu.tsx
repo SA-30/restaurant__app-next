@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import HorizontalItem from "./item/HorizontalItem"
-// import { FaPlus, FaWeight } from "react-icons/fa";
 
 // Make a type file and import from there
 type MenuItem = {

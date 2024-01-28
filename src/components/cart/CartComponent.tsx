@@ -2,8 +2,7 @@
 
 import {FaWeight, FaPlus, FaTrash} from 'react-icons/fa';
 import MethodHeader from '../component/Header/MethodHeader';
-import OrderSummary from './orderSummary/OrderSummary';
-import GrandTotal from './GrandTotal/GrandTotal';
+import { CldImage } from 'next-cloudinary';
 
 import {useState, useEffect, useContext} from 'react'
 import Image from 'next/image'
@@ -71,8 +70,15 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                     {cartProducts?.length > 0 && cartProducts.map((product: any, index: number) => (
                         <div key={index} className='flex  gap-5'>
                             <div className='grid grid-cols-4 w-[500px] items-center  border-2 border-[#b9b9b9] py-2 px-5'>
-                                <div>
-                                    <img src={product.imgUrl} width={40} height={40} alt={product.title} />
+                                <div className="">
+                                    {product.imgUrl && <CldImage
+                                        width="50"
+                                        height="50"
+                                        src={product.imgUrl}
+                                        sizes="100vw"
+                                        alt={product.title}
+                                        className="w-16 h-16"
+                                    />}
                                 </div>
                                 <div className='flex justify-start'>{product.title}</div>
                                 <div className='font-semibold flex justify-end'>Rs. {product.price}</div>

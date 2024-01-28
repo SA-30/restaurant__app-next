@@ -1,11 +1,10 @@
 'use client'
 
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import EditableImage from '@/components/component/EditableImage';
 
+
 function AddNewItem({addItem}: any) {
-  
-  const [ image, setImage ] = useState(''); 
   const [newItem, setNewItem] = useState({
     imageUrl: '/assets/images/cafe2.png',
     name: '',
@@ -14,12 +13,6 @@ function AddNewItem({addItem}: any) {
     category: '',
     price: 0,
   });
-
-  const handleFileInputChange = (e: any) => {
-    const file = e.target.files[0];
-    // Handle the selected file, e.g., upload or process it
-    console.log('Selected file:', file);
-  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -32,6 +25,7 @@ function AddNewItem({addItem}: any) {
     if(newItem.name !== '' && newItem.description !== '' && newItem.price !== 0 && newItem.category !== '') {
       const data = newItem
       try {
+
         const response = await fetch('/api/menu/create', {
           method: 'POST',
           body: JSON.stringify(data),
@@ -55,9 +49,11 @@ function AddNewItem({addItem}: any) {
         } else {
           console.error('Failed to create item');
         }
-      } catch (error) {
+
+      } catch (error: any) {
         console.error(error);
       }
+
       addItem(newItem);
     } else {
       alert('Please enter all fields');
@@ -70,12 +66,16 @@ function AddNewItem({addItem}: any) {
     setNewItem((prevItem) => ({ ...prevItem, category: value }));
   };
 
+  const handleImageChange = (link: string) => {
+    setNewItem((prevItem) => ({ ...prevItem, imageUrl: link }));
+  };
+
   return (
     <div className="md:w-[60vw] w-auto fixed top-[45%] left-[50%] md:top-[55%] transform translate-x-[-50%] translate-y-[-50%] flex items-center justify-center py-10 px-10 md:py-5 md:px-40 bg-adminbgColor border-2 border-adminblueColor text-white">
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-5">
 
         <div className='flex items-center'>
-          <EditableImage link={image} setLink={setImage}/>
+          <EditableImage setLink={handleImageChange}/>
         </div>
         <div className='flex items-center'>
           <label htmlFor="name" className='text-black mr-2 text-sm font-bold'>name : </label>
