@@ -13,18 +13,24 @@ const LoginForm = () => {
     const [error, setError] = useState('');
     const [loginProcess, setLoginProcess] = useState(false)
 
+    const validateEmail = (email: string) => {
+        // Regular expression for email validation
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoginProcess(true)
 
-        if(!email || !password){
-            setError("Please fill all fields!!!");
-            return;
-        }
+        // Validate email format
+        // if (!validateEmail(email)) {
+        //     setError("Please enter a valid email address.");
+        //     setLoginProcess(false);
+        //     return;
+        // }
 
         await signIn('Credentials', {email, password, callbackUrl:'/'})
-        
         setLoginProcess(false)
     } 
 
@@ -32,10 +38,10 @@ const LoginForm = () => {
         <div className="relative flex justify-center items-center h-[100vh] bg-primaryColor text-white">
 
             <div className='z-1'>
-                <Image draggable={false} className=' unselectable absolute top-10 left-10 filter blur-[5px]' src='/assets/images/login/burgur1.png' priority height={50} width={300} alt='burgur'></Image>
-                <Image  draggable={false}  className=' hidden md:block unselectable absolute bottom-10 right-10 filter blur-[5px]' src='/assets/images/login/burgu2.png' height={50} width={300} alt='burgur'></Image>
-                <Image  draggable={false}  className=' hidden md:block unselectable absolute top-10 right-10 filter blur-[5px]' src='/assets/images/login/pizza1.png' height={50} width={300} alt='burgur'></Image>
-                <Image  draggable={false}  className=' unselectable absolute bottom-10 left-10 filter blur-[5px]' src='/assets/images/login/pizza5.png' height={50} width={300} alt='burgur'></Image>
+                <Image draggable={false} className='h-56 w-auto unselectable absolute top-10 left-10 filter blur-[5px]' src='/assets/images/login/burgur1.png' priority height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='h-56 w-auto hidden md:block unselectable absolute bottom-10 right-10 filter blur-[5px]' src='/assets/images/login/burgu2.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='h-56 w-auto hidden md:block unselectable absolute top-10 right-10 filter blur-[5px]' src='/assets/images/login/pizza1.png' height={50} width={300} alt='burgur'></Image>
+                <Image  draggable={false}  className='h-56 w-auto unselectable absolute bottom-10 left-10 filter blur-[5px]' src='/assets/images/login/pizza5.png' height={50} width={300} alt='burgur'></Image>
             </div>
         
         <div className="z-10 w-64 p-4 bg-gray-800 shadow-lg rounded-lg border-t-4 border-blue-900">
@@ -44,6 +50,7 @@ const LoginForm = () => {
                 <div className="mb-4">
                 <input
                     type="text"
+                    required
                     name='email'
                     disabled={loginProcess}
                     className="w-full p-2 bg-gray-800  border-b-[1px]   border-gray-500 focus:border-gray-300 rounded outline-none"
@@ -56,6 +63,7 @@ const LoginForm = () => {
                 <input
                     type="password"
                     name='password'
+                    required
                     disabled={loginProcess}
                     className="w-full bg-gray-800 p-2  border-b-[1px]  border-gray-500 focus:border-gray-300 rounded outline-none"
                     placeholder="Password"
