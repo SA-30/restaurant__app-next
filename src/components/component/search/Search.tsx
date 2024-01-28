@@ -57,8 +57,8 @@ const fetchMenuItems = async () => {
   
   return (
     <div className='relative'>
-      <div className='text-white rounded-3xl bg-gray-800 flex md:mt-5 justify-between w-full md:w-96 px-5 py-3'>
-        <input type="text" placeholder='Search a food' className='bg-transparent outline-none'  onChange={handleChange}/>
+      <div className='text-white rounded-3xl bg-gray-800 flex md:mt-5 justify-between w-full md:w-96 pr-5 items-center'>
+        <input type="text" placeholder='Search a food' className=' bg-transparent rounded-3xl outline-none w-full px-5 py-3'  onChange={handleChange}/>
         <FaSearch size={20}/>
       </div>
 
@@ -67,7 +67,7 @@ const fetchMenuItems = async () => {
           {items.length > 0 ? (
             items.map((item: any, index: number) => (
               <div className='transition-all  cursor-pointer hover:scale-[0.95]' onClick={() => handleSearchClick(item)}>
-              <div className='border rounded-xl p-2 my-4 flex gap-2' key={index}>
+              <div className='transition-all border-2 border-blue-500 hover:border-red-500 rounded-xl p-2 my-4 flex gap-2' key={index}>
               <div className="">
                 {item.imageUrl && <CldImage
                     width="100"
@@ -75,7 +75,7 @@ const fetchMenuItems = async () => {
                     src={item.imageUrl}
                     sizes="100vw"
                     alt={item.name}
-                    className="w-full  min-h-[50px] rounded-2xl "
+                    className="w-[50px]  h-[50px] rounded-full shadow-md shadow-[#00000069]"
                 />}
             </div>
                 <div className='flex flex-col justify-around'>

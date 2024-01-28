@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import {FaCircle} from 'react-icons/fa'
 import HorizontalItem from "./item/HorizontalItem"
 
 // Make a type file and import from there
@@ -78,38 +79,27 @@ const HorizontalMenu = () => {
                 <div className="flex justify-center">
                     <ul className="flex px-5 mt-5 gap-5 md:gap-14 font-bold">
                         <li 
-                            className={`cursor-pointer ${selectedCategory === '' ? 'active' : ''}`}
+                            className={`hover:text-red-400 transition-all cursor-pointer ${selectedCategory === '' ? 'active' : ''}`}
                             onClick={() => handleCategoryClick('')}
                         > All </li>
                         <li 
-                            className={`cursor-pointer ${selectedCategory === 'veg' ? 'active' : ''}`}
+                            className={`hover:text-red-400 transition-all cursor-pointer ${selectedCategory === 'veg' ? 'active' : ''}`}
                             onClick={() => handleCategoryClick('veg')}
                         > Veg </li>
                         <li
-                            className={`cursor-pointer ${selectedCategory === 'buff' ? 'active' : ''}`}
+                            className={`hover:text-red-400 transition-all cursor-pointer ${selectedCategory === 'buff' ? 'active' : ''}`}
                             onClick={() => handleCategoryClick('buff')}
                         > Buff </li>
                     </ul>
                 </div>
             </div>
             
-            <div className=" flex  flex-row justify-center gap-5 mx-5 mt-10  ">
+            <div className="flex flex-row justify-center gap-5 mx-5 mt-10  ">
                 {loading && ( 
-                    Array.from({length: 5}).map((_, index: number) => (
-                    <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
-                        <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover'>
-                        </div>
-                        <div className='flex flex-col p-4 gap-2'>
-                            <h2 className='font-bold'></h2>
-                            <div className='flex gap-2 items-center justify-start'>
-                                <p className='text-[12px] font-thin'></p>
-                            </div>
-                            <div className='flex items-center justify-between'>
-                                <h2 className='font-bold'></h2>
-                            </div>
-                        </div>
+                    <div className="flex justify-center items-center gap-5">
+                        <p className="text-2xl text-center ml-36 text-blue-400 font-semibold">Loading...</p>
                     </div>
-                )))}
+                )}
 
                 <div className=" grid grid-cols-2  md:grid-cols-5  md:justify-center gap-5  ">
                     {!loading && filterItems().length > 0 && (
