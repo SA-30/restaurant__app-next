@@ -21,8 +21,8 @@ const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
     }
     
     return (
-        <div>
-            <div className='bg-gray-800 shadow-lg shadow-gray-800/25 text-white flex flex-row  rounded-2xl'>
+        <div>     
+            <div className='transition-all hover:scale-[1.06] cursor-pointer border-2 border-blue-500 hover:border-red-500 hover:shadow-xl shadow-[#aac0ffac] hover:shadow-[#ff00002f] bg-gray-800 shadow-lg   text-white flex flex-row  rounded-2xl'>
             <div className="">
                 {props.imgUrl && <CldImage
                     width="200"
@@ -40,9 +40,9 @@ const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
                     <p className='text-[12px] font-thin'>{props.weight}</p>
                 </div>
                 <div className='flex items-center justify-between '>
-                    <h2 className='font-bold'>{props.price}</h2>
-                    <div onClick={handleAddToCart}  className='cursor-pointer bg-white p-2 rounded-full'>
-                        <FaPlus className='text-orange-500 h-4 w-4 md:h-5 md:w-5' size={20}/>
+                    <h2 className='font-bold'>{props.price}</h2> 
+                    <div onClick={handleAddToCart}  className='transition-all cursor-pointer border-2 border-red-500 hover:scale-[1.1] hover:rotate-90  bg-white p-2 rounded-full'>
+                        <FaPlus className='text-red-500 h-4 w-4 md:h-5 md:w-5' size={20}/>
                     </div>
                 </div>
             </div>

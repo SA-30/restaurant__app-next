@@ -111,7 +111,7 @@ const HorizontalMenu = () => {
                     </div>
                 )))}
 
-                <div className=" grid grid-cols-2  md:grid-cols-5  md:justify-center gap-5  overflow-x-auto ">
+                <div className=" grid grid-cols-2  md:grid-cols-5  md:justify-center gap-5  ">
                     {!loading && filterItems().length > 0 && (
                         filterItems().map((item: any, index) => (
                             <HorizontalItem key={index} imgUrl={item.imageUrl} title={item.name} weight={item.description} price={item.price}/>
