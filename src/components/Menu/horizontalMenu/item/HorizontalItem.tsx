@@ -23,14 +23,14 @@ const HorizontalItem: React.FC<MethodHeaderProps> = (props) => {
     
     return (
         <div className='transition-all bg-gray-800   min-w-[150px] flex flex-col rounded-2xl text-white'>
-            <div className="">
+            <div className=" overflow-hidden flex justify-center items-center">
                 {props.imgUrl && <CldImage
                     width="400"
                     height="400"
                     src={props.imgUrl}
                     sizes="100vw"
                     alt=""
-                    className="w-full  min-h-[200px] rounded-t-2xl h-40"
+                    className="md:w-[200px] md:h-[200px] w-full h-[150px]  rounded-t-2xl "
                 />}
             </div>
             <div className='flex flex-col p-4 gap-2'>

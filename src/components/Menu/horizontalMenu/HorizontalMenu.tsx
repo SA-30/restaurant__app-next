@@ -98,29 +98,26 @@ const HorizontalMenu = () => {
                     Array.from({length: 5}).map((_, index: number) => (
                     <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
                         <div className='h-40 flex items-center justify-center rounded-t-2xl bg-center bg-cover'>
-                        {/* style={{ backgroundImage: `url(${cafe})`}} */}
                         </div>
                         <div className='flex flex-col p-4 gap-2'>
                             <h2 className='font-bold'></h2>
                             <div className='flex gap-2 items-center justify-start'>
-                                {/* <FaWeight className='opacity-50' size={10}/> */}
                                 <p className='text-[12px] font-thin'></p>
                             </div>
                             <div className='flex items-center justify-between'>
                                 <h2 className='font-bold'></h2>
-                                {/* <div className='cursor-pointer bg-gray-600 p-2 rounded-full'>
-                                    <FaPlus size={10}/>
-                                </div> */}
                             </div>
                         </div>
                     </div>
                 )))}
 
-                {!loading && filterItems().length > 0 && (
-                    filterItems().map((item: any, index) => (
-                        <HorizontalItem key={index} imgUrl={item.imageUrl} title={item.name} weight={item.description} price={item.price}/>
-                    ))
-                )}
+                <div className=" grid grid-cols-2 md:grid-cols-5  md:justify-center gap-5  overflow-x-auto ">
+                    {!loading && filterItems().length > 0 && (
+                        filterItems().map((item: any, index) => (
+                            <HorizontalItem key={index} imgUrl={item.imageUrl} title={item.name} weight={item.description} price={item.price}/>
+                        ))
+                    )}
+                </div>
 
                 {!loading && selectedCategory === '' && filterItems().length === 0 && (
                     <div className="text-white">No items available.</div>

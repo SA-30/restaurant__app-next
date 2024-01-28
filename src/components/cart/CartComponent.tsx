@@ -32,7 +32,9 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const handlePayment = async (e: any) => {
         e.preventDefault();
 
-        console.log("works here client");
+        if(phone.length < 10 || phone.length > 10){
+            return alert("Invalid number");
+        }
 
         const response = await fetch('/api/checkout', {
             method: 'POST',
@@ -66,8 +68,8 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                     )}
 
                     {cartProducts?.length > 0 && cartProducts.map((product: any, index: number) => (
-                        <div key={index} className='flex  gap-5'>
-                            <div className='grid grid-cols-4 w-[500px] items-center  border-2 border-[#b9b9b9] py-2 px-5'>
+                        <div key={index} className='flex bg-gray-600 text-white gap-5 shadow'>
+                            <div className='grid grid-cols-4 w-[500px] items-center  border border-[#b9b9b9] py-2 px-5'>
                                 <div className="">
                                     {product.imgUrl && <CldImage
                                         width="50"
@@ -75,7 +77,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                                         src={product.imgUrl}
                                         sizes="100vw"
                                         alt={product.title}
-                                        className="w-16 h-16"
+                                        className="w-16 h-16 rounded-full"
                                     />}
                                 </div>
                                 <div className='flex justify-start'>{product.title}</div>
@@ -85,13 +87,13 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                                         className=''
                                         type='button' 
                                         onClick={() => removeCartProduct(index)}>
-                                        <FaTrash size={20}/>
+                                        <FaTrash className="transition-all text-black hover:text-red-500 hover:scale-[1.4]" size={25}/>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     ))}
-                    <div className='grid grid-cols-4 md:w-[500px] items-center  border-2 border-[#b9b9b9] py-2 px-5'>
+                    <div className='grid grid-cols-4 md:w-[500px] items-center  border shadow-sm border-[#b9b9b9] py-2 px-5'>
                         <span></span>
                         <span>subtotal</span>
                         <span className='flex justify-end font-bold '>Rs {total} </span> 
