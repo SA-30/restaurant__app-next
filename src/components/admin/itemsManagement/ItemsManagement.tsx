@@ -10,7 +10,7 @@ interface AdminPageProps {
 }
  
 const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
-    const { data: profileData } = useProfile();
+    const { data: profileData }: any = useProfile();
     const isAdmin = profileData?.admin;
 
     // if(!profileData) {
