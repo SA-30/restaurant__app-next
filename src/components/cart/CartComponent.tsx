@@ -5,8 +5,6 @@ import MethodHeader from '../component/Header/MethodHeader';
 import { CldImage } from 'next-cloudinary';
 
 import {useState, useEffect, useContext} from 'react'
-import Image from 'next/image'
-import Link from 'next/link';
 import { CartContext } from '../appContext';
 
 
@@ -21,7 +19,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('');
 
-    const { cartProducts, removeCartProduct } = useContext(CartContext);
+    const { cartProducts, removeCartProduct }: any = useContext(CartContext);
     let total = 0;
     for( const p of cartProducts) {
         total += p.price;
