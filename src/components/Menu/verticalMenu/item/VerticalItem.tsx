@@ -14,7 +14,7 @@ interface MethodHeaderProps{
 }
 
 const VerticalItem: React.FC<MethodHeaderProps> = (props) => {
-    const {addToCart} = useContext(CartContext);
+    const {addToCart}: any = useContext(CartContext);
 
     function handleAddToCart () {
         addToCart(props);
