@@ -11,10 +11,19 @@ const Search = ({onSearch}: any) => {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null)
   const [search, setSearch] = useState<string>('')
+  const [inputActive, setInputActive] = useState<boolean>(false); 
 
   const handleChange = (event: any) => {
     const searchText = event.target.value;
     setSearch(searchText);
+  };
+
+  const handleInputFocus = () => {
+    setInputActive(true);
+  };
+
+  const handleInputBlur = () => {
+    setInputActive(false);
   };
 
   useEffect(() => {
@@ -57,13 +66,20 @@ const fetchMenuItems = async () => {
   
   return (
     <div className='relative'>
-      <div className='text-white rounded-3xl bg-gray-800 flex md:mt-5 justify-between w-full md:w-96 pr-5 items-center'>
-        <input type="text" placeholder='Search a food' className=' bg-transparent rounded-3xl outline-none w-full px-5 py-3'  onChange={handleChange}/>
+      <div className={`transition-all text-white rounded-3xl border-2 ${inputActive ? 'border-red-500' : 'hover:border-blue-500'} bg-gray-800 flex md:mt-5 justify-between w-full md:w-96 pr-5 items-center`}>
+        <input 
+          type="text" 
+          placeholder='Search a food' 
+          className=' bg-transparent rounded-3xl outline-none w-full px-5 py-3'  
+          onChange={handleChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+        />
         <FaSearch size={20}/>
       </div>
 
       {search.trim() !== '' && !error && (
-        <div className='absolute z-[20] shadow-2xl mt-7 bg-gray-800 text-white rounded-xl py-5 px-3 w-full'>
+        <div className='absolute z-[20] shadow-2xl shadow-[black] mt-5 bg-gray-800 border border-blue-900  text-white rounded-xl py-5 px-3 w-full'>
           {items.length > 0 ? (
             items.map((item: any, index: number) => (
               <div className='transition-all  cursor-pointer hover:scale-[0.95]' onClick={() => handleSearchClick(item)}>
