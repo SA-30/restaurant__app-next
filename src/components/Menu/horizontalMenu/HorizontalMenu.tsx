@@ -68,14 +68,14 @@ const HorizontalMenu = () => {
     return (
         <div className="mt-10">
             <div>
-                <div className="md:flex md:justify-center">
-                    <div className="flex justify-between md:justify-start md:gap-56 px-5 ">
+                <div className="flex justify-center">
+                    <div className="flex justify-start gap-40 md:gap-56 px-5 ">
                         <h3> MENU </h3>
                         <h3> SORT BY </h3>
                     </div>
                 </div>
 
-                <div className="md:flex md:justify-center">
+                <div className="flex justify-center">
                     <ul className="flex px-5 mt-5 gap-5 md:gap-14 font-bold">
                         <li 
                             className={`cursor-pointer ${selectedCategory === '' ? 'active' : ''}`}
@@ -93,7 +93,7 @@ const HorizontalMenu = () => {
                 </div>
             </div>
             
-            <div className=" flex  flex-row md:justify-center gap-5 ml-5 mt-10 overflow-x-auto hide-scroolbar">
+            <div className=" flex  flex-row justify-center gap-5 mx-5 mt-10  ">
                 {loading && ( 
                     Array.from({length: 5}).map((_, index: number) => (
                     <div key={index} className='bg-gray-800 min-w-[150px] flex flex-col rounded-2xl'>
@@ -111,7 +111,7 @@ const HorizontalMenu = () => {
                     </div>
                 )))}
 
-                <div className=" grid grid-cols-2 md:grid-cols-5  md:justify-center gap-5  overflow-x-auto ">
+                <div className=" grid grid-cols-2  md:grid-cols-5  md:justify-center gap-5  overflow-x-auto ">
                     {!loading && filterItems().length > 0 && (
                         filterItems().map((item: any, index) => (
                             <HorizontalItem key={index} imgUrl={item.imageUrl} title={item.name} weight={item.description} price={item.price}/>
