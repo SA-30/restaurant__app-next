@@ -24,7 +24,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
   }
 
   return (
-    <div className='text-white fixed h-16 w-full px-5 p-5 md:px-20 bg-gray-800 border-b-[1px] border-gray-600 z-[1]'>
+    <div className='text-white fixed z-20 h-16 w-full px-5 p-5 md:px-20 bg-gray-800 border-b-[1px] border-gray-600'>
       <div className='flex justify-between '>
         <div className='flex items-center gap-10'>
             {/* <FaArrowLeft size={22}/> */}

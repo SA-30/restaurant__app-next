@@ -4,6 +4,7 @@ import {  FaWeight } from 'react-icons/fa';
 import {AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useAppSelector } from '@/hook/redux-toolkit/store';
 import { useEffect, useState } from 'react';
+import { CldImage } from 'next-cloudinary';
 
 function AdminOrderDetails({selectedOrder}: any) {
     const [pending, setPending] = useState(false);
@@ -102,8 +103,16 @@ function AdminOrderDetails({selectedOrder}: any) {
                         {(Array.isArray(selectedOrderFromRedux.dish) ? selectedOrderFromRedux.dish : []).map((product, index) => (
                             <div key={index} className='flex flex-row  items-center gap-5 border-b border-gray-600 pb-2'>
                                 {/* Render the product image */}
-                                <div className='h-[40px] w-[50px] flex items-center justify-center rounded-[50%] bg-center bg-cover' style={{ backgroundImage: `url(${product.imgUrl})` }}></div>
-
+                                <div>
+                                {product.imgUrl && <CldImage
+                                        width="100"
+                                        height="100"
+                                        src={product.imgUrl}
+                                        sizes="100vw"
+                                        alt={product.title}
+                                        className="w-20 h-16 rounded-full"
+                                    />}
+                                </div>
                                 {/* Render product details */}
                                 <div className='flex flex-col gap-2 w-full justify-center rounded-r-2xl'>
                                     <h2 className='font-bold text-sm'>{product.title}</h2>

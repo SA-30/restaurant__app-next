@@ -121,7 +121,7 @@ function OrderList({onOrderSelection}: any) {
                     className="">
                         <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#6dd491d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#6dd48cd5]' : 'hover:bg-adminredColor' }`}>
                         <div className="flex gap-3 items-center">
-                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center`} >
+                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center uppercase text-white`} >
                                 {data?.email[0]}
                             </div>
                             <p className="!text-black !font-semibold">{data?.phone}</p>

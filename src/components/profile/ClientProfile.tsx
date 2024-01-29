@@ -103,12 +103,12 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
 
     return (  
         <>
-        <div className='bg-primaryColor'>
+        <div className='bg-primaryColor relative h-screen flex'>
+            <div className='absolute  bg-no-repeat bg-cover bg-center w-full h-full z-[0]'  style={{ backgroundImage: 'url(/assets/images/bg/bg2.jpg)', filter: 'blur(20px)'}} />
             <div><MethodHeader /></div>
             
-            <div className='flex-[11_11_0%] flex flex-col md:flex-row justify-center items-center gap-20'>
-            
-                {!editProfile ? <div className="h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
+            <div className='z-[1] flex-[11_11_0%] flex flex-col md:flex-row justify-center items-center gap-20'>
+                {!editProfile ? <div className=" z-[1]  sm:h-screen flex flex-col justify-center items-center pt-20 md:pt-0">
                 {isAdmin && 
                     <div className="">
                         <Link href='/admin'>
@@ -125,27 +125,27 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                     </div>
                     
                 }
-                <div className={`bg-[#1e6a758c] text-[60px] rounded-[50%] p-1 flex items-center`} >
+                <div className={`bg-[white] text-[60px] rounded-[50%] p-1 flex items-center`} >
                     😀
                 </div>
-                <h1 className="font-semibold text-4xl md:text-3xl text-adminblueColor mt-5">{formData.name == ''? username : formData.name}</h1>
-                <div className="flex flex-col md:flex-row px-5 py-5 gap-5 mt-5">
+                <h1 className="py-2 px-5 bg-black rounded-3xl font-semibold text-2xl md:text-sm text-white mt-5">{formData.name == ''? username : formData.name}</h1>
+                <div className="flex flex-col md:flex-row px-5 py-5 gap-5 ">
                     <Link href={'/login'}>
-                    <button onClick={handleSignOut} className="transition-all  bg-adminblueColor  font-semibold hover:shadow hover:scale-[1.05] text-[14px] border-[1px] border-adminblueColor py-2 px-5 text-gray-900">Logout</button>
+                    <button onClick={handleSignOut} className="transition-all  bg-black text-white  font-semibold hover:shadow hover:scale-[1.05] text-[14px] border-[1px] border-white rounded-3xl py-2 px-5">Logout</button>
                     </Link>
                 </div>
                 </div> : <EditAdminForm toggleForm={toggleForm} formDatas={formDatas} />}
             
             {!isAdmin && (
-                <div className="flex justify-center items-center h-screen">
-                    <div className='flex flex-col items-center justify-center p-4 m-2 bg-[#e4e4f0] rounded-lg md:mr-20'>
+                <div className="z-[1] flex justify-center items-center sm:h-screen">
+                    <div className='flex flex-col items-center justify-center p-4 m-2 bg-[white] shadow-lg roounded rounded-lg md:mr-20'>
                         <div className='font-bold text-center text-3xl text-[#704444a4] mb-7 mt-3'>Order history</div>
                         <div className="hide-scroolbar  overflow-scroll ">
                         {orderData.map(( data, index) => (
                             <div 
                             key={index} 
                             className="">
-                                <div className={`transition-all order-list px-5 grid grid-cols-3 border-b border-[#80808074] gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#806dd4d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
+                                <div className={`transition-all order-list px-5 grid rounded-2xl grid-cols-3 border-b border-[#80808074] gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#806dd4d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#806dd4d5]' : 'hover:bg-adminredColor' }`}>
                                 <div className="md:mr-10 ml-5 md:ml-0">
                                     {data?.cartProducts.map((product, index) => (
                                         <div key={index}>
@@ -175,6 +175,8 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                 </div>
             )}
             </div>
+
+            
         </div>
         </>
     );

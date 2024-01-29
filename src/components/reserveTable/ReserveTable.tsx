@@ -2,8 +2,8 @@
 
 import { FunctionComponent, useState } from "react";
 import MethodHeader from "../component/Header/MethodHeader";
-import Link from 'next/link';
 import { useRouter } from "next/navigation";
+import {  useSession } from "next-auth/react"
 
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from "@/hook/redux-toolkit/store";
@@ -18,6 +18,8 @@ interface Props {
 const ReserveTable: FunctionComponent<Props> = () => {
     const [selectedTable, setSelectedTable] = useState<number | null>(null);
     const [tableStatus, setTableStatus] = useState<string | null>(null);
+
+    const session = useSession()
 
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
@@ -122,7 +124,7 @@ const ReserveTable: FunctionComponent<Props> = () => {
                         key={index}
                         onClick={() => handleTableClick(table, index)}
                         className='transition-all hover:scale-[1.02] cursor-pointer '>
-                    <div className={`p-3 pr-20 bg-gray-800 ${ selectedTable === index ? table.status === "available" ? "bg-[black]" : "bg-[black]" : "" } ${table.status === 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}
+                    <div className={`p-3 pr-20 bg-gray-800 ${ selectedTable === index ? table.status === 'available' ? " bg-[black]" : "bg-[black]" : "" } ${table.status === 'available' ? "hover:bg-admingreenColor" : "hover:bg-adminredColor"}`}
                     
                     >
                     <div className='flex items-center gap-2 mb-4'>
@@ -143,13 +145,15 @@ const ReserveTable: FunctionComponent<Props> = () => {
                 ))}
                 </div>
 
-                {/* Next button */}
                 <div className='py-5 my-5 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
-                {/* <Link href="reserveTable/conformReserve"> */}
-                    <button onClick={handleNext} className='text-[10px] font-bold transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
+                    {session.status === 'authenticated' ? 
+                        <button onClick={handleNext} className='text-[10px] font-bold transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
                         NEXT
-                    </button> 
-                {/* </Link>  */}
+                        </button> : 
+                        <div className="text-[14px] font-bold transition-all text-white  bg-blue-400 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105">
+                            login    
+                        </div>
+                    }
                 </div>
             </div>
         </div>
