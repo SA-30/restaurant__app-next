@@ -1,7 +1,7 @@
 'use client'
 
 import { FunctionComponent, useState, useEffect } from "react";
-import {FaLocationDot, FaPeopleGroup, FaPeoplePulling} from 'react-icons/fa6'
+import {FaFirstOrder,FaPeopleGroup} from 'react-icons/fa6'
 import Link from "next/link";
 import EditAdminForm from "../admin/adminProfile/EditAdminForm";
 import MethodHeader from "../component/Header/MethodHeader";
@@ -116,12 +116,19 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                                 <p  className="text-2xl font-bold uppercase   ">Admin page</p>
                             </div>
                         </Link>
+                        <Link href='/orderHistory'>
+                            <div className="flex items-center justify-center gap-2 px-5 text-white p-2 bg-gray-800 hover:scale-[1.1] transition-all rounded-md text-center mb-5">
+                                <FaFirstOrder className=" text-green-500" size={30}/>
+                                <p  className="font-bold ">Order History</p>
+                            </div>
+                        </Link>
                         <Link href='/users'>
                             <div className="flex  items-center justify-center gap-2 hover:scale-[1.05] transition-all text-white p-2 bg-gray-800 rounded-md text-center font-bold mb-5">
                                 <FaPeopleGroup className='text-green-600'  size={30}/>
                                 <p>Clients</p>
                             </div>
                         </Link>
+                        
                     </div>
                     
                 }
