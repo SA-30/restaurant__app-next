@@ -112,12 +112,12 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                 {isAdmin && 
                     <div className="">
                         <Link href='/admin'>
-                            <div className="flex  items-center justify-center gap-2 px-5 text-white p-2 bg-gray-800  rounded-md text-center font-bold mb-5">
-                                <p>Admin page</p>
+                            <div className="flex items-center justify-center gap-2 px-5 text-white p-2 bg-gray-800 hover:scale-[1.1] transition-all rounded-md text-center mb-5">
+                                <p  className="text-2xl font-bold uppercase   ">Admin page</p>
                             </div>
                         </Link>
                         <Link href='/users'>
-                            <div className="flex  items-center justify-center gap-2  text-white p-2 bg-gray-800 rounded-md text-center font-bold mb-5">
+                            <div className="flex  items-center justify-center gap-2 hover:scale-[1.05] transition-all text-white p-2 bg-gray-800 rounded-md text-center font-bold mb-5">
                                 <FaPeopleGroup className='text-green-600'  size={30}/>
                                 <p>Clients</p>
                             </div>

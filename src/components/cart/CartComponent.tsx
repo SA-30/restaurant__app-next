@@ -36,9 +36,19 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const handlePhoneChange = (e: any) => {
         const phoneNumber = e.target.value;
         setPhone(phoneNumber);
-        console.log(phone);
         
-        if (phoneNumber.length === 10 && address) {
+        if ((phoneNumber.length === 9 || phoneNumber.length === 10) && address) {
+            setDisableBtn(false);
+        } else {
+            setDisableBtn(true); 
+        }
+    }
+
+    const handelAddressChange = (e: any) => {
+        const addressLocation = e.target.value;
+        setAddress(addressLocation);
+        
+        if ((addressLocation.length > 2) && (phone.length === 9 || phone.length === 10)) {
             setDisableBtn(false);
         } else {
             setDisableBtn(true); 
@@ -121,9 +131,9 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                     <h2 className='font-bold mb-4'>Checkout</h2>
                     <form onSubmit={handlePayment}>
                         <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
-                        <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" placeholder='977*******' required/> <br />
+                        <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" pattern="[0-9]{10}" placeholder='977*******' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
-                        <input value={address} onChange={(e) => setAddress(e.target.value)} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" pattern="[0-9]{10}" placeholder='location' required/> <br />
+                        <input value={address} onChange={handelAddressChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text"  placeholder='location' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
                         <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' />  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
                         <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
