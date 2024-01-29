@@ -41,20 +41,20 @@ interface ManagementItemProps {
                 <DeleteConfirmationDialog onCancel={hideDeleteDialog} onConfirm={confirmDelete} />
             )}
              <div className='relative grid grid-cols-2 md:grid-cols-5 gap-5 '>
-                    <div onClick={setItemForm} className="transition-all min-h-[200px] flex flex-col border-[1px] border-adminblueColor justify-center items-center text-gray-800 cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
+                    <div onClick={setItemForm} className="transition-all min-h-[200px] flex flex-col border-[2px] border-dashed  border-black justify-center items-center text-gray-800 cursor-pointer hover:shadow-xl hover:scale-[1.01] gap-5">
                         <FaPlus size={10}/>
                         <p className="text-[12px]">Add new item</p>
                     </div>
                     {items.map((item: any, index: number) => (
-                        <div key={index} className='transition-all border-[1px] hover:shadow-xl hover:shadow-[#5050ca17] cursor-pointer border-[#5050cab7] min-w-[150px] flex flex-col items-center rounded'>
-                            <div className="">
+                        <div key={index} className='transition-all border-[2px] relative hover:shadow-xl  bg-white  hover:shadow-[#ff000030] cursor-pointer border-gray-400 hover:border-red-500 hover:scale-[1.02] min-w-[150px] flex flex-col items-center rounded'>
+                            <div className=" w-full">
                             {item.imageUrl && <CldImage
-                                width="200"
-                                height="200"
+                                width="600"
+                                height="600"
                                 src={item.imageUrl}
                                 sizes="100vw"
-                                alt=""
-                                className="w-[200px] h-[150px]"
+                                alt="img"
+                                className="w-[100%] h-auto md:h-[200px]"
                             />}
                             </div>
     
