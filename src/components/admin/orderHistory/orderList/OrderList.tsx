@@ -1,9 +1,11 @@
-import { FaPerson, FaFilter } from "react-icons/fa6"
+import { FaArrowRight } from "react-icons/fa6"
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/hook/redux-toolkit/store";
 import { orderFood } from "@/hook/redux-toolkit/features/admin/order-slice";
 import { useEffect, useState } from "react";
 import { dbTimeForCustomer } from "@/lib/datetime-function";
+import Sidebar from "./Sidebar";
+import OrderDetailsTitles from "./OrderDetailsTitles";
 
 interface orderItem {
     face: string;
@@ -36,13 +38,12 @@ function OrderList({onOrderSelection}: any) {
    const [orderData, setOrderData] = useState<OrderItem[]>([]);
    const [arrayOrderData, setArrayOrderData] = useState<OrderItem[]>([]);
    const [activeFilter, setActiveFilter] = useState('all');
-   const [activeDate, setActiveDate] = useState('today');
+   const [activeDate, setActiveDate] = useState('day');
    const [page, setPage] = useState(0)
 
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-
         fetch('/api/order').then(response => {
             response.json().then(data => {
                 setOrderData(data.reverse())
@@ -101,93 +102,77 @@ function OrderList({onOrderSelection}: any) {
     const endIndex = (page + 1) * 5;
 
     return (
-        <div className=" bg-gray-200  min-h-[75vh]  pt-10  font-semibold">
-
-            {/* OrderDetailsTitles */}
-            <div className="px-5">
-                <div className="">
-                    <div className="flex justify-between">
-                        <h2>Order Report</h2>
-                        <div className="flex items-center gap-2 border-gray-600 text-[12px] text-black cursor-pointer font-normal">
-                            <h3 onClick={() => setActiveDate('day')} className={`rounded text-[12px] ${activeDate === 'day' ? 'bg-gray-800 text-white' : 'bg-gray-400'}  text-black p-2`}>day</h3>
-                            <h3 onClick={() => setActiveDate('week')} className={`rounded text-[12px] ${activeDate === 'week' ? 'bg-green-500 text-white' : 'bg-gray-300'}  text-black p-2`}>week</h3>
-                            <h3 onClick={() => setActiveDate('month')} className={`rounded text-[12px] ${activeDate === 'month' ? 'bg-red-500 text-white' : 'bg-gray-300'}  text-black p-2`}>month</h3>
-                        </div>
-
-                        <div className="flex items-center gap-2 border-gray-600 text-[12px] text-black cursor-pointer font-normal">
-                            <h3 onClick={() => setActiveFilter('all')} className={`rounded text-[12px] ${activeFilter === 'all' ? 'bg-gray-800' : 'bg-gray-400'}  text-white p-2`}>all</h3>
-                            <h3 onClick={() => setActiveFilter('paid')} className={`rounded text-[12px] ${activeFilter === 'paid' ? 'bg-green-500' : 'bg-green-300'}  text-white p-2`}>paid</h3>
-                            <h3 onClick={() => setActiveFilter('pending')} className={`rounded text-[12px] ${activeFilter === 'pending' ? 'bg-red-500' : 'bg-red-300'}  text-white p-2`}>pending</h3>
-                        </div>
-                        
-                    </div>
-                    <div className="grid grid-cols-3 md:grid-cols-5 mt-4 gap-10 ">
-                        <h3 className="text-black">Customer</h3>
-                        <h3 className="sm:block hidden text-black">Menu</h3>
-                        <h3 className="sm:block hidden text-black">Time</h3>
-                        <h3 className="text-black text-center sm:text-start">Total Payment</h3>
-                        <h3 className="text-black">Status</h3>
-                    </div>
-                </div>
+        <div className="  text-white  min-h-[100vh] flex flex-col-reverse sm:flex-row font-semibold">
+            
+            {/* sidebar for filtering */}
+            <div className="md:w-[15rem] bg-gray-900 pt-10">
+                <Sidebar activeDate={activeDate} setActiveDate={setActiveDate}/>
             </div>
 
-            {/* Divider */}
-            <div className="border-b-[1px] border-gray-600 my-4"></div>
+            <div className="w-full bg-gray-800 pt-5">
+                {/* OrderDetailsTitles */}
+                <OrderDetailsTitles activeFilter={activeFilter} setActiveFilter={setActiveFilter}/>
 
-            {/* Order Lists */}
-            <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                {arrayOrderData.slice(startIndex, endIndex).map((data, index) => (
-                    <div 
-                    key={index} 
-                    onClick={() => handleSelection(data as OrderItem, index)}
-                    className="">
-                        <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#6dd491d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#6dd48cd5]' : 'hover:bg-adminredColor' }`}>
-                        <div className="flex gap-3 items-center">
-                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center uppercase text-white`} >
-                                {data?.email[0]}
-                            </div>
-                            <p className="!text-black !font-semibold">{data?.phone}</p>
-                        </div>
-                        <div className="md:mr-10 ml-5 md:ml-0 sm:block hidden">
-                            {data?.cartProducts.map((product, index) => (
-                                <div key={index}>
-                                    <p className="!text-black">{product?.title}</p>
+                {/* Divider */}
+                <div className="border-b-[1px] border-gray-600 my-4"></div>
+
+                {/* Order Lists */}
+                <div className="hide-scroolbar h-[50vh] overflow-scroll ">
+                    {arrayOrderData.slice(startIndex, endIndex).map((data, index) => (
+                        <div 
+                        key={index} 
+                        onClick={() => handleSelection(data as OrderItem, index)}
+                        className="">
+                            <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#6dd491d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#6dd48cd5]' : 'hover:bg-adminredColor' }`}>
+                            <div className="flex gap-3 items-center">
+                                <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center uppercase text-white`} >
+                                    {data?.email[0]}
                                 </div>
-                            ))}
-                            
-                        </div>
-                        <div className="sm:block hidden">
-                            <div className="!text-black !font-bold"> 
-                                <p className="!text-gray-900 !font-semibold">{dbTimeForCustomer(data.createdAt)}</p>
+                                <p className="!text-white !font-semibold">{data?.phone}</p>
                             </div>
-                        </div>
-                        <div className="sm:text-start text-center">
-                            <div className="!text-black !font-bold"> 
-                                <p className=" !text-black !font-bold">
-                                    <span className="font-semibold text-[10px]">Rs </span> 
-                                    {data?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0)}
-                                </p>
+                            <div className="md:mr-10 ml-5 md:ml-0 sm:block hidden">
+                                {data?.cartProducts.map((product, index) => (
+                                    <div key={index}>
+                                        <p className="!text-white">{product?.title}</p>
+                                    </div>
+                                ))}
+                                
                             </div>
-                        </div>
-                        <div>
+                            <div className="sm:block hidden">
+                                <div className="!text-white !font-bold"> 
+                                    <p className="!text-white !font-semibold">{dbTimeForCustomer(data.createdAt)}</p>
+                                </div>
+                            </div>
+                            <div className="sm:text-start text-center">
+                                <div className="!text-white !font-bold"> 
+                                    <p className=" !text-white !font-bold">
+                                        <span className="font-semibold text-[10px]">Rs </span> 
+                                        {data?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0)}
+                                    </p>
+                                </div>
+                            </div>
                             <div>
-                                <p className={`cursor-pointer text-[10px] md:text-[14px] p-2  rounded flex justify-center items-center  !text-white ${data.paid == true ? 'bg-[#50af50d7]': 'bg-[#e04949dc]'}`}>{data.paid == true ? 'paid' : 'Pending'}</p>
+                                <div>
+                                    <p className={`cursor-pointer text-[10px] md:text-[14px] p-2  rounded flex justify-center items-center  !text-white ${data.paid == true ? 'bg-[#50af50d7]': 'bg-[#e04949dc]'}`}>{data.paid == true ? 'paid' : 'Pending'}</p>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="py-5 gap-2 flex justify-center items-center">
-                {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
-                    <button
-                        className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
-                        key={index}
-                        onClick={() => handlePageClick(index)}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
+                    ))}
+                </div>
+
+                {/* Pagination */}
+                <div className="py-5 gap-2 flex justify-center items-center">
+                    {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
+                        <button
+                            className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
+                            key={index}
+                            onClick={() => handlePageClick(index)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     )

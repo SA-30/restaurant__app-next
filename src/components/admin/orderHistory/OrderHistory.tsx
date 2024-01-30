@@ -3,13 +3,17 @@
 import React from 'react'
 import AdminOrderList from '@/components/admin/orderFood/components/AdminOrderList'
 import OrderList from './orderList/OrderList';
+import AdminMenu from '../components/adminMenu/AdminMenu';
 
 
 const OrderHistory = () => {
 
   return (
-    <div className='p-5'>
-        <div className='font-bold'>Order History</div>
+    <div className='relative text-white '>
+        {/* <div className='font-bold'>Order History</div> */}
+
+        {/* <div className=' text-black'>s</div> */}
+
         <div className='hide-scroolbar  flex-[7_7_0%]  overflow-scroll'>
             <OrderList />
         </div>
