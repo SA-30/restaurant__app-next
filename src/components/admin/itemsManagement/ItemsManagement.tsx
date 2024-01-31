@@ -6,12 +6,13 @@ import ManagementItems from "./components/ManagementItems";
 import {useProfile} from "@/hook/useProfile"
 
 interface AdminPageProps {
-    
 }
  
 const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
-    const { data: profileData }: any = useProfile();
-    const isAdmin = profileData?.admin;
+    // const { data: profileData }: any = useProfile();
+    // const isAdmin = profileData?.admin;
+
+    const isAdmin = true;
 
     // if(!profileData) {
     //     return (

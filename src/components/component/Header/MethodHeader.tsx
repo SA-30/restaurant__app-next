@@ -7,7 +7,7 @@ import { AiOutlineLogout} from 'react-icons/ai';
 import {BsHandIndex,BsPersonFillGear} from 'react-icons/bs'
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/components/appContext';
-import { UserButton, useUser } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 
 interface MethodHeaderProps {
 }
@@ -16,31 +16,24 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
   const [userInfo, setUserInfo] = useState('')
 
   const {cartProducts}: any = useContext(CartContext);
-  const { data: user, isLoading  }: any = useUser();
 
-  if (isLoading) {
-    console.log("loiading");
-    
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch('/api/userinfo');
+        if (!response.ok) {
+          throw new Error('Failed to fetch user information');
+        }
+        const data = await response.json();
+        setUserInfo(data.data.message);
+        
+      } catch (error) {
+        console.error('Error fetching user information:', error);
+      }
+    };
 
-  // hit server endpoint for userInfo
-  // useEffect(() => {
-  //   const fetchUserInfo = async () => {
-  //     try {
-  //       const response = await fetch('/api/userinfo');
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch user information');
-  //       }
-  //       const data = await response.json();
-  //       setUserInfo(data.data.message);
-  //     } catch (error) {
-  //       console.error('Error fetching user information:', error);
-  //     }
-  //   };
-
-  //   fetchUserInfo();
-  // }, [userInfo])
+    fetchUserInfo();
+  }, [])
 
   return (
     <div className='text-white fixed z-20 h-16 w-full px-5 p-5 md:px-20 bg-gray-800 border-b-[1px] border-gray-600'>
@@ -56,7 +49,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
                 </div>
               </Link>
             <Link href='/reserveTable'> <BsHandIndex size={20}/> </Link>
-            {!user  && (
+            {userInfo !=='verified' && (
               <Link href='/sign-in'>
                 <p className='transition-all flex gap-2 justify-center items-center py-1 px-3 bg-[white] text-[#ff6600] hover:text-white hover:bg-[#ff6600] rounded-md text-sm font-semibold hover:rounded'>
                   SignIn<BsPersonFillGear size={15}/>

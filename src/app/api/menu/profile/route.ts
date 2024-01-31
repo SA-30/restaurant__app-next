@@ -1,25 +1,30 @@
 import { connectMongoDB } from "@/db/db";
-import {getServerSession} from 'next-auth'
+// import {getServerSession} from 'next-auth'
 import UserInfo from "@/db/models/userInfo";
 import User from "@/db/models/user";
-import { authOptions } from "../../auth/[...nextauth]/route";
+
+import { NextResponse } from 'next/server';
+import { currentUser } from '@clerk/nextjs';
+
+// import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function POST() {
     try {
         await connectMongoDB();
-        const session = await getServerSession(authOptions);
-        const email = session?.user?.email;
+        // const session = await getServerSession(authOptions);
+        // const email = session?.user?.email;
 
-        if(email === null) return Response.json({msg: 'Login first'})
+        // if(email === null) return Response.json({msg: 'Login first'})
 
-        const existingUser = await UserInfo.findOne({ email });
+        // const existingUser = await UserInfo.findOne({ email });
 
-        if(existingUser){
-            return Response.json({ msg: 'User already exists', admin: existingUser.admin });
-        } else {
-            await UserInfo.create({ email, admin: false });
-            return Response.json({ msg: 'Successfully added admin', admin: false  });
-        }
+        // if(existingUser){
+        //     return Response.json({ msg: 'User already exists', admin: existingUser.admin });
+        // } else {
+        //     await UserInfo.create({ email, admin: false });
+        //     return Response.json({ msg: 'Successfully added admin', admin: false  });
+        // }
+        return Response.json({msg: 'Success'})
     } catch (error: any) {
         console.log("error ", error.message)
         return Response.json({msg: 'Failed to add admin'})
@@ -28,26 +33,16 @@ export async function POST() {
 
 export async function GET() {
     try {
-        await connectMongoDB();
-        const session = await getServerSession(authOptions)
-        const email = session?.user?.email;
-
-        if(!email){
-            return Response.json({})
+        const user = await currentUser();
+        
+        if(!user){
+            return new Response("Unauthorized", { status: 401 });
         }
+        const data = { message: user.emailAddresses[0].verification?.status };
+        console.log(data);
 
-        const user = await User.findOne({email}).lean()
-        const userInfo = await UserInfo.findOne({email}).lean()
-        // const userInfo = await UserInfo.findOneAndUpdate(
-        //     {email},
-        //     {},
-        //     {new: true, upsert: true}
-        // ).lean()
-        console.log("admin wala -> ", {...user, ...userInfo});
-        return Response.json({...user, ...userInfo})
-
-        // console.log("admin wala -> ", {...user, ...userInfo});
-        // return Response.json({...user, ...userInfo})
+        return NextResponse.json({ data });
     } catch (error) {
+        return Response.json({msg: 'Failed to get userInfo'})
     }
 }

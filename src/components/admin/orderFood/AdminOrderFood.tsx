@@ -13,7 +13,9 @@ const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
 
     const { data: profileData }: any = useProfile();
-    const isAdmin = profileData?.admin;
+    
+    console.log(profileData);
+    const isAdmin = true;
     
     const handleOrderSelection = (table: any) => {
         setSelectedOrder(table);
