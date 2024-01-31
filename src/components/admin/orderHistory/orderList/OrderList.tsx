@@ -1,4 +1,3 @@
-import { FaArrowRight } from "react-icons/fa6"
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/hook/redux-toolkit/store";
 import { orderFood } from "@/hook/redux-toolkit/features/admin/order-slice";

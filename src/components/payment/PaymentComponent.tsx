@@ -1,11 +1,7 @@
 'use client'
 
 import React, { useContext, useEffect } from 'react'
-import CreditCard from './components/CreditCard'
 import MethodHeader from '../component/Header/MethodHeader'
-import GrandTotal from '../cart/GrandTotal/GrandTotal'
-import Upi from './components/Upi'
-import MorePayment from './components/MorePayment'
 import { CartContext } from '../appContext'
 
 const PaymentComponent = () => {

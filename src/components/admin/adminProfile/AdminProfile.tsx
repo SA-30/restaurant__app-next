@@ -1,7 +1,6 @@
 'use client'
 
 import { FunctionComponent, useState } from "react";
-import {FaLocationArrow} from 'react-icons/fa'
 import {FaLocationDot} from 'react-icons/fa6'
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import { useRouter } from "next/navigation";

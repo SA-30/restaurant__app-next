@@ -1,7 +1,6 @@
 'use client'
 
 import MethodHeader from '@/components/component/Header/MethodHeader';
-import { useProfile } from '@/hook/useProfile';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -13,9 +12,6 @@ interface User {
 
 const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([])
-//   const { data: profileData } = useProfile();
-//   const isAdmin = profileData?.admin;
-
 
   useEffect(() => {
     fetch('/api/users')
@@ -26,7 +22,6 @@ const UsersPage = () => {
     })
   }, [])
 
-//   if(isAdmin){
   return (
     <div>
         <div ><MethodHeader/></div>
@@ -53,6 +48,5 @@ const UsersPage = () => {
     </div>
     </div>
   )};
-// }
 
 export default UsersPage

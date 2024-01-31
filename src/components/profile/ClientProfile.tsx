@@ -5,7 +5,7 @@ import {FaFirstOrder,FaPeopleGroup} from 'react-icons/fa6'
 import Link from "next/link";
 import EditAdminForm from "../admin/adminProfile/EditAdminForm";
 import MethodHeader from "../component/Header/MethodHeader";
-import { signOut, useSession } from "next-auth/react"
+// import { signOut, useSession } from "next-auth/react"
 
 
 interface ClientProfileprops {
@@ -29,10 +29,10 @@ interface OrderItem {
  
 const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
       
-    const session = useSession()
-    const username = session.data?.user?.name;
+    // const session = useSession()
+    // const username = session.data?.user?.name;
 
-    const {status} = session
+    // const {status} = session;
     const [editProfile, setEditProfile] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const [orderData, setOrderData] = useState<OrderItem[]>([]);
@@ -53,32 +53,32 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
         setFormData(datas)
     }
 
-    useEffect(() => {
-        fetch('/api/menu/profile', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({}),
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
-            }
-            return response.json();
-        }).then(data => {
-            // Handle the case where the user is already an admin
-            setIsAdmin(data?.admin || false);
-        }).catch(error => {
-            console.error('Error fetching data:', error);
-        });
+    // useEffect(() => {
+    //     fetch('/api/menu/profile', {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({}),
+    //     }).then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`Server error: ${response.status}`);
+    //         }
+    //         return response.json();
+    //     }).then(data => {
+    //         // Handle the case where the user is already an admin
+    //         setIsAdmin(data?.admin || false);
+    //     }).catch(error => {
+    //         console.error('Error fetching data:', error);
+    //     });
 
-        fetch('/api/menu/profile').then(response => {
-            response.json().then(data => {
-                setIsAdmin((prev) => data?.admin)
-            })
-        })
+    //     fetch('/api/menu/profile').then(response => {
+    //         response.json().then(data => {
+    //             setIsAdmin((prev) => data?.admin)
+    //         })
+    //     })
 
-    }, [session, status])
+    // }, [session, status])
 
     useEffect(() => {
         fetch('/api/order').then(response => {
@@ -96,8 +96,8 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     }
 
     const handleSignOut = async () => {
-        await signOut();
-        window.location.href = '/login';
+        // await signOut();
+        // window.location.href = '/login';
     }
 
 
@@ -135,7 +135,7 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
                 <div className={`bg-[white] text-[60px] rounded-[50%] p-1 flex items-center`} >
                     😀
                 </div>
-                <h1 className="py-2 px-5 bg-black rounded-3xl font-semibold text-2xl md:text-sm text-white mt-5">{formData.name == ''? username : formData.name}</h1>
+                {/* <h1 className="py-2 px-5 bg-black rounded-3xl font-semibold text-2xl md:text-sm text-white mt-5">{formData.name == ''? username : formData.name}</h1> */}
                 <div className="flex flex-col md:flex-row px-5 py-5 gap-5 ">
                     <Link href={'/login'}>
                     <button onClick={handleSignOut} className="transition-all  bg-black text-white  font-semibold hover:shadow hover:scale-[1.05] text-[14px] border-[1px] border-white rounded-3xl py-2 px-5">Logout</button>
