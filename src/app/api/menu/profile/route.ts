@@ -39,7 +39,7 @@ export async function GET() {
             return new Response("Unauthorized", { status: 401 });
         }
         const data = { message: user.emailAddresses[0].verification?.status };
-        console.log(data);
+        console.log(user);
 
         return NextResponse.json({ data });
     } catch (error) {

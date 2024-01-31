@@ -3,11 +3,10 @@
 import Link from 'next/link';
 
 import { FaHome , FaShoppingBag } from 'react-icons/fa';
-import { AiOutlineLogout} from 'react-icons/ai';
+import { FaPerson } from 'react-icons/fa6';
 import {BsHandIndex,BsPersonFillGear} from 'react-icons/bs'
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/components/appContext';
-import { UserButton } from "@clerk/nextjs";
 
 interface MethodHeaderProps {
 }
@@ -20,7 +19,7 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('/api/userinfo');
+        const response = await fetch('/api/menu/profile');
         if (!response.ok) {
           throw new Error('Failed to fetch user information');
         }
@@ -57,7 +56,11 @@ const MethodHeader: React.FC<MethodHeaderProps> = () => {
               </Link> 
             )}
 
-            <UserButton afterSignOutUrl="/"/>
+            {userInfo === 'verified' &&  (
+              <Link href='/profile'>  
+                <FaPerson size={20} />
+              </Link>
+            )}
         </div>
       </div>
     </div>

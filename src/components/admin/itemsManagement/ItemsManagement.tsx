@@ -3,13 +3,12 @@
 import { FunctionComponent } from "react";
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import ManagementItems from "./components/ManagementItems";
-import {useProfile} from "@/hook/useProfile"
 
 interface AdminPageProps {
 }
  
 const ItemsManagement: FunctionComponent<AdminPageProps> = () => {
-    // const { data: profileData }: any = useProfile();
+    
     // const isAdmin = profileData?.admin;
 
     const isAdmin = true;

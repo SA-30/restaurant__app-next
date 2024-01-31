@@ -3,11 +3,12 @@
 import { FunctionComponent, useState } from "react";
 import MethodHeader from "../component/Header/MethodHeader";
 import { useRouter } from "next/navigation";
-import {  useSession } from "next-auth/react"
 
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from "@/hook/redux-toolkit/store";
 import { customerTouchTable } from "@/hook/redux-toolkit/features/customer/table-slice";
+
+import {useProfile} from "@/hook/useProfile"
 
 
 import {FaSkull,FaArrowUp, FaArrowDown, FaTable, FaChair} from 'react-icons/fa'
@@ -19,7 +20,7 @@ const ReserveTable: FunctionComponent<Props> = () => {
     const [selectedTable, setSelectedTable] = useState<number | null>(null);
     const [tableStatus, setTableStatus] = useState<string | null>(null);
 
-    const session = useSession()
+    const { data: profileData }: any = useProfile();
 
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
@@ -146,7 +147,7 @@ const ReserveTable: FunctionComponent<Props> = () => {
                 </div>
 
                 <div className='py-5 my-5 flex justify-center items-center  md:mx-60 md:rounded-3xl md:mb-10'> 
-                    {session.status === 'authenticated' ? 
+                    {profileData?.data?.message === 'verified' ? 
                         <button onClick={handleNext} className='text-[10px] font-bold transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
                         NEXT
                         </button> : 

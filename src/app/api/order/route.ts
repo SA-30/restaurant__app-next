@@ -1,6 +1,4 @@
 import { connectMongoDB } from "@/db/db";
-// import { getServerSession } from "next-auth";
-// import { authOptions, isAdmin } from "../auth/[...nextauth]/route";
 import Order from "@/db/models/Order";
 
 export async function GET (req: any) {

@@ -1,11 +1,11 @@
 import { connectMongoDB } from "@/db/db";
 import User from "@/db/models/user";
-import { isAdmin } from "../auth/[...nextauth]/route";
 
 export async function GET(){
     await connectMongoDB();
+    const isAdmin = true;
     
-    if(await isAdmin()){
+    if(isAdmin){
         const users = await User.find();
         return Response.json(users);
     } else {
