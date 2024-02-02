@@ -14,7 +14,7 @@ const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
 
     const { data: profileData }: any = useProfile();
     
-    console.log("esfds ",profileData?.data?.message);
+    // console.log("esfds ",profileData?.data?.message);
     const isAdmin = true;
     
     const handleOrderSelection = (table: any) => {

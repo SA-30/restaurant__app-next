@@ -4,6 +4,8 @@ import FoodItemModel, {FoodItem} from "@/db/models/foodItem/foodItem";
 
 export async function POST(req: any){
     try {
+
+        // secure this endpoint and remaining
         const {name, description, price, category, isCombination, imageUrl}: FoodItem =  await req.json()
         await connectMongoDB();
 

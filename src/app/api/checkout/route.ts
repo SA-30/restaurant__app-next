@@ -1,15 +1,17 @@
 import { connectMongoDB } from "@/db/db";
-import { getServerSession } from "next-auth";
-import { authOptions, isAdmin } from "../auth/[...nextauth]/route";
+// import { getServerSession } from "next-auth";
+// import { authOptions, isAdmin } from "../auth/[...nextauth]/route";
 import Order from "@/db/models/Order";
+import { currentUser } from '@clerk/nextjs';
+
 
 export async function POST (req: any) {
     await connectMongoDB();
 
-    const {cartProducts, address, phone} = await req.json();
+    const user: any = await currentUser();
+    const email = user.emailAddresses[0].emailAddress;
 
-    const session = await getServerSession(authOptions);
-    const email = session?.user?.email;
+    const {cartProducts, address, phone} = await req.json();
 
     const orderDocument = await Order.create({
         email,
@@ -26,9 +28,11 @@ export async function PUT(req: any) {
     await connectMongoDB();
 
     const {id} = await req.json();
-    console.log("getting id -> ",id);
+    // console.log("getting id -> ",id);
 
-    if(await isAdmin()) {
+    const isAdmin = true;
+
+    if(isAdmin) {
         const updatedOrder = await Order.findByIdAndUpdate(id, { paid: true });
         console.log("updating id -> ",updatedOrder);
         if (!updatedOrder) {
@@ -37,5 +41,6 @@ export async function PUT(req: any) {
 
         return Response.json({msg: "Payment completed"})
     }
+
     return Response.json({msg: "Your are not an Admin"})
 }
