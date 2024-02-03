@@ -1,9 +1,15 @@
 import { connectMongoDB } from "@/db/db";
 import { type NextRequest, NextResponse } from "next/server";
 import FoodItemModel from "@/db/models/foodItem/foodItem";
+import { currentUser } from '@clerk/nextjs';
 
 export async function GET(req: NextRequest ) {
   try {
+      const user = await currentUser();
+      if(!user){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          return new Response("Unauthorized", { status: 401 });
+      }
+
       await connectMongoDB();
 
       const searchParams = req.nextUrl.searchParams;
