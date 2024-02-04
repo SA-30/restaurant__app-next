@@ -7,7 +7,15 @@ const Sidebar = ({activeDate, setActiveDate}: any) => {
   };
 
   return (
-    <div className="flex flex-col mx-5 items-center gap-2 border-gray-600 text-[12px] text-white cursor-pointer font-normal">
+    <div className=' flex flex-col gap-10'>
+      <div className="flex flex-col mx-5 items-center gap-2 border-gray-600 text-[12px] text-white cursor-pointer font-normal">
+      <div onClick={() => handleClick('all')} className={`py-3 sm:py-2 relative font-bold flex items-center justify-between px-5 w-full rounded text-[12px] ${activeDate === 'all' ? 'bg-white text-black' : 'bg-black'}   p-2`}>
+            <h3>All</h3>
+            <FaArrowRight className={`transition-all absolute right-4 z-10 p-2  ${activeDate === 'all' ? ' translate-x-[10px] text-white  bg-black p-1 rounded-full' : 'text-white bg-black'} `} size={30}/>
+        </div>
+      </div>
+
+      <div className="flex flex-col mx-5 items-center gap-2 border-gray-600 text-[12px] text-white cursor-pointer font-normal">
         <div onClick={() => handleClick('day')} className={`py-3 sm:py-2 relative font-bold flex items-center justify-between px-5 w-full rounded text-[12px] ${activeDate === 'day' ? 'bg-white text-black' : 'bg-black'}   p-2`}>
             <h3>day</h3>
             <FaArrowRight className={`transition-all absolute right-4 z-10 p-2  ${activeDate === 'day' ? ' translate-x-[10px] text-white  bg-black p-1 rounded-full' : 'text-white bg-black'} `} size={30}/>
@@ -20,6 +28,11 @@ const Sidebar = ({activeDate, setActiveDate}: any) => {
             <h3>month</h3>
             <FaArrowRight className={`transition-all absolute right-4 z-10 p-2 text-white  ${activeDate === 'month' ? ' translate-x-[10px] text-white  bg-black p-1 rounded-full' : 'bg-black'} `} size={30}/>
         </div>
+        <div onClick={() => handleClick('year')} className={`py-3 sm:py-2 relative font-bold flex items-center justify-between px-5  w-full rounded text-[12px] ${activeDate === 'year' ? 'bg-blue-500 text-white' : 'bg-black'}  text-white p-2`}>
+            <h3>year</h3>
+            <FaArrowRight className={`transition-all absolute right-4 z-10 p-2 text-white  ${activeDate === 'year' ? ' translate-x-[10px] text-white  bg-black p-1 rounded-full' : 'bg-black'} `} size={30}/>
+        </div>
+      </div>
     </div>
   )
 }

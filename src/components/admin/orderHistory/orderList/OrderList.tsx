@@ -91,6 +91,17 @@ function OrderList({onOrderSelection}: any) {
                 const orderDate = new Date(order.createdAt);
                 return orderDate >= lastDayOfMonth && orderDate <= firstDayOfMonth;
             });
+        } else if (activeDate === 'year') {
+            const currentDate = new Date();
+            const firstDayOfYear = new Date(currentDate);
+            firstDayOfYear.setDate(currentDate.getDate() - currentDate.getDay());
+            const lastDayOfYear = new Date(currentDate);
+            lastDayOfYear.setDate(currentDate.getDate() - (365 - currentDate.getDay()));
+
+            filteredOrders = orderData.filter(order => {
+                const orderDate = new Date(order.createdAt);
+                return orderDate >= lastDayOfYear && orderDate <= firstDayOfYear;
+            });
         }
 
         setFilterOrderData(filteredOrders);
