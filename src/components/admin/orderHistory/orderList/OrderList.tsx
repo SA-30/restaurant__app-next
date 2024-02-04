@@ -91,14 +91,14 @@ function OrderList({onOrderSelection}: any) {
     }
 
     // add pagination, filtering
-    const totalPages = Math.ceil(arrayOrderData.length / 5)
+    // const totalPages = Math.ceil(arrayOrderData.length / 5)
 
     const handlePageClick = (newPage: number) => {
         setPage(newPage)
     }
 
-    const startIndex = page * 5;
-    const endIndex = (page + 1) * 5;
+    // const startIndex = page * 5;
+    // const endIndex = (page + 1) * 5;
 
     return (
         <div className="  text-white  min-h-[100vh] flex flex-col-reverse sm:flex-row font-semibold">
@@ -116,8 +116,8 @@ function OrderList({onOrderSelection}: any) {
                 <div className="border-b-[1px] border-gray-600 my-4"></div>
 
                 {/* Order Lists */}
-                <div className="hide-scroolbar h-[50vh] overflow-scroll ">
-                    {arrayOrderData.slice(startIndex, endIndex).map((data, index) => (
+                <div className="hide-scroolbar h-[50vh] ">
+                    {arrayOrderData.map((data, index) => (
                         <div 
                         key={index} 
                         onClick={() => handleSelection(data as OrderItem, index)}
@@ -161,7 +161,7 @@ function OrderList({onOrderSelection}: any) {
                 </div>
 
                 {/* Pagination */}
-                <div className="py-5 gap-2 flex justify-center items-center">
+                {/* <div className="py-5 gap-2 flex justify-center items-center">
                     {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
                         <button
                             className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
@@ -171,7 +171,7 @@ function OrderList({onOrderSelection}: any) {
                             {index + 1}
                         </button>
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     )

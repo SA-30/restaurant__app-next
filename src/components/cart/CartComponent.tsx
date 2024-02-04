@@ -137,11 +137,11 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                         <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
                         <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' />  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
                         <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
-                        {/* {session.status === "authenticated" && (
+                        {true && (
                             <button className={`py-2 px-5 rounded text-white w-full mt-5 ${disableBtn  === true ? 'bg-gray-600' : 'bg-red-500'}`} disabled={disableBtn}  type='submit'>
                             Pay <span className='font-normal text-[10px] text-gray-200'>Rs</span> {total}
                             </button>
-                        )} */}
+                        )}
                         
                     </form>
                 </div>

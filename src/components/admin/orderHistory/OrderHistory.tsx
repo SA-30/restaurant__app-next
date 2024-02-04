@@ -10,10 +10,6 @@ const OrderHistory = () => {
 
   return (
     <div className='relative text-white '>
-        {/* <div className='font-bold'>Order History</div> */}
-
-        {/* <div className=' text-black'>s</div> */}
-
         <div className='hide-scroolbar  flex-[7_7_0%]  overflow-scroll'>
             <OrderList />
         </div>

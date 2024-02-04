@@ -40,7 +40,7 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
 
     // const {status} = session;
     const [editProfile, setEditProfile] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(true)
     const [orderData, setOrderData] = useState<OrderItem[]>([]);
     const [selectedTable, setSelectedTable] = useState<number | null>(null);
 
