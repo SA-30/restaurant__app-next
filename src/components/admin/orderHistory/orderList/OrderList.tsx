@@ -43,7 +43,7 @@ function OrderList({onOrderSelection}: any) {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        fetch('/api/order').then(response => {
+        fetch('/api/orderHistory').then(response => {
             response.json().then(data => {
                 setOrderData(data.reverse())
             })
