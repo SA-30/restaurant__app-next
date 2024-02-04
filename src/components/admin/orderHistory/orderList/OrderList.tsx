@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { dbTimeForCustomer } from "@/lib/datetime-function";
 import Sidebar from "./Sidebar";
 import OrderDetailsTitles from "./OrderDetailsTitles";
-import AdminMenu from "../../components/adminMenu/AdminMenu";
+import PriceDetails from "./PriceDetails";
 
 
 interface orderItem {
@@ -38,38 +38,77 @@ function OrderList({onOrderSelection}: any) {
    const [selectedTable, setSelectedTable] = useState<number | null>(null);
    const [orderData, setOrderData] = useState<OrderItem[]>([]);
    const [arrayOrderData, setArrayOrderData] = useState<OrderItem[]>([]);
-   const [activeFilter, setActiveFilter] = useState('all');
-   const [activeDate, setActiveDate] = useState('day');
-   const [page, setPage] = useState(0)
+   const [activeFilter, setActiveFilter] = useState<string>('all');
+   const [activeDate, setActiveDate] = useState<string>('');
+   const [totalPaid, setTotalPaid] = useState<string>('');
+   const [totalPending, setTotalPending] = useState<string>('');
 
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        fetch('/api/orderHistory').then(response => {
-            response.json().then(data => {
-                setOrderData(data.reverse())
+        fetch('/api/orderHistory')
+            .then(response => response.json())
+            .then(data => {
+                setOrderData(data.reverse());
             })
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
-    }, [,selectedTable])
-
-    // Filter the order based on paid - pending - all
-    useEffect(() => {
-        if (activeFilter === 'all') {
-            setArrayOrderData(orderData);
-        } else {
-            const filteredOrders = orderData.filter(order => {
-                if (activeFilter === 'paid') {
-                    return order.paid === true;
-                } else if (activeFilter === 'pending') {
-                    return order.paid === false;
-                }
+            .catch(error => {
+                console.error('Error fetching data:', error);
             });
-            setArrayOrderData(filteredOrders);
+    }, []);
+
+    useEffect(() => {
+        let filteredOrders = orderData;
+        
+        if (activeDate === 'day') {
+            console.log("day here");
+            const currentDate = new Date();
+            filteredOrders = orderData.filter(order => {
+                const orderDate = new Date(order.createdAt);
+                return orderDate.getDate() === currentDate.getDate() &&
+                    orderDate.getMonth() === currentDate.getMonth() &&
+                    orderDate.getFullYear() === currentDate.getFullYear();
+            });
+        } else if (activeDate === 'week') {
+            console.log("week here");
+
+            // Logic to filter orders for the current week
+        } else if (activeDate === 'month') {
+            console.log("month here");
+
+            // Logic to filter orders for the current month
         }
+        
+        setArrayOrderData(filteredOrders);
+    }, [activeDate]);
+
+    useEffect(() => {
+        let filteredOrders = orderData;
+    
+        if (activeFilter !== 'all') {
+            filteredOrders = orderData.filter(order => {
+                return activeFilter === 'paid' ? order.paid === true : order.paid === false;
+            });
+        }
+
+        setArrayOrderData(filteredOrders);
+
+        // Calculate total paid and total pending
+        const totalPaidAmount = filteredOrders.reduce((acc, order) => {
+            if (order.paid) {
+                return acc + order.cartProducts.reduce((acc, product) => acc + parseInt(product.price), 0);
+            }
+            return acc;
+        }, 0);
+
+        const totalPendingAmount = filteredOrders.reduce((acc, order) => {
+            if (!order.paid) {
+                return acc + order.cartProducts.reduce((acc, product) => acc + parseInt(product.price), 0);
+            }
+            return acc;
+        }, 0);
+
+        setTotalPaid(totalPaidAmount.toFixed(2));
+        setTotalPending(totalPendingAmount.toFixed(2));
     }, [activeFilter, orderData]);
 
     useEffect(() => {
@@ -92,12 +131,8 @@ function OrderList({onOrderSelection}: any) {
         dispatch(orderFood({face: item.email[0], id: item._id, status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
     }
 
-    const handlePageClick = (newPage: number) => {
-        setPage(newPage)
-    }
-
     return (
-        <div className="  text-white  md:min-h-[100vh] flex  flex-col sm:flex-row font-semibold">
+        <div className="  text-white  md:min-h-[100vh] flex  flex-col md:flex-row font-semibold">
             
             {/* sidebar for filtering */}
             <div className="md:w-[15rem] py-10 md:py-0 md:fixed md:h-full bg-gray-900 md:pt-10">
@@ -107,6 +142,11 @@ function OrderList({onOrderSelection}: any) {
             </div>
 
             <div className="w-full bg-gray-800 pt-5 md:ml-[15rem]">
+                {/* Component for price details */}
+                <div className="m-5 w-[50%]">
+                    <PriceDetails date={activeDate} totalPaid={totalPaid} totalPending={totalPending}/>
+                </div>
+                
                 {/* OrderDetailsTitles */}
                 <OrderDetailsTitles activeFilter={activeFilter} setActiveFilter={setActiveFilter}/>
 
