@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { dbTimeForCustomer } from "@/lib/datetime-function";
 import Sidebar from "./Sidebar";
 import OrderDetailsTitles from "./OrderDetailsTitles";
+import AdminMenu from "../../components/adminMenu/AdminMenu";
+
 
 interface orderItem {
     face: string;
@@ -90,25 +92,21 @@ function OrderList({onOrderSelection}: any) {
         dispatch(orderFood({face: item.email[0], id: item._id, status: item.paid, customerName: item.email, price: item?.cartProducts.reduce((acc, product) => acc + parseFloat(product.price), 0), dish: item.cartProducts}))
     }
 
-    // add pagination, filtering
-    // const totalPages = Math.ceil(arrayOrderData.length / 5)
-
     const handlePageClick = (newPage: number) => {
         setPage(newPage)
     }
 
-    // const startIndex = page * 5;
-    // const endIndex = (page + 1) * 5;
-
     return (
-        <div className="  text-white  min-h-[100vh] flex flex-col-reverse sm:flex-row font-semibold">
+        <div className="  text-white  md:min-h-[100vh] flex  flex-col sm:flex-row font-semibold">
             
             {/* sidebar for filtering */}
-            <div className="md:w-[15rem] bg-gray-900 pt-10">
-                <Sidebar activeDate={activeDate} setActiveDate={setActiveDate}/>
+            <div className="md:w-[15rem] py-10 md:py-0 md:fixed md:h-full bg-gray-900 md:pt-10">
+                <div className=" ">
+                    <Sidebar activeDate={activeDate} setActiveDate={setActiveDate}/>
+                </div>
             </div>
 
-            <div className="w-full bg-gray-800 pt-5">
+            <div className="w-full bg-gray-800 pt-5 md:ml-[15rem]">
                 {/* OrderDetailsTitles */}
                 <OrderDetailsTitles activeFilter={activeFilter} setActiveFilter={setActiveFilter}/>
 
@@ -116,7 +114,7 @@ function OrderList({onOrderSelection}: any) {
                 <div className="border-b-[1px] border-gray-600 my-4"></div>
 
                 {/* Order Lists */}
-                <div className="hide-scroolbar h-[50vh] ">
+                <div className="  ">
                     {arrayOrderData.map((data, index) => (
                         <div 
                         key={index} 
@@ -159,19 +157,6 @@ function OrderList({onOrderSelection}: any) {
                         </div>
                     ))}
                 </div>
-
-                {/* Pagination */}
-                {/* <div className="py-5 gap-2 flex justify-center items-center">
-                    {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
-                        <button
-                            className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
-                            key={index}
-                            onClick={() => handlePageClick(index)}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
-                </div> */}
             </div>
         </div>
     )
