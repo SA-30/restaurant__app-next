@@ -72,35 +72,35 @@ function OrderList({onOrderSelection}: any) {
             });
         } else if (activeDate === 'week') {
             const currentDate = new Date();
-            const firstDayOfWeek = new Date(currentDate);
-            firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
             const lastDayOfWeek = new Date(currentDate);
-            lastDayOfWeek.setDate(currentDate.getDate() - (6 - currentDate.getDay()));
+            lastDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+            const firstDayOfWeek = new Date(currentDate);
+            firstDayOfWeek.setDate(currentDate.getDate() - (6 - currentDate.getDay()));
             filteredOrders = orderData.filter(order => {
                 const orderDate = new Date(order.createdAt);
-                return orderDate >= lastDayOfWeek && orderDate <= firstDayOfWeek;
+                return orderDate >= firstDayOfWeek && orderDate <= lastDayOfWeek;
             });
         } else if (activeDate === 'month') {
             const currentDate = new Date();
-            const firstDayOfMonth = new Date(currentDate);
-            firstDayOfMonth.setDate(currentDate.getDate() - currentDate.getDay());
             const lastDayOfMonth = new Date(currentDate);
-            lastDayOfMonth.setDate(currentDate.getDate() - (30 - currentDate.getDay()));
+            lastDayOfMonth.setDate(currentDate.getDate() - currentDate.getDay());
+            const firstDayOfMonth = new Date(currentDate);
+            firstDayOfMonth.setDate(currentDate.getDate() - (30 - currentDate.getDay()));
 
             filteredOrders = orderData.filter(order => {
                 const orderDate = new Date(order.createdAt);
-                return orderDate >= lastDayOfMonth && orderDate <= firstDayOfMonth;
+                return orderDate >= firstDayOfMonth && orderDate <= lastDayOfMonth;
             });
         } else if (activeDate === 'year') {
             const currentDate = new Date();
-            const firstDayOfYear = new Date(currentDate);
-            firstDayOfYear.setDate(currentDate.getDate() - currentDate.getDay());
             const lastDayOfYear = new Date(currentDate);
-            lastDayOfYear.setDate(currentDate.getDate() - (365 - currentDate.getDay()));
+            lastDayOfYear.setDate(currentDate.getDate() - currentDate.getDay());
+            const firstDayOfYear = new Date(currentDate);
+            firstDayOfYear.setDate(currentDate.getDate() - (365 - currentDate.getDay()));
 
             filteredOrders = orderData.filter(order => {
                 const orderDate = new Date(order.createdAt);
-                return orderDate >= lastDayOfYear && orderDate <= firstDayOfYear;
+                return orderDate >= firstDayOfYear && orderDate <= lastDayOfYear;
             });
         }
 
