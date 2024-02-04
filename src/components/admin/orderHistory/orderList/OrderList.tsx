@@ -37,6 +37,7 @@ interface OrderItem {
 function OrderList({onOrderSelection}: any) {
    const [selectedTable, setSelectedTable] = useState<number | null>(null);
    const [orderData, setOrderData] = useState<OrderItem[]>([]);
+   const [filterOrderData, setFilterOrderData] = useState<OrderItem[]>([]);
    const [arrayOrderData, setArrayOrderData] = useState<OrderItem[]>([]);
    const [activeFilter, setActiveFilter] = useState<string>('all');
    const [activeDate, setActiveDate] = useState<string>('');
@@ -50,6 +51,7 @@ function OrderList({onOrderSelection}: any) {
             .then(response => response.json())
             .then(data => {
                 setOrderData(data.reverse());
+                setFilterOrderData(data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -69,23 +71,36 @@ function OrderList({onOrderSelection}: any) {
                     orderDate.getFullYear() === currentDate.getFullYear();
             });
         } else if (activeDate === 'week') {
-            console.log("week here");
-
-            // Logic to filter orders for the current week
+            const currentDate = new Date();
+            const firstDayOfWeek = new Date(currentDate);
+            firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+            const lastDayOfWeek = new Date(currentDate);
+            lastDayOfWeek.setDate(currentDate.getDate() - (6 - currentDate.getDay()));
+            filteredOrders = orderData.filter(order => {
+                const orderDate = new Date(order.createdAt);
+                return orderDate >= lastDayOfWeek && orderDate <= firstDayOfWeek;
+            });
         } else if (activeDate === 'month') {
-            console.log("month here");
+            const currentDate = new Date();
+            const firstDayOfMonth = new Date(currentDate);
+            firstDayOfMonth.setDate(currentDate.getDate() - currentDate.getDay());
+            const lastDayOfMonth = new Date(currentDate);
+            lastDayOfMonth.setDate(currentDate.getDate() - (30 - currentDate.getDay()));
 
-            // Logic to filter orders for the current month
+            filteredOrders = orderData.filter(order => {
+                const orderDate = new Date(order.createdAt);
+                return orderDate >= lastDayOfMonth && orderDate <= firstDayOfMonth;
+            });
         }
-        
-        setArrayOrderData(filteredOrders);
+
+        setFilterOrderData(filteredOrders);
     }, [activeDate]);
 
     useEffect(() => {
-        let filteredOrders = orderData;
+        let filteredOrders = filterOrderData;
     
         if (activeFilter !== 'all') {
-            filteredOrders = orderData.filter(order => {
+            filteredOrders = filterOrderData.filter(order => {
                 return activeFilter === 'paid' ? order.paid === true : order.paid === false;
             });
         }
@@ -109,13 +124,13 @@ function OrderList({onOrderSelection}: any) {
 
         setTotalPaid(totalPaidAmount.toFixed(2));
         setTotalPending(totalPendingAmount.toFixed(2));
-    }, [activeFilter, orderData]);
+    }, [activeFilter, filterOrderData]);
 
     useEffect(() => {
         if (activeFilter === 'all') {
-            setArrayOrderData(orderData);
+            setArrayOrderData(filterOrderData);
         } else {
-            const filteredOrders = orderData.filter(order => {
+            const filteredOrders = filterOrderData.filter(order => {
                 if (activeFilter === 'paid') {
                     return order.paid === true;
                 } else if (activeFilter === 'pending') {
