@@ -4,8 +4,6 @@ import Image from "next/image";
 import React,{useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
-import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
     const [name, setName] = useState('');

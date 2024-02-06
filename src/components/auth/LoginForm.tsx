@@ -2,9 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-// import { FcGoogle } from 'react-icons/fc'
 import { FormEvent, useState } from 'react';
-import { signIn } from 'next-auth/react';
 
 
 const LoginForm = () => {
@@ -30,8 +28,8 @@ const LoginForm = () => {
         //     return;
         // }
 
-        await signIn('Credentials', {email, password, callbackUrl:'/'})
-        setLoginProcess(false)
+        // await signIn('Credentials', {email, password, callbackUrl:'/'})
+        // setLoginProcess(false)
     } 
 
     return (
