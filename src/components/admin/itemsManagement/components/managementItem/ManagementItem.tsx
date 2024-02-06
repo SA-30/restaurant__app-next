@@ -54,7 +54,7 @@ interface ManagementItemProps {
                                 src={item.imageUrl}
                                 sizes="100vw"
                                 alt="img"
-                                className="w-[100%] h-auto md:h-[200px]"
+                                className="w-[100%] h-auto md:h-[150px]"
                             />}
                             </div>
     
