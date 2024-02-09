@@ -6,8 +6,6 @@ import { CldImage } from 'next-cloudinary';
 
 import {useState, useEffect, useContext} from 'react'
 import { CartContext } from '../appContext';
-// import { signOut, useSession } from "next-auth/react"
-
 
 interface MethodHeaderProps{
     // title: string,
@@ -21,7 +19,6 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
     const [phone, setPhone] = useState('');
     const [disableBtn, setDisableBtn] = useState(true);
 
-    // const session = useSession()
 
     const { cartProducts, removeCartProduct }: any = useContext(CartContext);
     let total = 0;

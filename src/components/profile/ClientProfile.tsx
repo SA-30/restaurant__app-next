@@ -3,11 +3,9 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import {FaFirstOrder,FaPeopleGroup} from 'react-icons/fa6'
 import Link from "next/link";
-import EditAdminForm from "../admin/adminProfile/EditAdminForm";
 import MethodHeader from "../component/Header/MethodHeader";
 import {getProfile} from "@/hook/useProfile";
 import { UserButton, SignOutButton } from "@clerk/nextjs";
-
 
 interface ClientProfileprops {
 }
@@ -34,57 +32,10 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
     
     const userName = profileData?.data?.message?.firstName;
     const userEmail = profileData?.data?.message?.emailAddresses[0]?.emailAddress;
-    
 
-    
-
-    // const {status} = session;
-    const [editProfile, setEditProfile] = useState(false)
     const [isAdmin, setIsAdmin] = useState(true)
     const [orderData, setOrderData] = useState<OrderItem[]>([]);
     const [selectedTable, setSelectedTable] = useState<number | null>(null);
-
-    const [formData, setFormData] = useState({
-        name: '',
-        location: '',
-        number: '',
-        restaurant: '',
-    })
-
-    const toggleForm = () => {
-        setEditProfile(!editProfile)
-    }
-
-    const formDatas = (datas: any) => {
-        setFormData(datas)
-    }
-
-    // useEffect(() => {
-    //     fetch('/api/menu/profile', {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({}),
-    //     }).then(response => {
-    //         if (!response.ok) {
-    //             throw new Error(`Server error: ${response.status}`);
-    //         }
-    //         return response.json();
-    //     }).then(data => {
-    //         // Handle the case where the user is already an admin
-    //         setIsAdmin(data?.admin || false);
-    //     }).catch(error => {
-    //         console.error('Error fetching data:', error);
-    //     });
-
-    //     fetch('/api/menu/profile').then(response => {
-    //         response.json().then(data => {
-    //             setIsAdmin((prev) => data?.admin)
-    //         })
-    //     })
-
-    // }, [session, status])
 
     useEffect(() => {
         fetch('/api/order').then(response => {
@@ -105,7 +56,6 @@ const ClientProfile: FunctionComponent<ClientProfileprops> = () => {
         // await signOut();
         // window.location.href = '/login';
     }
-
 
     return (  
         <>
