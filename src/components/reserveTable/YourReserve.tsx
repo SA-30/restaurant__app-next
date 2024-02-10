@@ -49,7 +49,7 @@ const YourReserve: FunctionComponent<Props> = () => {
                     </div>
                 </div>
                 <div className="transition-all text-gray-600 flex justify-center my-10 hover:scale-[1.04] cursor-pointer">
-                    <Link href="/reserveTable/reserveFood">
+                    <Link href="/">
                         <p className="bg-gray-800 px-7 rounded py-2 text-white text-sm font-semibold">Order food</p>
                     </Link>
                 </div>
