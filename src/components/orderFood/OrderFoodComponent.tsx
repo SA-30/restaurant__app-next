@@ -10,24 +10,24 @@ const OrderFoodComponent = () => {
       <div className='bg-primaryColor'>
 
         {/* Header */}
-        {/* <div ><MethodHeader /></div> */}
+        <div ><MethodHeader /></div>
         <div className='min-h-[10vh]'></div>
 
         {/* Hero-Section */}
         <div className=''>
-          {/* <HeroSection /> */}
+          <HeroSection />
         </div>
 
         {/* Search */}
         <div className='mx-5 flex  justify-center '>
-          {/* <Search /> */}
+          <Search />
         </div>
         
         {/* Horizontal Menu */}
-        {/* <HorizontalMenu/> */}
+        <HorizontalMenu/>
 
         {/* Vertical Menu */}
-        {/* <VerticalMenu /> */}
+        <VerticalMenu />
 
       </div>
     </div>
