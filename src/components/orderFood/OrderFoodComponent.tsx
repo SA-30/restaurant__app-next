@@ -10,7 +10,7 @@ const OrderFoodComponent = () => {
       <div className='bg-primaryColor'>
 
         {/* Header */}
-        <div ><MethodHeader /></div>
+        {/* <div ><MethodHeader /></div> */}
         <div className='min-h-[10vh]'></div>
 
         {/* Hero-Section */}
