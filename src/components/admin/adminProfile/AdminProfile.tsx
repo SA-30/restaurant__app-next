@@ -4,8 +4,6 @@ import { FunctionComponent, useState } from "react";
 import {FaLocationDot} from 'react-icons/fa6'
 import AdminMenu from "../components/adminMenu/AdminMenu";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import EditAdminForm from "./EditAdminForm";
 import {getProfile} from "@/hook/useProfile";
 import { UserButton, SignOutButton } from "@clerk/nextjs";
 
