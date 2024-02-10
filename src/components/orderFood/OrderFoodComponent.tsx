@@ -15,12 +15,12 @@ const OrderFoodComponent = () => {
 
         {/* Hero-Section */}
         <div className=''>
-          <HeroSection />
+          {/* <HeroSection /> */}
         </div>
 
         {/* Search */}
         <div className='mx-5 flex  justify-center '>
-          <Search />
+          {/* <Search /> */}
         </div>
         
         {/* Horizontal Menu */}
