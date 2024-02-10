@@ -24,10 +24,10 @@ const OrderFoodComponent = () => {
         </div>
         
         {/* Horizontal Menu */}
-        <HorizontalMenu/>
+        {/* <HorizontalMenu/> */}
 
         {/* Vertical Menu */}
-        <VerticalMenu />
+        {/* <VerticalMenu /> */}
 
       </div>
     </div>
