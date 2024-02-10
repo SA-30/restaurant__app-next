@@ -12,6 +12,8 @@ const OrderFoodComponent = () => {
         <div ><MethodHeader /></div>
         <div className='min-h-[10vh]'></div>
 
+        {/* Hero-Section */}
+
         {/* Search */}
         <div className='mx-5 flex  justify-center '>
           <Search />
