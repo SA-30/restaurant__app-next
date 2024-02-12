@@ -1,40 +1,18 @@
 'use client'
 
 import { FunctionComponent, useState } from "react";
-import {FaLocationDot} from 'react-icons/fa6'
 import AdminMenu from "../components/adminMenu/AdminMenu";
-import { useRouter } from "next/navigation";
 import {getProfile} from "@/hook/useProfile";
 import { UserButton, SignOutButton } from "@clerk/nextjs";
 
-
 interface AdminPageProps {
-    
 }
  
 const AdminProfile: FunctionComponent<AdminPageProps> = () => {
-    const router = useRouter();
-    const [editProfile, setEditProfile] = useState(false)
-    const [formData, setFormData] = useState({
-        name: '',
-        location: '',
-        number: '',
-        restaurant: '',
-    })
-
     const { data: profileData }: any = getProfile();
     
     const userName = profileData?.data?.message?.firstName;
     const userEmail = profileData?.data?.message?.emailAddresses[0]?.emailAddress;
-
-    const toggleForm = () => {
-        setEditProfile(!editProfile)
-    }
-
-    const formDatas = (datas: any) => {
-        setFormData(datas)
-    }
-
 
     return (  
         <>
@@ -52,11 +30,8 @@ const AdminProfile: FunctionComponent<AdminPageProps> = () => {
                     </div>
                     <h1 className="font-semibold text-4xl md:text-3xl text-adminblueColor mt-5">{userName}</h1>
                     <p className="text-gray-400 text-xl md:text-sm mt-2">{userEmail}</p>
-                    
-                    
                     </div>
                 </div>
-                
                 <div></div>
             </div>
         </div>
