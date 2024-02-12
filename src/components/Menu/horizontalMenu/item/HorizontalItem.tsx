@@ -1,11 +1,9 @@
 'use client'
 
 import {FaWeight, FaPlus} from 'react-icons/fa';
-import Link from 'next/link';
 import { useContext } from 'react';
 import { CartContext } from '@/components/appContext';
 import { CldImage } from 'next-cloudinary';
-
 
 interface MethodHeaderProps{
     imgUrl: string,

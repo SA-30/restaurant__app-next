@@ -1,6 +1,6 @@
 import MethodHeader from "@/components/component/Header/MethodHeader";
 import Link from "next/link";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import {FaStar} from 'react-icons/fa'
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 }
  
 const ItemPage: FunctionComponent<Props> = () => {
+
+
     return ( 
         <div className="bg-primaryColor flex flex-col justify-between min-h-screen text-black">
             {/* Header */}
@@ -50,7 +52,7 @@ const ItemPage: FunctionComponent<Props> = () => {
                     {/* Order now button */}
                     <div className='py-5 bg-secondaryColor mt-8 flex justify-center items-center  md:mx-60 md:rounded-3xl  w-full'> 
                         <Link href="/cart">
-                            <button className='transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
+                            <button  className='transition-all text-white  bg-gray-800 py-3 px-16 rounded-2xl hover:shadow-2xl hover:scale-105'>
                                 ADD TO CART
                             </button>  
                         </Link>  
