@@ -11,10 +11,7 @@ interface AdminPageProps {
  
 const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
-
     const { data: profileData }: any = useProfile();
-    
-    // console.log("esfds ",profileData?.data?.message);
     const isAdmin = true;
     
     const handleOrderSelection = (table: any) => {

@@ -156,6 +156,7 @@ function OrderList({onOrderSelection}: any) {
                     </div>
                 ))}
             </div>
+            
             <div className="py-5 gap-2 flex justify-center items-center">
                 {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
                     <button
