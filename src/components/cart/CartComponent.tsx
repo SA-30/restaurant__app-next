@@ -1,24 +1,20 @@
 'use client'
 
-import {FaWeight, FaPlus, FaTrash} from 'react-icons/fa';
-import MethodHeader from '../component/Header/MethodHeader';
+import { FaTrash } from 'react-icons/fa';
+import {useState, useContext} from 'react'
 import { CldImage } from 'next-cloudinary';
+import { z } from 'zod';
 
-import {useState, useEffect, useContext} from 'react'
+import MethodHeader from '../component/Header/MethodHeader';
 import { CartContext } from '../appContext';
 
 interface MethodHeaderProps{
-    // title: string,
-    // weight: string,
-    // price: string,
 }
 
 const CartComponent: React.FC<MethodHeaderProps> = (props) => {
-    const [totalPrice, setTotalPrice] = useState<number>(0);
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [disableBtn, setDisableBtn] = useState(true);
-
 
     const { cartProducts, removeCartProduct }: any = useContext(CartContext);
     let total = 0;
@@ -26,54 +22,67 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
         total += p.price;
     }
 
-    const updateTotalPrice = (price: number) => {
-        setTotalPrice(price);
-    };
+    const phoneSchema = z.string().length(10).regex(/^\d+$/);
+    const addressSchema = z.string().min(3);
 
-    const handlePhoneChange = (e: any) => {
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const phoneNumber = e.target.value;
         setPhone(phoneNumber);
-        
-        if ((phoneNumber.length === 9 || phoneNumber.length === 10) && address) {
-            setDisableBtn(false);
-        } else {
-            setDisableBtn(true); 
+
+        try {
+            phoneSchema.parse(phoneNumber);
+            if (address.length > 2) {
+                setDisableBtn(false);
+            } else {
+                setDisableBtn(true);
+            }
+        } catch (error) {
+            setDisableBtn(true);
         }
     }
 
-    const handelAddressChange = (e: any) => {
+    const handelAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const addressLocation = e.target.value;
         setAddress(addressLocation);
-        
-        if ((addressLocation.length > 2) && (phone.length === 9 || phone.length === 10)) {
-            setDisableBtn(false);
-        } else {
-            setDisableBtn(true); 
+
+        try {
+            addressSchema.parse(addressLocation);
+            
+            if (phone.length === 9 || phone.length === 10) {
+                setDisableBtn(false);
+            } else {
+                setDisableBtn(true);
+            }
+        } catch (error) {
+            setDisableBtn(true);
         }
     }
 
     const handlePayment = async (e: any) => {
         e.preventDefault();
 
-        if(phone.length !== 10){
-            return alert("Invalid number");
-        }
-
-        const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                phone,
-                address,
-                cartProducts
-            }),
-        })
-
-        if(response.ok){
-            // redirect user to done payment page
-            window.location.href = `/payment?clear-cart=1`;
+        try {
+            phoneSchema.parse(phone);
+            addressSchema.parse(address);
+    
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    phone,
+                    address,
+                    cartProducts,
+                }),
+            });
+    
+            if (response.ok) {
+                // redirect user to done payment page
+                window.location.href = `/payment?clear-cart=1`;
+            }
+        } catch (error) {
+            alert('Invalid input');
         }
     }
 
@@ -93,7 +102,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                     )}
 
                     {cartProducts?.length > 0 && cartProducts.map((product: any, index: number) => (
-                        <div key={index} className='flex bg-gray-600 text-white gap-5 shadow'>
+                        <div key={index} className='flex bg-gray-800 text-white gap-5 shadow'>
                             <div className='grid grid-cols-4 w-[500px] items-center  border border-[#b9b9b9] py-2 px-5'>
                                 <div className="">
                                     {product.imgUrl && <CldImage
@@ -105,7 +114,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                                         className="w-16 h-16 rounded-full"
                                     />}
                                 </div>
-                                <div className='flex justify-start'>{product.title}</div>
+                                <div className='flex justify-start font-mono text-sm '>{product.title}</div>
                                 <div className='font-semibold flex justify-end'>Rs. {product.price}</div>
                                 <div className='flex justify-end'>
                                     <button 
@@ -124,11 +133,12 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                         <span className='flex justify-end font-bold '>Rs {total} </span> 
                     </div>
                 </div>
+                
                 <div className='bg-gray-200 p-4 z-[1] rounded-sm'>
                     <h2 className='font-bold mb-4'>Checkout</h2>
                     <form onSubmit={handlePayment}>
                         <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
-                        <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text" pattern="[0-9]{10}" placeholder='977*******' required/> <br />
+                        <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" pattern="[0-9]{10}" placeholder='977*******' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
                         <input value={address} onChange={handelAddressChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text"  placeholder='location' required/> <br />
                         <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />

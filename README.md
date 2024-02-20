@@ -9,4 +9,3 @@ Restaurant app powered by Next.js and Vercel.
 
 ## Todo
 - Zod for validation.
-- Hero section
