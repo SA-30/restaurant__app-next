@@ -98,7 +98,7 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                 </div>
                 <div className='flex flex-col z-[1] gap-2 '>
                     {cartProducts?.length === 0 && (
-                        <div>No products in your shopping cart!!!</div>
+                        <div className='text-center'>No products in your shopping cart!!!</div>
                     )}
 
                     {cartProducts?.length > 0 && cartProducts.map((product: any, index: number) => (
@@ -127,31 +127,37 @@ const CartComponent: React.FC<MethodHeaderProps> = (props) => {
                             </div>
                         </div>
                     ))}
-                    <div className='grid grid-cols-4 md:w-[500px] items-center  border shadow-sm border-[#b9b9b9] py-2 px-5'>
+
+                    {cartProducts?.length > 0 && (
+                        <div className='grid grid-cols-4 md:w-[500px] items-center  border shadow-sm border-[#b9b9b9] py-2 px-5'>
                         <span></span>
                         <span>subtotal</span>
                         <span className='flex justify-end font-bold '>Rs {total} </span> 
-                    </div>
+                        </div>
+                    )}
                 </div>
                 
-                <div className='bg-gray-200 p-4 z-[1] rounded-sm'>
+                {cartProducts?.length > 0 && (
+                    <div className='bg-gray-200 p-4 z-[1] rounded-sm'>
                     <h2 className='font-bold mb-4'>Checkout</h2>
-                    <form onSubmit={handlePayment}>
-                        <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
-                        <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" pattern="[0-9]{10}" placeholder='977*******' required/> <br />
-                        <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
-                        <input value={address} onChange={handelAddressChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text"  placeholder='location' required/> <br />
-                        <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
-                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' />  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
-                        <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
-                        {true && (
-                            <button className={`py-2 px-5 rounded text-white w-full mt-5 ${disableBtn  === true ? 'bg-gray-600' : 'bg-red-500'}`} disabled={disableBtn}  type='submit'>
-                            Pay <span className='font-normal text-[10px] text-gray-200'>Rs</span> {total}
-                            </button>
-                        )}
-                        
-                    </form>
-                </div>
+                        <form onSubmit={handlePayment}>
+                            <label className='text-gray-600 text-sm mt-2'>Phone</label> <br />
+                            <input  value={phone} onChange={handlePhoneChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="number" pattern="[0-9]{10}" placeholder='977*******' required/> <br />
+                            <label className='text-gray-600 text-sm mt-2'>Address</label> <br />
+                            <input value={address} onChange={handelAddressChange} className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="text"  placeholder='location' required/> <br />
+                            <label className='text-gray-600 text-sm mt-2'>Payment Option</label> <br />
+                            <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' />  <label className='text-gray-600 text-sm mt-2'>COD</label> <br />
+                            <input className='p-2 w-full md:w-auto rounded-lg m-2 outline-none font-bold' type="radio" name='payment' disabled/> <label className='text-gray-600 text-sm mt-2 line-through'>Esewa</label> <br />
+                            {true && (
+                                <button className={`py-2 px-5 rounded text-white w-full mt-5 ${disableBtn  === true ? 'bg-gray-600' : 'bg-red-500'}`} disabled={disableBtn}  type='submit'>
+                                Pay <span className='font-normal text-[10px] text-gray-200'>Rs</span> {total}
+                                </button>
+                            )}
+                            
+                        </form>
+                    </div>
+                )}
+                
             </div>
 
         </div>

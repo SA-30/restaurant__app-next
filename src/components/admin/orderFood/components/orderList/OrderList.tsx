@@ -127,12 +127,11 @@ function OrderList({onOrderSelection}: any) {
                             <p className="!text-black !font-semibold">{data?.phone}</p>
                         </div>
                         <div className="md:mr-10 ml-5 md:ml-0 sm:block hidden">
-                            {data?.cartProducts.map((product, index) => (
+                            {data?.cartProducts.slice(0, 2).map((product, index) => (
                                 <div key={index}>
                                     <p className="!text-black">{product?.title}</p>
                                 </div>
                             ))}
-                            
                         </div>
                         <div className="sm:block hidden">
                             <div className="!text-black !font-bold"> 
