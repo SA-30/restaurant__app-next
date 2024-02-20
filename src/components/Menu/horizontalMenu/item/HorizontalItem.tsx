@@ -21,14 +21,14 @@ const HorizontalItem: React.FC<MethodHeaderProps> = (props) => {
     
     return (
         <div className='transition-all bg-gray-800 hover:scale-[1.06] cursor-pointer shadow-md hover:shadow-xl shadow-[#aac0ffac] hover:shadow-[#ffaaaaac] border-2 border-blue-500 hover:border-red-500 min-w-[150px] flex flex-col rounded-2xl text-white'>
-            <div className=" overflow-hidden flex justify-center items-center">
+            <div className="md:w-[200px] md:h-[150px] w-full h-[150px] overflow-hidden flex justify-center items-center">
                 {props.imgUrl && <CldImage
                     width="400"
                     height="400"
                     src={props.imgUrl}
                     sizes="100vw"
                     alt=""
-                    className="md:w-[200px] md:h-[200px] w-full h-[150px]  rounded-t-2xl "
+                    className="md:w-[200px] md:h-[150px] w-full h-[150px]  rounded-t-2xl "
                 />}
             </div>
             <div className='flex flex-col p-4 gap-2'>

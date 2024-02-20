@@ -5,9 +5,11 @@ import {AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useAppSelector } from '@/hook/redux-toolkit/store';
 import { useEffect, useState } from 'react';
 import { CldImage } from 'next-cloudinary';
+// import ChangeConformation from '@/components/component/ConfirmationDialog/ChangeConformation';
 
 function AdminOrderDetails({selectedOrder}: any) {
     const [pending, setPending] = useState(false);
+    const [conform, setConform] = useState(false);
 
     const selectedOrderFromRedux = useAppSelector(state => state.orderReducer.value)
    
@@ -37,13 +39,14 @@ function AdminOrderDetails({selectedOrder}: any) {
   const [tax, setTax] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
 
-
     const handlePending = () => {
         if(selectedOrderFromRedux.status == false)
             setPending(true)
     }
 
     const handlePaid = async (id: string) => {
+        setConform(true);
+
         await fetch('/api/checkout', {
             method: 'PUT',
             headers: {
@@ -54,32 +57,67 @@ function AdminOrderDetails({selectedOrder}: any) {
             }),
         })
 
-        setPending(false)
+        // handleConform(id)
     }
+
+    // const hideConform = () => {
+    //     setConform(false);
+    // }
+    
+    // const handleConform = async (id: string) => {
+
+    //     if(id){
+    //         await fetch('/api/checkout', {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 id,
+    //             }),
+    //         })
+    //     } else {
+    //         console.log('no id');
+    //     }
+
+    //     hideConform()
+    //     setPending(false)
+    // }
 
     return (
         <div className='text-black  md:h-screen flex flex-col md:justify-between gap-5 md:gap-0 md:mr-5'>
-            <div className='shadow-sm shadow-[#00000075] bg-gray-200  flex flex-col px-5 mt-5 py-5'>
+            {/* {conform && (
+                <div>
+                    <ChangeConformation onCancel={hideConform} onConfirm={handleConform}/>
+                </div>
+            )} */}
+            <div className='shadow-sm shadow-[#00000075] bg-white  flex flex-col px-5 mt-5 py-5'>
                 <div>
                     <div className='flex flex-col justify-between '>
                         <div className='flex justify-between items-center ' >
                             <div className='flex items-center gap-3'>
-                                <div className={`bg-[#e9485088] text-[16px] rounded-[50%] p-2 flex items-center h-[2rem] w-[2rem] justify-center`}>
+                                <div className={`bg-[#e9485088] text-white uppercase font-bold text-[16px] rounded-[50%] p-2 flex items-center h-[2rem] w-[2rem] justify-center`}>
                                 {selectedOrderFromRedux && selectedOrderFromRedux.face  }
                             </div>
-                                <h2 className='text-lg font-bold'>{selectedOrderFromRedux && selectedOrderFromRedux.customerName}</h2>
+                                <h2 className='text-sm font-bold'>{selectedOrderFromRedux && selectedOrderFromRedux.customerName}</h2>
                             </div>
                             <div className={`relative flex flex-col gap-3 ${pending && 'border-2 border-gray-500 p-2 rounded-md'}`}>
                                 {!pending && 
                                     <div
                                         onClick={handlePending}
-                                        className={`relative text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center z-[0] ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#50af50d7]' : 'bg-[#e04949dc]'}`}
+                                        className={`relative gap-2 text-white cursor-pointer text-[12px] px-5 py-1 rounded flex justify-center items-center z-[0] ${selectedOrderFromRedux && selectedOrderFromRedux.status == true? 'bg-[#50af50d7]' : 'bg-[#e04949dc]'}`}
                                     >
+                                        <div 
+                                            onClick={() => setPending(false)}
+                                            className=' z-10  '
+                                        >
+                                            <AiOutlineFullscreenExit size={20}/>
+                                        </div>
                                         <p>{ selectedOrderFromRedux.status == false ? 'Pending' : 'Paid'}</p>
                                     </div>
                                 }
                                 { pending && (
-                                    <div className='flex justify-center items-center gap-5'>
+                                    <div className='flex justify-center items-center gap-2'>
                                         <div 
                                             onClick={() => setPending(false)}
                                             className=' z-10  '><AiOutlineFullscreenExit size={20}/></div>
@@ -93,7 +131,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                                 )}
                             </div>
                         </div>
-                        <div className='border-b-[1px] border-gray-500 mt-7 mb-5'></div>
+                        <div className='border-b-[1px] border-gray-500/60 mt-7 mb-5'></div>
                     </div>
                     <div>
                     </div>
@@ -101,7 +139,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                 <div>
                     <div className='h-40  overflow-y-scroll flex flex-col  gap-5 mb-5 '>
                         {(Array.isArray(selectedOrderFromRedux.dish) ? selectedOrderFromRedux.dish : []).map((product, index) => (
-                            <div key={index} className='flex flex-row  items-center gap-5 border-b border-gray-600 pb-2'>
+                            <div key={index} className='flex flex-row  items-center gap-5 border-b border-gray-600/30 pb-2'>
                                 {/* Render the product image */}
                                 <div>
                                 {product.imgUrl && <CldImage
@@ -110,7 +148,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                                         src={product.imgUrl}
                                         sizes="100vw"
                                         alt={product.title}
-                                        className="w-20 h-16 rounded-full"
+                                        className="w-16 h-12 rounded-full"
                                     />}
                                 </div>
                                 {/* Render product details */}
@@ -129,14 +167,14 @@ function AdminOrderDetails({selectedOrder}: any) {
             </div>
 
             {/* Total Payment */}
-            <div className='shadow-sm shadow-[#00000075] bg-gray-200 px-10 pt-5 mb-20 md:mb-5 '>
+            <div className='shadow-sm shadow-[#00000075] bg-white px-10 pt-5 mb-20 md:mb-5 '>
                 <div>
                 <div className='flex justify-between items-center mx-5' >
                         <h2 className='text-[12px] font-semibold'>Total Payment</h2>
                     <p className='cursor-pointer text-[12px]  px-2 py-1 border-[1px] flex justify-center items-center border-gray-600'>COD</p>
                 </div>
 
-                <div className='border-b-[1px] border-gray-500 mt-4 mx-5'></div>
+                <div className='border-b-[1px] border-gray-500/40 mt-4 mx-5'></div>
 
                 <div className='p-5 '>
                 <div className='flex justify-between '>
@@ -154,7 +192,7 @@ function AdminOrderDetails({selectedOrder}: any) {
                     </div>
                     </div>
                     {/* DIVIDER */}
-                    <div className='border-gray-700 border-t-2 mb-2 mt-3'></div>
+                    <div className='border-gray-700/30 border-t-2 mb-2 mt-3'></div>
                         <div className='flex justify-between mt-4'>
                             <h3 className='font-bold text-[13px]'>Grand Total</h3>
                             <h3 className=' font-semibold'>Rs &nbsp; {grandTotal}</h3>

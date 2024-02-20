@@ -21,7 +21,7 @@ const AdminOrderFood: FunctionComponent<AdminPageProps> = () => {
     if(isAdmin){
         return (  
             <>
-            <div className='bg-adminbgColor'>
+            <div className='bg-[#f5f5f5]'>
             <div className='relative gap-10 md:h-screen flex flex-col md:flex-row  md:justify-between text-white '>
                 {/* Admin Menus */}
                 <div className='flex-1 bg-admindarkColor flex  md:relative top-0 z-10'>

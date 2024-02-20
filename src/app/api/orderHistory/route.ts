@@ -11,10 +11,6 @@ export async function GET (req: any) {
 
     await connectMongoDB();
 
-    // const session = await getServerSession(authOptions);
-    // const email = session?.user?.email;
-    // let admin = await isAdmin();
-
     const email="1@gmail.com"
 
     const url = new URL(req.url);

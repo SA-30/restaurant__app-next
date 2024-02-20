@@ -85,7 +85,7 @@ function OrderList({onOrderSelection}: any) {
     const endIndex = (page + 1) * 5;
 
     return (
-        <div className=" bg-gray-200  min-h-[75vh]  pt-10  font-semibold">
+        <div className=" bg-white rounded  min-h-[75vh]  pt-10  font-semibold">
 
             {/* OrderDetailsTitles */}
             <div className="px-5">
@@ -110,10 +110,10 @@ function OrderList({onOrderSelection}: any) {
             </div>
 
             {/* Divider */}
-            <div className="border-b-[1px] border-gray-600 my-4"></div>
+            <div className="border-b-[1px] border-gray-600/40 my-4"></div>
 
             {/* Order Lists */}
-            <div className="hide-scroolbar h-[50vh] overflow-scroll ">
+            <div className=" h-[45vh] overflow-scroll ">
                 {arrayOrderData.slice(startIndex, endIndex).map((data, index) => (
                     <div 
                     key={index} 
@@ -121,7 +121,7 @@ function OrderList({onOrderSelection}: any) {
                     className="">
                         <div className={`transition-all order-list px-5 grid md:grid-cols-5 grid-cols-3 gap-10 items-center  py-3 ${selectedTable === index ? data?.paid == true ?  "bg-[#6dd491d5]" : "bg-[#eb5a5a9c]" : "" } ${data?.paid == true ? 'hover:bg-[#6dd48cd5]' : 'hover:bg-adminredColor' }`}>
                         <div className="flex gap-3 items-center">
-                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[16px] h-[2rem] w-[2rem] justify-center rounded-[50%]  p-2  flex items-center uppercase text-white`} >
+                            <div className={`${data?.paid == true ? 'bg-[#3dcf3da2]': 'bg-[#d33e3ec4]'} text-[12px] h-[25px] w-[30px] justify-center rounded-[50%]  p-2  flex items-center uppercase text-white`} >
                                 {data?.email[0]}
                             </div>
                             <p className="!text-black !font-semibold">{data?.phone}</p>
@@ -160,7 +160,7 @@ function OrderList({onOrderSelection}: any) {
             <div className="py-5 gap-2 flex justify-center items-center">
                 {totalPages > 0 && [...Array(totalPages)].map((val, index) => (
                     <button
-                        className={`py-1 px-2 bg-gray-500 text-white rounded ${page === index && 'bg-green-500'}`}
+                        className={`py-1 px-2 bg-gray-500 text-white rounded text-[12px] ${page === index && 'bg-green-500'}`}
                         key={index}
                         onClick={() => handlePageClick(index)}
                     >

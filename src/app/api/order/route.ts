@@ -4,10 +4,6 @@ import Order from "@/db/models/Order";
 export async function GET (req: any) {
     await connectMongoDB();
 
-    // const session = await getServerSession(authOptions);
-    // const email = session?.user?.email;
-    // let admin = await isAdmin();
-
     const email="1@gmail.com"
 
     const url = new URL(req.url);
@@ -16,7 +12,9 @@ export async function GET (req: any) {
         return Response.json(await Order.findById(_id));
     }
 
-    return Response.json( await Order.find({email}))
+    return Response.json( await Order.find())
+    
+    // return Response.json( await Order.find({email}))
     
     // if(admin) {
     //     return Response.json(await Order.find())

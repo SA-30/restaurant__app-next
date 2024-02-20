@@ -1,10 +1,7 @@
 'use client'
 
 import React from 'react'
-import AdminOrderList from '@/components/admin/orderFood/components/AdminOrderList'
 import OrderList from './orderList/OrderList';
-import AdminMenu from '../components/adminMenu/AdminMenu';
-
 
 const OrderHistory = () => {
 

@@ -1,10 +1,8 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import {FaCircle} from 'react-icons/fa'
 import HorizontalItem from "./item/HorizontalItem"
 
-// Make a type file and import from there
 type MenuItem = {
     imageUrl: string;
     name: string;
@@ -52,6 +50,7 @@ const HorizontalMenu = () => {
         }
     };
 
+    // Filter items based on category
     const filterItems = () => {
         if (selectedCategory === '') {
             return allItems;
@@ -60,6 +59,7 @@ const HorizontalMenu = () => {
         return allItems.filter(item => item.category === selectedCategory);
     };
 
+    // Handle catogery click
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
     };
