@@ -4,7 +4,6 @@ import { connectMongoDB } from "@/db/db";
 import Order from "@/db/models/Order";
 import { currentUser } from '@clerk/nextjs';
 
-
 export async function POST (req: any) {
     await connectMongoDB();
 
