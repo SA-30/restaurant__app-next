@@ -1,4 +1,4 @@
-## Restaurant App
+s## Restaurant App
 
 Restaurant app powered by Next.js and Vercel.
 
@@ -8,4 +8,4 @@ Restaurant app powered by Next.js and Vercel.
 - mongodb
 
 ## Todo
-- Zod for validation.
+- Zod for validation.s
